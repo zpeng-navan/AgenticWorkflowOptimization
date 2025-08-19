@@ -35,7 +35,7 @@ import time
 
 def mine_ip_conversations(
     start_date_str="2025-04-21 00:00:00",
-    end_date_str="2025-04-25 00:00:00",
+    end_date_str="2025-08-18 00:00:00",
 ):
     """
     Mine identify partial conversations from New Relic logs for each day in the range.
@@ -55,10 +55,12 @@ def mine_ip_conversations(
         date_list = list(daterange(start_date, end_date))
         for single_date in tqdm(date_list, desc="Mining IP Conversations"):
             
-            # Split each day into 12-hour chunks: 00-12, 12-24
+            # Split each day into 6-hour chunks: 00-06, 06-12, 12-18, 18-24
             chunks = [
-                (0, 12),   # 00:00 - 12:00
-                (12, 24)  # 12:00 - 24:00
+                (0, 6),   # 00:00 - 06:00
+                (6, 12),   # 00:00 - 12:00
+                (12, 18), # 12:00 - 18:00
+                (18, 24)  # 18:00 - 24:00
             ]
             
             all_day_results = []
@@ -88,23 +90,27 @@ def mine_ip_conversations(
                 log_file.write(f"Querying logs for chunk {chunk_start_str} to {chunk_end_str} ...\n")
                 log_file.flush()
 
-                chunk_results = None
-                attempt = 0
-                while attempt < 10:
-                    chunk_results = query_new_relic_all_results(query, batch_size=1000, timeout=300)
-                    if chunk_results is not None:
-                        break
-                    attempt += 1
-                    log_file.write(f"  Chunk {start_hour:02d}-{end_hour:02d} Attempt {attempt}: No logs returned, waiting 10 seconds before retry...\n")
-                    log_file.flush()
-                    time.sleep(10)
+                # Query this chunk (retry logic is now handled inside query_new_relic_all_results)
+                chunk_results = query_new_relic_all_results(
+                    query, 
+                    log_file=log_file, 
+                    batch_size=1000, 
+                    timeout=300,
+                    retry_num=10,  # 3 retries for request errors
+                    retry_interval=15  # 10 seconds between retries
+                )
                 
-                if chunk_results:
-                    # chunk_results is already a list of logs, not a dict
+                # Handle different return values properly
+                if chunk_results is None:
+                    # Query failed after retries
+                    log_file.write(f"  Chunk {start_hour:02d}-{end_hour:02d}: Query failed after retries\n")
+                elif len(chunk_results) == 0:
+                    # Query succeeded but no logs found
+                    log_file.write(f"  Chunk {start_hour:02d}-{end_hour:02d}: No logs found\n")
+                else:
+                    # Query succeeded with results
                     all_day_results.extend(chunk_results)
                     log_file.write(f"  Chunk {start_hour:02d}-{end_hour:02d}: Retrieved {len(chunk_results)} logs\n")
-                else:
-                    log_file.write(f"  Chunk {start_hour:02d}-{end_hour:02d}: Failed to retrieve logs after 10 attempts\n")
                 
                 log_file.flush()
                 time.sleep(2)  # Short wait between chunks
