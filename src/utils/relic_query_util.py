@@ -114,7 +114,7 @@ def query_new_relic_all_results(query, batch_size=1000, timeout=60):
         timeout: Timeout in seconds
     
     Returns:
-        Dictionary with all results combined from multiple batches if needed
+        List of all log entries combined from multiple batches if needed
     """
     
     all_logs = []
@@ -184,7 +184,7 @@ def main():
     """
     Main function to query New Relic logs with the specified query
     """
-    query = "SELECT timestamp, CHANNEL_ID, message FROM Log WHERE applicationName='ml-flow-svc' AND environment='prod' AND NODE_ID='vsat41bgk-lyyx97j8' AND message LIKE 'prompt:%' OR message LIKE 'completion:%' SINCE '2025-04-21 00:00:00' UNTIL '2025-04-22 00:00:00'"
+    query = "SELECT timestamp, CHANNEL_ID, message FROM Log WHERE applicationName='ml-flow-svc' AND environment='prod' AND NODE_ID='vsat41bgk-lyyx97j8' AND message LIKE 'prompt:%' OR message LIKE 'completion:%' SINCE '2025-04-22 00:00:00' UNTIL '2025-04-23 00:00:00'"
     
     print("=" * 80)
     print("NEW RELIC LOGS QUERY")
