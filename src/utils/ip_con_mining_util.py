@@ -35,7 +35,7 @@ import time
 
 def mine_ip_conversations(
     start_date_str="2025-04-21 00:00:00",
-    end_date_str="2025-08-18 00:00:00",
+    end_date_str="2025-08-19 00:00:00",
 ):
     """
     Mine identify partial conversations from New Relic logs for each day in the range.
