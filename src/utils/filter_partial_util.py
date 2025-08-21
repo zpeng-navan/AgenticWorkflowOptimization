@@ -25,7 +25,7 @@ raw_log_dir = join(data_dir, "raw", "logs")
 processed_log_dir = join(data_dir, "processed", "logs")
 
 raw_success_file = join(raw_log_dir, "04222025-08182025", "ava_chat_history_api_raw_data", "chat_history_success.csv")
-success_file = join(processed_log_dir, "04222025-08182025", "ava_chat_history_api_raw_data", "chat_history_success.csv")
+success_file = join(processed_log_dir, "04222025-08182025", "ava_chat_history_api_raw_data", "chat_history_success.json")
 os.makedirs(os.path.dirname(success_file), exist_ok=True)
 data = load_csv_file(raw_success_file)
 
