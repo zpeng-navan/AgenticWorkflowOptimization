@@ -95,8 +95,8 @@ def create_balanced_dataset(ground_truth_data: Dict[str, Any]) -> Dict[str, Any]
     print(f"  partial_or_full=partial: {len(partial_partial_sessions)}")
     print(f"  partial_or_full=full: {len(partial_full_sessions)}")
     
-    # Balance cancel_not_for_all (need 186 of each)
-    target_cancel_count = len(cancel_true_sessions)  # 186
+    # Balance cancel_not_for_all (need 157 of each)
+    target_cancel_count = len(cancel_true_sessions)  # 157
     
     # Balance partial_or_full (need 71 of each)
     target_partial_count = len(partial_partial_sessions)  # 71
@@ -108,10 +108,10 @@ def create_balanced_dataset(ground_truth_data: Dict[str, Any]) -> Dict[str, Any]
     # Sample sessions for balanced dataset
     balanced_data = {}
     
-    # Add all cancel_not_for_all=true sessions (186)
+    # Add all cancel_not_for_all=true sessions (157)
     balanced_data.update(cancel_true_sessions)
     
-    # Randomly sample 186 cancel_not_for_all=false sessions
+    # Randomly sample 157 cancel_not_for_all=false sessions
     if len(cancel_false_sessions) >= target_cancel_count:
         sampled_cancel_false = dict(random.sample(list(cancel_false_sessions.items()), target_cancel_count))
         # Add only those not already in balanced_data to avoid duplicates
@@ -217,13 +217,13 @@ def main():
     
     # Define file paths
     base_dir = Path(__file__).parent.parent.parent  # Go up to project root
-    input_file = base_dir / "data/processed/logs/04222025-08182025/ground_truth/ground_truth.json"
+    input_file = base_dir / "data/processed/logs/04222025-08182025/ground_truth/verified_ground_truth.json"
     output_dir = base_dir / "data/processed/logs/04222025-08182025/ground_truth"
     
-    balance_file = output_dir / "ground_truth_balance.json"
-    train_file = output_dir / "ground_truth_balance_train.json"
-    dev_file = output_dir / "ground_truth_balance_dev.json"
-    test_file = output_dir / "ground_truth_balance_test.json"
+    balance_file = output_dir / "verified_ground_truth_balance.json"
+    train_file = output_dir / "verified_ground_truth_balance_train.json"
+    dev_file = output_dir / "verified_ground_truth_balance_dev.json"
+    test_file = output_dir / "verified_ground_truth_balance_test.json"
     
     # Load original ground truth data
     print(f"📁 Loading ground truth data from: {input_file}")
@@ -248,21 +248,23 @@ def main():
     # Split into train/dev/test
     train_data, dev_data, test_data = split_dataset(balanced_data, 0.5, 0.2, 0.3)
     
+    # Follow ORPO, merge train_data and dev_data to train_data
+    train_data.update(dev_data)
     # Save split datasets
     save_dataset(train_data, str(train_file), "Training set")
-    save_dataset(dev_data, str(dev_file), "Development set")
+    # save_dataset(dev_data, str(dev_file), "Development set")
     save_dataset(test_data, str(test_file), "Test set")
     
     # Analyze split distributions
     analyze_distribution(train_data, "Training Set")
-    analyze_distribution(dev_data, "Development Set")
+    # analyze_distribution(dev_data, "Development Set")
     analyze_distribution(test_data, "Test Set")
     
     print(f"\n🎉 All datasets created successfully!")
     print(f"📊 Final summary:")
     print(f"  Balanced dataset: {len(balanced_data)} sessions")
     print(f"  Training set: {len(train_data)} sessions")
-    print(f"  Development set: {len(dev_data)} sessions")
+    # print(f"  Development set: {len(dev_data)} sessions")
     print(f"  Test set: {len(test_data)} sessions")
 
 
