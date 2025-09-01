@@ -336,6 +336,13 @@ if __name__ == "__main__":
         default="data/processed/logs/04222025-08182025/ground_truth/verified_ground_truth_balance_test.json",
         help="Path to test data JSON file"
     )
+
+    parser.add_argument(
+        "--data_source",
+        type=str,
+        default="gpt-5-verified",
+        help="Data source (default: gpt-5-verified)"
+    )
     
     parser.add_argument(
         "--model",
@@ -355,8 +362,8 @@ if __name__ == "__main__":
     # Generate output filename automatically
     prompt_dir = os.path.dirname(args.prompt_file_path)
     output_filename = f"evaluation_results_{args.prompt_name}_{args.model}_{args.temperature}.json"
-    output_path = os.path.join(prompt_dir, output_filename)
-    
+    output_path = os.path.join(prompt_dir, args.data_source, output_filename)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     # Run evaluation
     print(f"🚀 Evaluating prompt '{args.prompt_name}' from {args.prompt_file_path}")
     print(f"📊 Model: {args.model}, Temperature: {args.temperature}")
