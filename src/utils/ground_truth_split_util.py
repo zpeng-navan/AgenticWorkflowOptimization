@@ -217,8 +217,8 @@ def main():
     
     # Define file paths
     base_dir = Path(__file__).parent.parent.parent  # Go up to project root
-    input_file = base_dir / "data/processed/logs/04222025-08182025/ground_truth/verified_ground_truth.json"
-    output_dir = base_dir / "data/processed/logs/04222025-08182025/ground_truth"
+    input_file = base_dir / "data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth.json"
+    output_dir = base_dir / "data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified"
     
     balance_file = output_dir / "verified_ground_truth_balance.json"
     train_file = output_dir / "verified_ground_truth_balance_train.json"
