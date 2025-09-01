@@ -12,7 +12,7 @@ import yaml
 import os
 import argparse
 from typing import Dict, List, Tuple, Optional, Any
-from sklearn.metrics import precision_recall_fscore_support, accuracy_score, confusion_matrix
+from sklearn.metrics import precision_recall_fscore_support, accuracy_score, confusion_matrix, balanced_accuracy_score
 import pandas as pd
 from tqdm import tqdm
 
@@ -102,12 +102,14 @@ def compute_binary_metrics(y_true: List[bool], y_pred: List[bool]) -> Dict[str, 
         y_true, y_pred, average='binary', pos_label=True
     )
     accuracy = accuracy_score(y_true, y_pred)
+    balanced_accuracy = balanced_accuracy_score(y_true, y_pred)
     
     return {
         'precision': precision,
         'recall': recall, 
         'f1': f1,
-        'accuracy': accuracy
+        'accuracy': accuracy,
+        'balanced_accuracy': balanced_accuracy
     }
 
 
