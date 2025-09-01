@@ -227,7 +227,7 @@ def process_ground_truth_verification():
     
     # Load ground truth data
     input_file = "data/processed/logs/04222025-08182025/ground_truth/ground_truth.json"
-    output_file = "data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_gpt5.json"
+    output_file = "data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth.json"
     
     print(f"Loading data from {input_file}...")
     ground_truth_data = load_json_file(input_file)
