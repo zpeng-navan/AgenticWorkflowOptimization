@@ -95,7 +95,7 @@ class OpenAIClient:
     def __init__(self):
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         
-    def get_completion(self, prompt, model="gpt-4o", temperature=0, max_tokens=1000):
+    def get_completion(self, prompt, model="gpt-5", temperature=1.0, max_tokens=1000):
         """Get completion from OpenAI API"""
         try:
             response = self.client.chat.completions.create(
@@ -104,7 +104,7 @@ class OpenAIClient:
                     {"role": "user", "content": prompt}
                 ],
                 temperature=temperature,
-                max_tokens=max_tokens
+                max_completion_tokens=max_tokens
             )
             return response.choices[0].message.content.strip()
         except Exception as e:
@@ -145,7 +145,7 @@ def verify_cancel_not_for_all_from_full_conversation(element, openai_client):
     prompt_template = create_cancel_not_for_all_prompt(data_sections)
 
     try:
-        response = openai_client.get_completion(prompt_template, temperature=0)
+        response = openai_client.get_completion(prompt_template, temperature=1.0)
         
         if response:
             answer = parse_llm_json_response(response)
@@ -227,7 +227,7 @@ def process_ground_truth_verification():
     
     # Load ground truth data
     input_file = "data/processed/logs/04222025-08182025/ground_truth/ground_truth.json"
-    output_file = "data/processed/logs/04222025-08182025/ground_truth/verified_ground_truth.json"
+    output_file = "data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_gpt5.json"
     
     print(f"Loading data from {input_file}...")
     ground_truth_data = load_json_file(input_file)
