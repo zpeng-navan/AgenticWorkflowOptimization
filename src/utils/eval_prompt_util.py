@@ -103,13 +103,15 @@ def compute_binary_metrics(y_true: List[bool], y_pred: List[bool]) -> Dict[str, 
     )
     accuracy = accuracy_score(y_true, y_pred)
     balanced_accuracy = balanced_accuracy_score(y_true, y_pred)
+    adjusted_balanced_accuracy = balanced_accuracy_score(y_true, y_pred, adjusted=True)
     
     return {
         'precision': precision,
         'recall': recall, 
         'f1': f1,
         'accuracy': accuracy,
-        'balanced_accuracy': balanced_accuracy
+        'balanced_accuracy': balanced_accuracy,
+        'adjusted_balanced_accuracy': adjusted_balanced_accuracy
     }
 
 
