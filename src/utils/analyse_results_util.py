@@ -544,7 +544,7 @@ def metric_cost_latency(metric_name: str,
     lines2, labels2 = ax2.get_legend_handles_labels()
     lines3, labels3 = ax3.get_legend_handles_labels()
     ax1.legend(lines1 + lines2 + lines3, labels1 + labels2 + labels3, 
-              loc='upper left', bbox_to_anchor=(0.02, 0.98))
+              loc='upper left', bbox_to_anchor=(0.005, 0.98))
     
     # Set title
     title = f'{metric_name.replace("_", " ").title()} (Avg), Cost & Latency vs Models ({prompt_name.replace("_", " ").title()})'
