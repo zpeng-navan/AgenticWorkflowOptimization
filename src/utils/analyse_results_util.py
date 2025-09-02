@@ -468,11 +468,13 @@ if __name__ == "__main__":
     print("=" * 50)
     
     # Create a single comparison
-    two_labels_diff_model("balanced_accuracy", "initial_prompt_simple")
+    # two_labels_diff_model("balanced_accuracy", "initial_prompt_simple")
     
     # Test the new combined function
-    # two_labels_diff_model_one_more("balanced_accuracy", "latency", "initial_prompt")
-    # two_labels_diff_model_one_more("f1", "cost", "initial_prompt_simple")
+    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt")
+    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt_simple")
+    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt")
+    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt_simple")
     
     # Uncomment to create all metric comparisons
     # create_all_metric_comparisons("initial_prompt")
