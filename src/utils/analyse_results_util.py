@@ -15,6 +15,17 @@ import matplotlib.patches as mpatches
 # Define custom colors based on LaTeX specification
 CUSTOM_BLUE = (20/255, 81/255, 124/255)  # RGB(20, 81, 124)
 CUSTOM_RED = (216/255, 56/255, 58/255)   # RGB(216, 56, 58)
+API_COST_PER_MILLION_TOKENS = {
+    "gpt-3.5-turbo": {"input": 0.50 , "output": 1.50},
+    "gpt-4o-mini": {"input": 0.15, "output": 0.60},
+    "gpt-4o": {"input": 2.50, "output": 10.00},
+    "o3-mini": {"input": 1.10, "output": 4.40},
+    "o3": {"input": 2.00, "output": 8.00},
+    "gpt-4.1-mini": {"input": 0.40, "output": 1.60},
+    "gpt-4.1": {"input": 2.00, "output": 8.00},
+    "gpt-5-mini": {"input": 0.25, "output": 2.00},
+    "gpt-5": {"input": 1.25, "output": 10.00}
+}
 
 def load_evaluation_results(results_dir: str, prompt_name: str) -> Dict[str, Dict]:
     """
