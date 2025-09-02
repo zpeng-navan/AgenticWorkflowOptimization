@@ -777,7 +777,8 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
         min_val, max_val = min(values), max(values)
         if max_val == min_val:
             return [1.0] * len(values)
-        return [(v - min_val) / (max_val - min_val) for v in values]
+        # return [(v - min_val) / (max_val - min_val) for v in values]
+        return [v / max_val for v in values]
     
     # Metric values are already 0-1, no normalization needed
     norm_metric_init = avg_metric_values_init
