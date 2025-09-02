@@ -11,6 +11,7 @@ import json
 import yaml
 import os
 import argparse
+import numpy as np
 from typing import Dict, List, Tuple, Optional, Any
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, confusion_matrix, balanced_accuracy_score
 import pandas as pd
@@ -302,6 +303,146 @@ def evaluate_prompt(
     return evaluation_results
 
 
+def compute_metrics_statistics(metrics_list: List[Dict[str, float]]) -> Dict[str, Dict[str, float]]:
+    """
+    Compute mean and standard deviation for metrics across multiple runs.
+    
+    Args:
+        metrics_list: List of metric dictionaries from multiple runs
+        
+    Returns:
+        Dictionary with mean and std for each metric
+    """
+    if not metrics_list:
+        return {}
+    
+    # Get all metric keys
+    metric_keys = metrics_list[0].keys()
+    
+    statistics = {}
+    for key in metric_keys:
+        values = [metrics[key] for metrics in metrics_list if key in metrics]
+        if values:
+            statistics[key] = {
+                'mean': float(np.mean(values)),
+                'std': float(np.std(values)),
+                'values': values
+            }
+    
+    return statistics
+
+
+def evaluate_prompt_multiple_runs(
+    prompt_file_path: str = "prompts/original/identify_partial.yaml",
+    prompt_name: str = "initial_prompt", 
+    test_data_path: str = "data/processed/logs/04222025-08182025/ground_truth/verified_ground_truth_balance_test.json",
+    model: str = "gpt-4o",
+    temperature: float = 0,
+    api_key: Optional[str] = None,
+    run_num: int = 1,
+    verbose: bool = True
+) -> Dict[str, Any]:
+    """
+    Evaluate prompt performance multiple times and compute statistics.
+    
+    Args:
+        prompt_file_path: Path to YAML file with prompts
+        prompt_name: Name of prompt to use from YAML file
+        test_data_path: Path to test data JSON file
+        model: OpenAI model to use
+        temperature: Temperature for OpenAI API (0=deterministic, 1=random)
+        api_key: OpenAI API key (if None, will use environment variable)
+        run_num: Number of times to run the evaluation
+        verbose: Whether to print progress and detailed results
+        
+    Returns:
+        Dictionary with evaluation results, individual runs, and statistics
+    """
+    if run_num == 1:
+        # Single run - return original results
+        return evaluate_prompt(
+            prompt_file_path=prompt_file_path,
+            prompt_name=prompt_name,
+            test_data_path=test_data_path,
+            model=model,
+            temperature=temperature,
+            api_key=api_key,
+            verbose=verbose
+        )
+    
+    # Multiple runs
+    if verbose:
+        print(f"🔄 Running evaluation {run_num} times...")
+    
+    all_runs = []
+    cancel_metrics_list = []
+    partial_metrics_list = []
+    
+    for run_idx in tqdm(range(run_num)):
+        if verbose:
+            print(f"\n--- Run {run_idx + 1}/{run_num} ---")
+        
+        # Run single evaluation
+        run_results = evaluate_prompt(
+            prompt_file_path=prompt_file_path,
+            prompt_name=prompt_name,
+            test_data_path=test_data_path,
+            model=model,
+            temperature=temperature,
+            api_key=api_key,
+            verbose=verbose
+        )
+        
+        # Store results
+        all_runs.append(run_results)
+        
+        # Collect metrics for statistics
+        if run_results.get('cancel_not_for_all_metrics'):
+            cancel_metrics_list.append(run_results['cancel_not_for_all_metrics'])
+        
+        if run_results.get('partial_or_full_metrics'):
+            partial_metrics_list.append(run_results['partial_or_full_metrics'])
+    
+    # Compute statistics
+    cancel_statistics = compute_metrics_statistics(cancel_metrics_list)
+    partial_statistics = compute_metrics_statistics(partial_metrics_list)
+    
+    # Compile aggregated results
+    aggregated_results = {
+        'run_num': run_num,
+        'individual_runs': all_runs,
+        'cancel_not_for_all_statistics': cancel_statistics,
+        'partial_or_full_statistics': partial_statistics,
+        'config': {
+            'prompt_file_path': prompt_file_path,
+            'prompt_name': prompt_name,
+            'test_data_path': test_data_path,
+            'model': model,
+            'temperature': temperature,
+            'run_num': run_num
+        }
+    }
+    
+    # Print aggregated summary
+    if verbose:
+        print("\n" + "="*80)
+        print("AGGREGATED EVALUATION RESULTS")
+        print("="*80)
+        print(f"Number of runs: {run_num}")
+        
+        print(f"\n📊 CANCEL_NOT_FOR_ALL_PASSENGERS STATISTICS:")
+        if cancel_statistics:
+            for metric_name, stats in cancel_statistics.items():
+                print(f"{metric_name.upper()}: {stats['mean']:.3f} ± {stats['std']:.3f}")
+        
+        print(f"\n📊 PARTIAL_OR_FULL STATISTICS:")
+        if partial_statistics:
+            for metric_name, stats in partial_statistics.items():
+                print(f"{metric_name.upper()}: {stats['mean']:.3f} ± {stats['std']:.3f}")
+    
+    return aggregated_results
+
+
 def save_evaluation_results(results: Dict[str, Any], output_path: str):
     """Save evaluation results to JSON file."""
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -356,6 +497,13 @@ if __name__ == "__main__":
     )
     
     parser.add_argument(
+        "--run_num",
+        type=int,
+        default=1,
+        help="Number of times to run the evaluation for computing mean and std (default: 1)"
+    )
+    
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Print detailed progress and results"
@@ -365,21 +513,25 @@ if __name__ == "__main__":
     
     # Generate output filename automatically
     prompt_dir = os.path.dirname(args.prompt_file_path)
-    output_filename = f"evaluation_results_{args.prompt_name}_{args.model}_{args.temperature}.json"
+    output_filename = f"evaluation_results_{args.prompt_name}_{args.model}_{args.temperature}_runs{args.run_num}.json"
     output_path = os.path.join(prompt_dir, args.data_source, output_filename)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
     # Run evaluation
     print(f"🚀 Evaluating prompt '{args.prompt_name}' from {args.prompt_file_path}")
     print(f"📊 Model: {args.model}, Temperature: {args.temperature}")
+    if args.run_num > 1:
+        print(f"🔄 Number of runs: {args.run_num} (will compute mean ± std)")
     print(f"📁 Test data: {args.test_data_path}")
     print(f"💾 Output will be saved to: {output_path}")
     
-    results = evaluate_prompt(
+    results = evaluate_prompt_multiple_runs(
         prompt_file_path=args.prompt_file_path,
         prompt_name=args.prompt_name,
         test_data_path=args.test_data_path,
         model=args.model,
         temperature=args.temperature,
+        run_num=args.run_num,
         verbose=args.verbose
     )
     
