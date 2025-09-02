@@ -875,7 +875,7 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
     
     # Customize axes
     ax.set_xlabel('Models', fontsize=14, fontweight='bold')
-    ax.set_ylabel('Values (Metrics: Original 0-1 Scale, Cost & Latency: Normalized 0-1)', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Values (Cost & Latency: Normalized 0-1)', fontsize=14, fontweight='bold')
     ax.set_title(f'Grouped Comparison: {metric_name.replace("_", " ").title()}, Cost & Latency\n(Initial Prompt vs Initial Prompt Simple)', 
                 fontsize=16, fontweight='bold', pad=20)
     
