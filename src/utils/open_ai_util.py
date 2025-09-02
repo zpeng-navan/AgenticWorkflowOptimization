@@ -68,12 +68,19 @@ class OpenAIClient:
             try:
                 if OPENAI_V1:
                     # Use new v1.x API
-                    params = {
-                        "model": model,
-                        "temperature": temperature,
-                        "max_tokens": max_tokens,
-                        "messages": [{"role": "user", "content": prompt}],
-                    }
+                    if "o3" in model or "gpt-5" in model:
+                        params = {
+                            "model": model,
+                            "max_completion_tokens": max_tokens,
+                            "messages": [{"role": "user", "content": prompt}],
+                        }
+                    else:
+                        params = {
+                            "model": model,
+                            "temperature": temperature,
+                            "max_tokens": max_tokens,
+                            "messages": [{"role": "user", "content": prompt}],
+                        }
                     # Add seed if provided (for reproducibility)
                     if seed is not None:
                         params["seed"] = seed
