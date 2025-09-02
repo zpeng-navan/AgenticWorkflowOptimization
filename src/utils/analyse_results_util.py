@@ -437,6 +437,139 @@ def two_labels_diff_model_one_more(metric_name: str,
     plt.close()
 
 
+def metric_cost_latency(metric_name: str,
+                       prompt_name: str = "initial_prompt",
+                       results_dir: str = "prompts/original/gpt-5-verified", 
+                       output_dir: str = "imgs/baselines") -> None:
+    """
+    Create a triple-axis graph showing:
+    1. Average metric of both labels (bars)
+    2. Cost per 1M calls (line)
+    3. Latency (line)
+    
+    Args:
+        metric_name: Name of the metric to plot
+        prompt_name: Name of the prompt ('initial_prompt' or 'initial_prompt_simple')
+        results_dir: Directory containing the JSON result files
+        output_dir: Directory to save the output graphs
+    """
+    print(f"🚀 Creating triple-axis graph for {metric_name} with cost and latency using {prompt_name}")
+    
+    # Load results
+    results = load_evaluation_results(results_dir, prompt_name)
+    if not results:
+        print(f"❌ No results found for {prompt_name}")
+        return
+    
+    # Extract metric values for both labels
+    cancel_values, partial_values = extract_metric_values(results, metric_name)
+    
+    # Calculate average of both labels
+    avg_metric_values = [(c + p) / 2 for c, p in zip(cancel_values, partial_values)]
+    
+    # Extract cost and latency values
+    cost_values = extract_latency_or_cost_values(results, "cost")
+    latency_values = extract_latency_or_cost_values(results, "latency")
+    
+    # Model order
+    models = ["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o", "o3-mini", "o3", 
+              "gpt-4.1-mini", "gpt-4.1", "gpt-5-mini", "gpt-5"]
+    
+    # Create figure and primary axis
+    fig, ax1 = plt.subplots(figsize=(14, 8))
+    
+    # Create bars for average metric (primary y-axis)
+    x = np.arange(len(models))
+    bars = ax1.bar(x, avg_metric_values, color=CUSTOM_BLUE, alpha=0.7, 
+                   label=f'Avg {metric_name.replace("_", " ").title()}', width=0.6)
+    
+    # Customize primary y-axis
+    ax1.set_xlabel('Models', fontsize=12, fontweight='bold')
+    ax1.set_ylabel(f'Average {metric_name.replace("_", " ").title()}', 
+                   fontsize=12, fontweight='bold', color=CUSTOM_BLUE)
+    ax1.tick_params(axis='y', labelcolor=CUSTOM_BLUE)
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(models, rotation=45, ha='right')
+    ax1.grid(True, alpha=0.3)
+    
+    # Add value labels on bars
+    def add_value_labels_bars(bars):
+        for bar in bars:
+            height = bar.get_height()
+            ax1.annotate(f'{height:.3f}',
+                        xy=(bar.get_x() + bar.get_width() / 2, height),
+                        xytext=(0, 3),
+                        textcoords="offset points",
+                        ha='center', va='bottom',
+                        fontsize=9, fontweight='bold')
+    
+    add_value_labels_bars(bars)
+    
+    # Create secondary y-axis for cost
+    ax2 = ax1.twinx()
+    line_cost = ax2.plot(x, cost_values, color=CUSTOM_RED, marker='o', linewidth=2, 
+                        markersize=6, label='Cost per 1M calls (USD)', linestyle='-')
+    ax2.set_ylabel('Cost (USD per 1M calls)', fontsize=12, fontweight='bold', color=CUSTOM_RED)
+    ax2.tick_params(axis='y', labelcolor=CUSTOM_RED)
+    
+    # Create tertiary y-axis for latency
+    ax3 = ax1.twinx()
+    # Offset the third y-axis
+    ax3.spines['right'].set_position(('outward', 60))
+    line_latency = ax3.plot(x, latency_values, color=CUSTOM_BLACK, marker='s', linewidth=2,
+                           markersize=6, label='Avg Latency (ms)', linestyle='--')
+    ax3.set_ylabel('Latency (ms)', fontsize=12, fontweight='bold', color=CUSTOM_BLACK)
+    ax3.tick_params(axis='y', labelcolor=CUSTOM_BLACK)
+    
+    # Add value labels for cost line
+    for i, value in enumerate(cost_values):
+        ax2.annotate(f'${value:.2f}',
+                    xy=(i, value),
+                    xytext=(0, 10),
+                    textcoords="offset points",
+                    ha='center', va='bottom',
+                    fontsize=8, color=CUSTOM_RED, fontweight='bold')
+    
+    # Add value labels for latency line
+    for i, value in enumerate(latency_values):
+        ax3.annotate(f'{value:.1f}ms',
+                    xy=(i, value),
+                    xytext=(0, -15),
+                    textcoords="offset points",
+                    ha='center', va='top',
+                    fontsize=8, color=CUSTOM_BLACK, fontweight='bold')
+    
+    # Create combined legend
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    lines3, labels3 = ax3.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2 + lines3, labels1 + labels2 + labels3, 
+              loc='upper left', bbox_to_anchor=(0.02, 0.98))
+    
+    # Set title
+    title = f'{metric_name.replace("_", " ").title()} (Avg), Cost & Latency vs Models ({prompt_name.replace("_", " ").title()})'
+    plt.title(title, fontsize=14, fontweight='bold', pad=20)
+    
+    # Adjust layout
+    plt.tight_layout()
+    
+    # Save files
+    os.makedirs(output_dir, exist_ok=True)
+    base_filename = f"{metric_name}_vs_models_{prompt_name}_cost_latency"
+    
+    png_path = os.path.join(output_dir, f"{base_filename}.png")
+    pdf_path = os.path.join(output_dir, f"{base_filename}.pdf")
+    
+    plt.savefig(png_path, dpi=300, bbox_inches='tight')
+    plt.savefig(pdf_path, bbox_inches='tight')
+    
+    print(f"💾 Saved PNG: {png_path}")
+    print(f"💾 Saved PDF: {pdf_path}")
+    
+    plt.show()
+    plt.close()
+
+
 def create_all_metric_comparisons(prompt_name: str, 
                                 results_dir: str = "prompts/original/gpt-5-verified",
                                 output_dir: str = "imgs/baselines") -> None:
@@ -468,13 +601,18 @@ if __name__ == "__main__":
     print("=" * 50)
     
     # Create a single comparison
-    # two_labels_diff_model("balanced_accuracy", "initial_prompt_simple")
+    two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt")
+    two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt_simple")
     
     # Test the new combined function
-    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt")
-    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt_simple")
-    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt")
-    two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt_simple")
+    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt")
+    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt_simple")
+    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt")
+    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt_simple")
+    
+    # Test the new triple-axis function
+    metric_cost_latency("adjusted_balanced_accuracy", "initial_prompt")
+    metric_cost_latency("adjusted_balanced_accuracy", "initial_prompt_simple")
     
     # Uncomment to create all metric comparisons
     # create_all_metric_comparisons("initial_prompt")
