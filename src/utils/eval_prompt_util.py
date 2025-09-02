@@ -12,6 +12,7 @@ import yaml
 import os
 import argparse
 import numpy as np
+import time
 from typing import Dict, List, Tuple, Optional, Any
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, confusion_matrix, balanced_accuracy_score
 import pandas as pd
@@ -163,6 +164,7 @@ def evaluate_prompt(
     results = []
     prediction_errors = []
     thought_word_counts = []  # Track thought word counts
+    latencies = []  # Track API call latencies in milliseconds
     
     if verbose:
         print(f"Evaluating {len(test_data)} test cases...")
@@ -188,12 +190,16 @@ def evaluate_prompt(
         
         # Call OpenAI API
         try:
+            start_time = time.time()
             response = client.call_openai_with_retry(
                 prompt=prompt,
                 model=model,
                 temperature=temperature,
-                max_tokens=1024
+                max_tokens=2048
             )
+            end_time = time.time()
+            latency = (end_time - start_time) * 1000  # Convert to milliseconds
+            latencies.append(latency)
             
             # Parse response
             parsed_response = parse_model_response(response)
@@ -217,6 +223,7 @@ def evaluate_prompt(
                     'gt_partial_or_full': gt_partial_or_full,
                     'pred_partial_or_full': pred_partial_or_full,
                     'thought_words': thought_words,
+                    'latency': latency,
                     'raw_response': response,
                     'parsed_response': parsed_response
                 })
@@ -224,6 +231,7 @@ def evaluate_prompt(
                 prediction_errors.append({
                     'element_id': element_id,
                     'error': 'Failed to parse JSON response',
+                    'latency': latency,
                     'raw_response': response
                 })
                 
@@ -231,6 +239,7 @@ def evaluate_prompt(
             prediction_errors.append({
                 'element_id': element_id,
                 'error': str(e),
+                'latency': None,  # No latency measurement for failed calls (would be in ms)
                 'raw_response': None
             })
         # debug_count += 1
@@ -266,8 +275,9 @@ def evaluate_prompt(
     else:
         partial_metrics = {}
     
-    # Calculate average thought words
+    # Calculate average thought words and latency
     avg_thought_words = np.mean(thought_word_counts) if thought_word_counts else 0.0
+    avg_latency = np.mean(latencies) if latencies else 0.0
     
     # Compile final results
     evaluation_results = {
@@ -278,6 +288,8 @@ def evaluate_prompt(
         'partial_or_full_metrics': partial_metrics,
         'avg_thought_words': float(avg_thought_words),
         'thought_word_counts': thought_word_counts,
+        'avg_latency': float(avg_latency),
+        'latencies': latencies,
         'detailed_results': results,
         'errors': prediction_errors,
         'config': {
@@ -317,6 +329,13 @@ def evaluate_prompt(
         print(f"\n💭 THOUGHT WORDS METRICS:")
         print(f"Responses with thought: {len(thought_word_counts)}")
         print(f"Average thought words: {avg_thought_words:.1f}")
+        
+        print(f"\n⏱️ LATENCY METRICS:")
+        print(f"Successful API calls: {len(latencies)}")
+        print(f"Average latency: {avg_latency:.1f}ms")
+        if latencies:
+            print(f"Min latency: {min(latencies):.1f}ms")
+            print(f"Max latency: {max(latencies):.1f}ms")
     
     return evaluation_results
 
@@ -396,6 +415,7 @@ def evaluate_prompt_multiple_runs(
     cancel_metrics_list = []
     partial_metrics_list = []
     avg_thought_words_list = []
+    avg_latency_list = []
     
     for run_idx in tqdm(range(run_num)):
         if verbose:
@@ -424,6 +444,9 @@ def evaluate_prompt_multiple_runs(
         
         if 'avg_thought_words' in run_results:
             avg_thought_words_list.append(run_results['avg_thought_words'])
+        
+        if 'avg_latency' in run_results:
+            avg_latency_list.append(run_results['avg_latency'])
     
     # Compute statistics
     cancel_statistics = compute_metrics_statistics(cancel_metrics_list)
@@ -440,6 +463,17 @@ def evaluate_prompt_multiple_runs(
             }
         }
     
+    # Compute avg_latency statistics
+    latency_statistics = {}
+    if avg_latency_list:
+        latency_statistics = {
+            'avg_latency': {
+                'mean': float(np.mean(avg_latency_list)),
+                'std': float(np.std(avg_latency_list)),
+                'values': avg_latency_list
+            }
+        }
+    
     # Compile aggregated results
     aggregated_results = {
         'run_num': run_num,
@@ -447,6 +481,7 @@ def evaluate_prompt_multiple_runs(
         'cancel_not_for_all_statistics': cancel_statistics,
         'partial_or_full_statistics': partial_statistics,
         'thought_statistics': thought_statistics,
+        'latency_statistics': latency_statistics,
         'config': {
             'prompt_file_path': prompt_file_path,
             'prompt_name': prompt_name,
@@ -478,6 +513,11 @@ def evaluate_prompt_multiple_runs(
         if thought_statistics:
             for metric_name, stats in thought_statistics.items():
                 print(f"{metric_name.upper().replace('_', ' ')}: {stats['mean']:.1f} ± {stats['std']:.1f}")
+        
+        print(f"\n⏱️ LATENCY STATISTICS:")
+        if latency_statistics:
+            for metric_name, stats in latency_statistics.items():
+                print(f"{metric_name.upper().replace('_', ' ')}: {stats['mean']:.1f}ms ± {stats['std']:.1f}ms")
     
     return aggregated_results
 
