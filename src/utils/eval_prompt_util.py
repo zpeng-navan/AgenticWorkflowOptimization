@@ -162,6 +162,7 @@ def evaluate_prompt(
     # Prepare evaluation data
     results = []
     prediction_errors = []
+    thought_word_counts = []  # Track thought word counts
     
     if verbose:
         print(f"Evaluating {len(test_data)} test cases...")
@@ -201,6 +202,13 @@ def evaluate_prompt(
                 pred_cancel_not_for_all = parsed_response.get("cancel_not_for_all_passengers")
                 pred_partial_or_full = parsed_response.get("partial_or_full")
                 
+                # Count thought words if present
+                thought_words = 0
+                if "thought" in parsed_response and parsed_response["thought"]:
+                    thought_text = str(parsed_response["thought"])
+                    thought_words = len(thought_text.split())
+                    thought_word_counts.append(thought_words)
+                
                 # Store result
                 results.append({
                     'element_id': element_id,
@@ -208,6 +216,7 @@ def evaluate_prompt(
                     'pred_cancel_not_for_all': pred_cancel_not_for_all,
                     'gt_partial_or_full': gt_partial_or_full,
                     'pred_partial_or_full': pred_partial_or_full,
+                    'thought_words': thought_words,
                     'raw_response': response,
                     'parsed_response': parsed_response
                 })
@@ -257,6 +266,9 @@ def evaluate_prompt(
     else:
         partial_metrics = {}
     
+    # Calculate average thought words
+    avg_thought_words = np.mean(thought_word_counts) if thought_word_counts else 0.0
+    
     # Compile final results
     evaluation_results = {
         'total_cases': len(test_data),
@@ -264,6 +276,8 @@ def evaluate_prompt(
         'prediction_errors': len(prediction_errors),
         'cancel_not_for_all_metrics': cancel_metrics,
         'partial_or_full_metrics': partial_metrics,
+        'avg_thought_words': float(avg_thought_words),
+        'thought_word_counts': thought_word_counts,
         'detailed_results': results,
         'errors': prediction_errors,
         'config': {
@@ -299,6 +313,10 @@ def evaluate_prompt(
             print(f"Precision: {partial_metrics['precision']:.3f}")
             print(f"Recall: {partial_metrics['recall']:.3f}")
             print(f"F1-Score: {partial_metrics['f1']:.3f}")
+        
+        print(f"\n💭 THOUGHT WORDS METRICS:")
+        print(f"Responses with thought: {len(thought_word_counts)}")
+        print(f"Average thought words: {avg_thought_words:.1f}")
     
     return evaluation_results
 
@@ -377,6 +395,7 @@ def evaluate_prompt_multiple_runs(
     all_runs = []
     cancel_metrics_list = []
     partial_metrics_list = []
+    avg_thought_words_list = []
     
     for run_idx in tqdm(range(run_num)):
         if verbose:
@@ -402,10 +421,24 @@ def evaluate_prompt_multiple_runs(
         
         if run_results.get('partial_or_full_metrics'):
             partial_metrics_list.append(run_results['partial_or_full_metrics'])
+        
+        if 'avg_thought_words' in run_results:
+            avg_thought_words_list.append(run_results['avg_thought_words'])
     
     # Compute statistics
     cancel_statistics = compute_metrics_statistics(cancel_metrics_list)
     partial_statistics = compute_metrics_statistics(partial_metrics_list)
+    
+    # Compute avg_thought_words statistics
+    thought_statistics = {}
+    if avg_thought_words_list:
+        thought_statistics = {
+            'avg_thought_words': {
+                'mean': float(np.mean(avg_thought_words_list)),
+                'std': float(np.std(avg_thought_words_list)),
+                'values': avg_thought_words_list
+            }
+        }
     
     # Compile aggregated results
     aggregated_results = {
@@ -413,6 +446,7 @@ def evaluate_prompt_multiple_runs(
         'individual_runs': all_runs,
         'cancel_not_for_all_statistics': cancel_statistics,
         'partial_or_full_statistics': partial_statistics,
+        'thought_statistics': thought_statistics,
         'config': {
             'prompt_file_path': prompt_file_path,
             'prompt_name': prompt_name,
@@ -439,6 +473,11 @@ def evaluate_prompt_multiple_runs(
         if partial_statistics:
             for metric_name, stats in partial_statistics.items():
                 print(f"{metric_name.upper()}: {stats['mean']:.3f} ± {stats['std']:.3f}")
+        
+        print(f"\n💭 THOUGHT WORDS STATISTICS:")
+        if thought_statistics:
+            for metric_name, stats in thought_statistics.items():
+                print(f"{metric_name.upper().replace('_', ' ')}: {stats['mean']:.1f} ± {stats['std']:.1f}")
     
     return aggregated_results
 
