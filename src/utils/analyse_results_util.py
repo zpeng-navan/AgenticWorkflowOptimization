@@ -570,6 +570,349 @@ def metric_cost_latency(metric_name: str,
     plt.close()
 
 
+def metric_cost_latency_two_prompt(metric_name: str,
+                                  results_dir: str = "prompts/original/gpt-5-verified", 
+                                  output_dir: str = "imgs/baselines") -> None:
+    """
+    Create a comprehensive graph comparing both initial_prompt and initial_prompt_simple showing:
+    1. Average metric of both labels (grouped bars)
+    2. Cost per 1M calls for both prompts (lines)
+    3. Latency for both prompts (lines)
+    
+    Colors:
+    - Blue: initial_prompt
+    - Red: initial_prompt_simple
+    
+    Args:
+        metric_name: Name of the metric to plot
+        results_dir: Directory containing the JSON result files
+        output_dir: Directory to save the output graphs
+    """
+    print(f"🚀 Creating comparison graph for {metric_name} with cost and latency for both prompts")
+    
+    # Load results for both prompts
+    results_initial = load_evaluation_results(results_dir, "initial_prompt")
+    results_simple = load_evaluation_results(results_dir, "initial_prompt_simple")
+    
+    if not results_initial or not results_simple:
+        print(f"❌ Missing results for one or both prompts")
+        return
+    
+    # Extract data for initial_prompt
+    cancel_values_init, partial_values_init = extract_metric_values(results_initial, metric_name)
+    avg_metric_values_init = [(c + p) / 2 for c, p in zip(cancel_values_init, partial_values_init)]
+    cost_values_init = extract_latency_or_cost_values(results_initial, "cost")
+    latency_values_init = extract_latency_or_cost_values(results_initial, "latency")
+    
+    # Extract data for initial_prompt_simple
+    cancel_values_simple, partial_values_simple = extract_metric_values(results_simple, metric_name)
+    avg_metric_values_simple = [(c + p) / 2 for c, p in zip(cancel_values_simple, partial_values_simple)]
+    cost_values_simple = extract_latency_or_cost_values(results_simple, "cost")
+    latency_values_simple = extract_latency_or_cost_values(results_simple, "latency")
+    
+    # Model order
+    models = ["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o", "o3-mini", "o3", 
+              "gpt-4.1-mini", "gpt-4.1", "gpt-5-mini", "gpt-5"]
+    
+    # Create figure and primary axis
+    fig, ax1 = plt.subplots(figsize=(16, 8))
+    
+    # Create line charts for average metric (primary y-axis)
+    x = np.arange(len(models))
+    
+    # Round symbols for metric values
+    line_metric_init = ax1.plot(x, avg_metric_values_init, color=CUSTOM_BLUE, marker='o', 
+                               linewidth=2, markersize=8, linestyle='-',
+                               label=f'Initial Prompt - Avg {metric_name.replace("_", " ").title()}')
+    line_metric_simple = ax1.plot(x, avg_metric_values_simple, color=CUSTOM_RED, marker='o',
+                                 linewidth=2, markersize=8, linestyle='-',
+                                 label=f'Initial Prompt Simple - Avg {metric_name.replace("_", " ").title()}')
+    
+    # Customize primary y-axis
+    ax1.set_xlabel('Models', fontsize=12, fontweight='bold')
+    ax1.set_ylabel(f'Average {metric_name.replace("_", " ").title()}', 
+                   fontsize=12, fontweight='bold')
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(models, rotation=45, ha='right')
+    ax1.grid(True, alpha=0.3)
+    
+    # Add value labels for metric lines
+    for i, (value_init, value_simple) in enumerate(zip(avg_metric_values_init, avg_metric_values_simple)):
+        ax1.annotate(f'{value_init:.3f}',
+                    xy=(i, value_init),
+                    xytext=(-8, 8),
+                    textcoords="offset points",
+                    ha='center', va='bottom',
+                    fontsize=7, color=CUSTOM_BLUE, fontweight='bold')
+        ax1.annotate(f'{value_simple:.3f}',
+                    xy=(i, value_simple),
+                    xytext=(8, 8),
+                    textcoords="offset points",
+                    ha='center', va='bottom',
+                    fontsize=7, color=CUSTOM_RED, fontweight='bold')
+    
+    # Create secondary y-axis for cost
+    ax2 = ax1.twinx()
+    # Square symbols for cost values
+    line_cost_init = ax2.plot(x, cost_values_init, color=CUSTOM_BLUE, marker='s', 
+                             linewidth=2, markersize=6, linestyle='-',
+                             label='Initial Prompt - Cost per 1M calls (USD)')
+    line_cost_simple = ax2.plot(x, cost_values_simple, color=CUSTOM_RED, marker='s', 
+                               linewidth=2, markersize=6, linestyle='-',
+                               label='Initial Prompt Simple - Cost per 1M calls (USD)')
+    ax2.set_ylabel('Cost (USD per 1M calls)', fontsize=12, fontweight='bold')
+    
+    # Create tertiary y-axis for latency
+    ax3 = ax1.twinx()
+    # Offset the third y-axis
+    ax3.spines['right'].set_position(('outward', 60))
+    # Triangle symbols for latency values
+    line_latency_init = ax3.plot(x, latency_values_init, color=CUSTOM_BLUE, marker='^', 
+                                linewidth=2, markersize=6, linestyle='-',
+                                label='Initial Prompt - Avg Latency (ms)')
+    line_latency_simple = ax3.plot(x, latency_values_simple, color=CUSTOM_RED, marker='^',
+                                  linewidth=2, markersize=6, linestyle='-',
+                                  label='Initial Prompt Simple - Avg Latency (ms)')
+    ax3.set_ylabel('Latency (ms)', fontsize=12, fontweight='bold')
+    
+    # Add value labels for cost lines
+    for i, (value_init, value_simple) in enumerate(zip(cost_values_init, cost_values_simple)):
+        ax2.annotate(f'${value_init:.2f}',
+                    xy=(i, value_init),
+                    xytext=(-8, 12),
+                    textcoords="offset points",
+                    ha='center', va='bottom',
+                    fontsize=7, color=CUSTOM_BLUE, fontweight='bold')
+        ax2.annotate(f'${value_simple:.2f}',
+                    xy=(i, value_simple),
+                    xytext=(8, 12),
+                    textcoords="offset points",
+                    ha='center', va='bottom',
+                    fontsize=7, color=CUSTOM_RED, fontweight='bold')
+    
+    # Add value labels for latency lines
+    for i, (value_init, value_simple) in enumerate(zip(latency_values_init, latency_values_simple)):
+        ax3.annotate(f'{value_init:.1f}ms',
+                    xy=(i, value_init),
+                    xytext=(-8, -18),
+                    textcoords="offset points",
+                    ha='center', va='top',
+                    fontsize=7, color=CUSTOM_BLUE, fontweight='bold')
+        ax3.annotate(f'{value_simple:.1f}ms',
+                    xy=(i, value_simple),
+                    xytext=(8, -18),
+                    textcoords="offset points",
+                    ha='center', va='top',
+                    fontsize=7, color=CUSTOM_RED, fontweight='bold')
+    
+    # Create combined legend
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    lines3, labels3 = ax3.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2 + lines3, labels1 + labels2 + labels3, 
+              loc='upper left', bbox_to_anchor=(0.005, 0.98), fontsize=9)
+    
+    # Set title
+    title = f'{metric_name.replace("_", " ").title()} (Avg), Cost & Latency Comparison: Initial Prompt vs Initial Prompt Simple'
+    plt.title(title, fontsize=14, fontweight='bold', pad=20)
+    
+    # Adjust layout
+    plt.tight_layout()
+    
+    # Save files
+    os.makedirs(output_dir, exist_ok=True)
+    base_filename = f"{metric_name}_vs_models_two_prompts_cost_latency"
+    
+    png_path = os.path.join(output_dir, f"{base_filename}.png")
+    pdf_path = os.path.join(output_dir, f"{base_filename}.pdf")
+    
+    plt.savefig(png_path, dpi=300, bbox_inches='tight')
+    plt.savefig(pdf_path, bbox_inches='tight')
+    
+    print(f"💾 Saved PNG: {png_path}")
+    print(f"💾 Saved PDF: {pdf_path}")
+    
+    plt.show()
+    plt.close()
+
+
+def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
+                                               results_dir: str = "prompts/original/gpt-5-verified", 
+                                               output_dir: str = "imgs/baselines") -> None:
+    """
+    Create a grouped bar chart comparing both initial_prompt and initial_prompt_simple showing:
+    - 3 groups per model: avg metric, cost, latency
+    - 2 bars per group: initial_prompt (blue) vs initial_prompt_simple (red)
+    - Different hatch patterns for each metric type
+    
+    Args:
+        metric_name: Name of the metric to plot
+        results_dir: Directory containing the JSON result files
+        output_dir: Directory to save the output graphs
+    """
+    print(f"🚀 Creating grouped bar chart for {metric_name} with cost and latency for both prompts")
+    
+    # Load results for both prompts
+    results_initial = load_evaluation_results(results_dir, "initial_prompt")
+    results_simple = load_evaluation_results(results_dir, "initial_prompt_simple")
+    
+    if not results_initial or not results_simple:
+        print(f"❌ Missing results for one or both prompts")
+        return
+    
+    # Extract data for initial_prompt
+    cancel_values_init, partial_values_init = extract_metric_values(results_initial, metric_name)
+    avg_metric_values_init = [(c + p) / 2 for c, p in zip(cancel_values_init, partial_values_init)]
+    cost_values_init = extract_latency_or_cost_values(results_initial, "cost")
+    latency_values_init = extract_latency_or_cost_values(results_initial, "latency")
+    
+    # Extract data for initial_prompt_simple
+    cancel_values_simple, partial_values_simple = extract_metric_values(results_simple, metric_name)
+    avg_metric_values_simple = [(c + p) / 2 for c, p in zip(cancel_values_simple, partial_values_simple)]
+    cost_values_simple = extract_latency_or_cost_values(results_simple, "cost")
+    latency_values_simple = extract_latency_or_cost_values(results_simple, "latency")
+    
+    # Normalize only cost and latency to 0-1 range (metric values are already 0-1)
+    def normalize_values(values):
+        min_val, max_val = min(values), max(values)
+        if max_val == min_val:
+            return [1.0] * len(values)
+        return [(v - min_val) / (max_val - min_val) for v in values]
+    
+    # Metric values are already 0-1, no normalization needed
+    norm_metric_init = avg_metric_values_init
+    norm_metric_simple = avg_metric_values_simple
+    
+    # Normalize cost and latency separately (they have different scales)
+    norm_cost_init = normalize_values(cost_values_init + cost_values_simple)[:len(cost_values_init)]
+    norm_cost_simple = normalize_values(cost_values_init + cost_values_simple)[len(cost_values_init):]
+    
+    norm_latency_init = normalize_values(latency_values_init + latency_values_simple)[:len(latency_values_init)]
+    norm_latency_simple = normalize_values(latency_values_init + latency_values_simple)[len(latency_values_init):]
+    
+    # Model order
+    models = ["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o", "o3-mini", "o3", 
+              "gpt-4.1-mini", "gpt-4.1", "gpt-5-mini", "gpt-5"]
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(20, 10))
+    
+    # Set up positions for grouped bars
+    n_models = len(models)
+    n_groups = 3  # metric, cost, latency
+    group_width = 0.8
+    bar_width = group_width / (n_groups * 2)  # 2 bars per group
+    group_spacing = 0.1
+    
+    # Calculate positions
+    model_positions = np.arange(n_models)
+    
+    # Define hatch patterns for different metrics
+    metric_hatch = ''      # No pattern for metric (solid)
+    cost_hatch = '///'     # Diagonal lines for cost
+    latency_hatch = '...'  # Dots for latency
+    
+    # Plot bars for each model
+    for i, model in enumerate(models):
+        base_pos = model_positions[i] - group_width/2
+        
+        # Group 1: Average Metric
+        pos1_init = base_pos + 0 * (group_width / n_groups) + bar_width/2
+        pos1_simple = pos1_init + bar_width
+        
+        # Group 2: Cost  
+        pos2_init = base_pos + 1 * (group_width / n_groups) + bar_width/2
+        pos2_simple = pos2_init + bar_width
+        
+        # Group 3: Latency
+        pos3_init = base_pos + 2 * (group_width / n_groups) + bar_width/2
+        pos3_simple = pos3_init + bar_width
+        
+        # Plot metric bars
+        ax.bar(pos1_init, norm_metric_init[i], bar_width, 
+               color=CUSTOM_BLUE, hatch=metric_hatch, alpha=0.8,
+               label='Initial Prompt - Metric' if i == 0 else '')
+        ax.bar(pos1_simple, norm_metric_simple[i], bar_width,
+               color=CUSTOM_RED, hatch=metric_hatch, alpha=0.8,
+               label='Initial Prompt Simple - Metric' if i == 0 else '')
+        
+        # Plot cost bars
+        ax.bar(pos2_init, norm_cost_init[i], bar_width,
+               color=CUSTOM_BLUE, hatch=cost_hatch, alpha=0.8,
+               label='Initial Prompt - Cost' if i == 0 else '')
+        ax.bar(pos2_simple, norm_cost_simple[i], bar_width,
+               color=CUSTOM_RED, hatch=cost_hatch, alpha=0.8,
+               label='Initial Prompt Simple - Cost' if i == 0 else '')
+        
+        # Plot latency bars
+        ax.bar(pos3_init, norm_latency_init[i], bar_width,
+               color=CUSTOM_BLUE, hatch=latency_hatch, alpha=0.8,
+               label='Initial Prompt - Latency' if i == 0 else '')
+        ax.bar(pos3_simple, norm_latency_simple[i], bar_width,
+               color=CUSTOM_RED, hatch=latency_hatch, alpha=0.8,
+               label='Initial Prompt Simple - Latency' if i == 0 else '')
+        
+        # Add value labels on bars with original values
+        def add_value_label(pos, norm_val, orig_val, metric_type):
+            if metric_type == 'metric':
+                label_text = f'{orig_val:.3f}'
+            elif metric_type == 'cost':
+                label_text = f'${orig_val:.2f}'
+            else:  # latency
+                label_text = f'{orig_val:.1f}ms'
+            
+            ax.annotate(label_text, xy=(pos, norm_val), xytext=(0, 3),
+                       textcoords='offset points', ha='center', va='bottom',
+                       fontsize=9, rotation=90, fontweight='bold')
+        
+        # Add labels with original values
+        add_value_label(pos1_init, norm_metric_init[i], avg_metric_values_init[i], 'metric')
+        add_value_label(pos1_simple, norm_metric_simple[i], avg_metric_values_simple[i], 'metric')
+        add_value_label(pos2_init, norm_cost_init[i], cost_values_init[i], 'cost')
+        add_value_label(pos2_simple, norm_cost_simple[i], cost_values_simple[i], 'cost')
+        add_value_label(pos3_init, norm_latency_init[i], latency_values_init[i], 'latency')
+        add_value_label(pos3_simple, norm_latency_simple[i], latency_values_simple[i], 'latency')
+    
+    # Customize axes
+    ax.set_xlabel('Models', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Values (Metrics: Original 0-1 Scale, Cost & Latency: Normalized 0-1)', fontsize=14, fontweight='bold')
+    ax.set_title(f'Grouped Comparison: {metric_name.replace("_", " ").title()}, Cost & Latency\n(Initial Prompt vs Initial Prompt Simple)', 
+                fontsize=16, fontweight='bold', pad=20)
+    
+    # Set x-axis ticks and labels
+    ax.set_xticks(model_positions)
+    ax.set_xticklabels(models, rotation=45, ha='right')
+    
+    # Add group separators
+    for i in range(1, n_models):
+        ax.axvline(x=i - 0.5, color='gray', linestyle='--', alpha=0.5)
+    
+    # Add grid
+    ax.grid(True, alpha=0.3, axis='y')
+    
+    # Create legend in upper left corner
+    ax.legend(bbox_to_anchor=(0.02, 0.98), loc='upper left')
+    
+    # Adjust layout
+    plt.tight_layout()
+    
+    # Save files
+    os.makedirs(output_dir, exist_ok=True)
+    base_filename = f"{metric_name}_vs_models_two_prompts_grouped_bars"
+    
+    png_path = os.path.join(output_dir, f"{base_filename}.png")
+    pdf_path = os.path.join(output_dir, f"{base_filename}.pdf")
+    
+    plt.savefig(png_path, dpi=300, bbox_inches='tight')
+    plt.savefig(pdf_path, bbox_inches='tight')
+    
+    print(f"💾 Saved PNG: {png_path}")
+    print(f"💾 Saved PDF: {pdf_path}")
+    
+    plt.show()
+    plt.close()
+
+
 def create_all_metric_comparisons(prompt_name: str, 
                                 results_dir: str = "prompts/original/gpt-5-verified",
                                 output_dir: str = "imgs/baselines") -> None:
@@ -604,16 +947,9 @@ if __name__ == "__main__":
     two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt")
     two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt_simple")
     
-    # Test the new combined function
-    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt")
-    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "cost", "initial_prompt_simple")
-    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt")
-    # two_labels_diff_model_one_more("adjusted_balanced_accuracy", "latency", "initial_prompt_simple")
-    
     # Test the new triple-axis function
     metric_cost_latency("adjusted_balanced_accuracy", "initial_prompt")
     metric_cost_latency("adjusted_balanced_accuracy", "initial_prompt_simple")
     
-    # Uncomment to create all metric comparisons
-    # create_all_metric_comparisons("initial_prompt")
-    # create_all_metric_comparisons("initial_prompt_simple")
+    # Test the new grouped bar chart function
+    metric_cost_latency_two_prompt_grouped_bars("adjusted_balanced_accuracy")
