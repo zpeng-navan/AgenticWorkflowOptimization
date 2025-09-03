@@ -108,6 +108,7 @@ class AvaOproOptimizer:
         self.instruction_score_dict = {}  # {prompt: (combined_score, cancel_adj_b_acc, partial_adj_b_acc)}
         self.old_instruction_md5_hashstrings_set = set()
         self.detailed_results_by_instruction = {}
+        self.step_statistics = []  # Step-level statistics for comprehensive tracking
         
     def _load_initial_prompt_parts(self) -> Tuple[str, str]:
         """Load initial prompt body and response format from YAML file."""
@@ -527,7 +528,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         initial_prompt_md5 = self._instruction_to_filename(self.initial_prompt, md5_hashing=True)
         self.old_instruction_md5_hashstrings_set.add(initial_prompt_md5)
         
-        prev_saved_instructions = {self.initial_prompt}
+
         
         # ============== Evolution ===============
         for i_step in range(self.num_search_steps):
@@ -604,48 +605,101 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 
             print(f"\nto-evaluate generated instructions: {[p[:50] + '...' for p in to_evaluate_instructions]}\n")
             
+            # Step-level tracking for metrics
+            step_metrics = {
+                'md5_hashes': [],
+                'instructions': [],
+                'combined_scores': [],
+                'cancel_precision': [], 'cancel_recall': [], 'cancel_f1': [], 'cancel_accuracy': [], 'cancel_balanced_accuracy': [], 'cancel_adj_balanced_accuracy': [],
+                'partial_precision': [], 'partial_recall': [], 'partial_f1': [], 'partial_accuracy': [], 'partial_balanced_accuracy': [], 'partial_adj_balanced_accuracy': [],
+                'word_counts': []
+            }
+            
             # Evaluate newly generated instructions on the training set
             for instruction in to_evaluate_instructions:
-                if instruction not in prev_saved_instructions:
-                    print(f'Computing the score of "{instruction[:50]}..." by prompting')
-                    
-                    combined_score, cancel_adj_b_acc, partial_adj_b_acc, results = self._evaluate_prompt_performance(
-                        instruction, train_data, self.scorer_model
-                    )
-                    
-                    prev_saved_instructions.add(instruction)
-                else:
-                    # Load previously saved results
-                    filename = self._instruction_to_filename(instruction)
-                    result_file_path = os.path.join(self.save_folder, f"{filename}.json")
-                    with open(result_file_path, 'r') as f:
-                        results = json.load(f)
-                    cancel_metrics = results.get('cancel_not_for_all_metrics', {})
-                    partial_metrics = results.get('partial_or_full_metrics', {})
-                    cancel_adj_b_acc = cancel_metrics.get('adjusted_balanced_accuracy', 0.0)
-                    partial_adj_b_acc = partial_metrics.get('adjusted_balanced_accuracy', 0.0)
-                    # Use harmonic mean for combined score
-                    if cancel_adj_b_acc > 0 and partial_adj_b_acc > 0:
-                        combined_score = 2 * (cancel_adj_b_acc * partial_adj_b_acc) / (cancel_adj_b_acc + partial_adj_b_acc)
-                    else:
-                        combined_score = 0.0
-                    print(f'reading previously saved "{instruction[:50]}..." information')
+                print(f'Computing the score of "{instruction[:50]}..." by prompting')
+                
+                combined_score, cancel_adj_b_acc, partial_adj_b_acc, results = self._evaluate_prompt_performance(
+                    instruction, train_data, self.scorer_model
+                )
                 
                 print(f"Step {i_step}, instruction: {instruction[:50]}..., combined_score: {combined_score:.3f}, cancel_adj_b_acc: {cancel_adj_b_acc:.3f}, partial_adj_b_acc: {partial_adj_b_acc:.3f}")
                 
-                # Save results
+                # Save results to individual JSON file
                 filename = self._instruction_to_filename(instruction)
                 result_file_path = os.path.join(self.save_folder, f"{filename}.json")
                 with open(result_file_path, 'w') as f:
                     json.dump(results, f, indent=2)
                 print(f"saving results to {result_file_path}")
                 
-                # Update tracking
+                # Extract all metrics for step-level tracking
+                md5_hash = self._instruction_to_filename(instruction, md5_hashing=True)
+                word_count = len(instruction.split())
+                
+                cancel_metrics = results.get('cancel_not_for_all_metrics', {})
+                partial_metrics = results.get('partial_or_full_metrics', {})
+                
+                # Store step metrics
+                step_metrics['md5_hashes'].append(md5_hash)
+                step_metrics['instructions'].append(instruction)
+                step_metrics['combined_scores'].append(combined_score)
+                step_metrics['word_counts'].append(word_count)
+                
+                # Cancel metrics
+                step_metrics['cancel_precision'].append(cancel_metrics.get('precision', 0.0))
+                step_metrics['cancel_recall'].append(cancel_metrics.get('recall', 0.0))
+                step_metrics['cancel_f1'].append(cancel_metrics.get('f1', 0.0))
+                step_metrics['cancel_accuracy'].append(cancel_metrics.get('accuracy', 0.0))
+                step_metrics['cancel_balanced_accuracy'].append(cancel_metrics.get('balanced_accuracy', 0.0))
+                step_metrics['cancel_adj_balanced_accuracy'].append(cancel_metrics.get('adjusted_balanced_accuracy', 0.0))
+                
+                # Partial metrics
+                step_metrics['partial_precision'].append(partial_metrics.get('precision', 0.0))
+                step_metrics['partial_recall'].append(partial_metrics.get('recall', 0.0))
+                step_metrics['partial_f1'].append(partial_metrics.get('f1', 0.0))
+                step_metrics['partial_accuracy'].append(partial_metrics.get('accuracy', 0.0))
+                step_metrics['partial_balanced_accuracy'].append(partial_metrics.get('balanced_accuracy', 0.0))
+                step_metrics['partial_adj_balanced_accuracy'].append(partial_metrics.get('adjusted_balanced_accuracy', 0.0))
+                
+                # Update global tracking
                 self.detailed_results_by_instruction[instruction] = results
                 self.old_instructions_and_scores.append((instruction, combined_score, cancel_adj_b_acc, partial_adj_b_acc, i_step))
                 self.instruction_score_dict[instruction] = (combined_score, cancel_adj_b_acc, partial_adj_b_acc)
             
-            # Record all generated instructions
+            # Compute step-level statistics (mean and std for each metric)
+            if step_metrics['md5_hashes']:
+                step_stats = {
+                    'step': i_step,
+                    'num_instructions': len(step_metrics['md5_hashes']),
+                    'md5_hashes': step_metrics['md5_hashes'],
+                }
+                
+                # Compute mean and std for each metric
+                for metric_name in ['combined_scores', 'word_counts',
+                                   'cancel_precision', 'cancel_recall', 'cancel_f1', 'cancel_accuracy', 'cancel_balanced_accuracy', 'cancel_adj_balanced_accuracy',
+                                   'partial_precision', 'partial_recall', 'partial_f1', 'partial_accuracy', 'partial_balanced_accuracy', 'partial_adj_balanced_accuracy']:
+                    values = step_metrics[metric_name]
+                    if values:
+                        step_stats[f'{metric_name}_mean'] = np.mean(values)
+                        step_stats[f'{metric_name}_std'] = np.std(values) if len(values) > 1 else 0.0
+                        step_stats[f'{metric_name}_values'] = values
+                    else:
+                        step_stats[f'{metric_name}_mean'] = 0.0
+                        step_stats[f'{metric_name}_std'] = 0.0
+                        step_stats[f'{metric_name}_values'] = []
+                
+                # Store step statistics
+                self.step_statistics.append(step_stats)
+                
+                # Print step summary
+                print(f"\n📊 Step {i_step} Summary:")
+                print(f"  Instructions evaluated: {len(step_metrics['md5_hashes'])}")
+                print(f"  Combined score: {step_stats['combined_scores_mean']:.3f} ± {step_stats['combined_scores_std']:.3f}")
+                print(f"  Cancel adj b-acc: {step_stats['cancel_adj_balanced_accuracy_mean']:.3f} ± {step_stats['cancel_adj_balanced_accuracy_std']:.3f}")
+                print(f"  Partial adj b-acc: {step_stats['partial_adj_balanced_accuracy_mean']:.3f} ± {step_stats['partial_adj_balanced_accuracy_std']:.3f}")
+                print(f"  Word count: {step_stats['word_counts_mean']:.1f} ± {step_stats['word_counts_std']:.1f}")
+            
+            # Record all generated instructions (including filtered ones)
             for instruction in generated_instructions_raw:
                 if instruction in self.instruction_score_dict:
                     combined_score, cancel_adj_b_acc, partial_adj_b_acc = self.instruction_score_dict[instruction]
@@ -686,6 +740,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
             'old_instructions_and_scores': self.old_instructions_and_scores,
             'old_instructions_and_scores_raw': self.old_instructions_and_scores_raw,
             'instruction_score_dict': self.instruction_score_dict,
+            'step_statistics': self.step_statistics,  # Include step-level statistics
             'config': {
                 'train_data_path': self.train_data_path,
                 'initial_prompt_file': self.initial_prompt_file,
@@ -719,6 +774,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 }
                 for prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step in sorted_prompts
             ],
+            'step_statistics': self.step_statistics,  # Include step-level statistics
             'config': results_dict['config']
         }
         
