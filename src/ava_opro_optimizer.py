@@ -172,9 +172,9 @@ class AvaOproOptimizer:
         def sort_key(x):
             prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
             word_count = len(prompt.split())
-            return (combined_score, -word_count)  # Higher score first, then fewer words
+            return (-combined_score, word_count)  # Higher score first, then fewer words
         
-        sorted_prompts = sorted(old_prompts_and_scores, key=sort_key)[-max_num_prompts:]
+        sorted_prompts = sorted(old_prompts_and_scores, key=sort_key)[:max_num_prompts]
         
         prompts_in_meta_prompt = []
         prompt_score_str = ""
@@ -747,9 +747,9 @@ Generate a new concise prompt that will improve classification accuracy. Output 
             def sort_key(x):
                 prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
                 word_count = len(prompt.split())
-                return (combined_score, -word_count)
+                return (-combined_score, word_count)  # Higher score first, then fewer words
             
-            best_prompts = sorted(self.old_instructions_and_scores, key=sort_key)[-5:]
+            best_prompts = sorted(self.old_instructions_and_scores, key=sort_key)[:5]
             print(f"\n🏆 Top 5 final prompts (sorted by score, then word count):")
             for i, (prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step) in enumerate(best_prompts):
                 word_count = len(prompt.split())
@@ -812,9 +812,9 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         def sort_key(x):
             prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
             word_count = len(prompt.split())
-            return (combined_score, -word_count)  # Higher score first, then fewer words
+            return (-combined_score, word_count)  # Higher score first, then fewer words
         
-        return sorted(self.old_instructions_and_scores, key=sort_key)[-top_k:]
+        return sorted(self.old_instructions_and_scores, key=sort_key)[:top_k]
     
     def save_best_prompt(self, output_file: str = None) -> str:
         """Save the best prompt to a file."""
@@ -825,9 +825,9 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         def sort_key(x):
             prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
             word_count = len(prompt.split())
-            return (combined_score, -word_count)  # Higher score first, then fewer words
+            return (-combined_score, word_count)  # Higher score first, then fewer words
         
-        best_prompt, best_combined_score, best_cancel_adj_b_acc, best_partial_adj_b_acc, best_step = max(self.old_instructions_and_scores, key=sort_key)
+        best_prompt, best_combined_score, best_cancel_adj_b_acc, best_partial_adj_b_acc, best_step = sorted(self.old_instructions_and_scores, key=sort_key)[0]
         best_word_count = len(best_prompt.split())
         
         if output_file is None:
