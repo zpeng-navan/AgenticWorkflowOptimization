@@ -116,9 +116,10 @@ def draw_training(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Draw training metric visualization from OPRO optimization results")
-    parser.add_argument("results_dir", 
+    parser.add_argument("--results_dir", 
                        help="Path to results directory containing optimization_results.json")
-    parser.add_argument("metric_name", 
+    parser.add_argument("--metric_name", 
+                       default="combined_scores",
                        help="Name of metric to plot (e.g., 'combined_scores', 'cancel_adj_balanced_accuracy')")
     
     args = parser.parse_args()
