@@ -26,7 +26,7 @@ from tqdm import tqdm
 import yaml
 import re
 from collections import Counter
-
+from os.path import join
 from src.utils.open_ai_util import OpenAIClient
 from src.utils.data_util import load_json_file, save_to_json
 from src.utils.eval_prompt_util import substitute_prompt_variables, parse_model_response, compute_binary_metrics
@@ -41,7 +41,14 @@ class AvaOproOptimizer:
         initial_prompt_file: str = "prompts/original/identify_partial.yaml",
         initial_prompt_key: str = "initial_prompt",
         api_key: Optional[str] = None,
-        save_folder: str = "results/ava_opro_optimization",
+        save_folder: str = "results/gpt-5-verified/",
+        num_search_steps: int = 10,
+        num_generated_instructions_in_each_step: int = 4,
+        optimizer_model: str = "gpt-4o",
+        scorer_model: str = "gpt-4o-mini",
+        optimizer_temperature: float = 1.0,
+        train_ratio: float = 1.0,
+        num_examples: int = 3,
         verbose: bool = True,
         random_seed: int = 42
     ):
@@ -63,7 +70,14 @@ class AvaOproOptimizer:
         self.initial_prompt_body_key = initial_prompt_key + "_body"
         self.initial_prompt_response_format_key = initial_prompt_key + "_response_format"
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
-        self.save_folder = save_folder
+        self.save_folder = join(save_folder, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
+        self.num_search_steps=num_search_steps,
+        self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step,
+        self.optimizer_model=optimizer_model,
+        self.scorer_model=scorer_model,
+        self.optimizer_temperature=optimizer_temperature,
+        self.train_ratio=train_ratio,
+        self.num_examples=num_examples,
         self.verbose = verbose
         self.random_seed = random_seed
         
@@ -438,13 +452,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
     
     def optimize(
         self,
-        num_search_steps: int = 10,
-        num_generated_instructions_in_each_step: int = 4,
-        optimizer_model: str = "gpt-4o",
-        scorer_model: str = "gpt-4o-mini",
-        optimizer_temperature: float = 1.0,
-        train_ratio: float = 1.0,
-        num_examples: int = 3,
+        
     ) -> Dict[str, Any]:
         """
         Run OPRO optimization for Ava prompts following OPRO's structure.
@@ -464,14 +472,14 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         
         if self.verbose:
             print(f"🚀 Starting Ava OPRO optimization")
-            print(f"📊 Steps: {num_search_steps}, Instructions per step: {num_generated_instructions_in_each_step}")
-            print(f"🤖 Optimizer: {optimizer_model}, Scorer: {scorer_model}")
-            print(f"📈 Train ratio: {train_ratio}, Examples in meta-prompt: {num_examples}")
+            print(f"📊 Steps: {self.num_search_steps}, Instructions per step: {self.num_generated_instructions_in_each_step}")
+            print(f"🤖 Optimizer: {self.optimizer_model}, Scorer: {self.scorer_model}")
+            print(f"📈 Train ratio: {self.train_ratio}, Examples in meta-prompt: {self.num_examples}")
         
         # Load and sample training data
         full_train_data = load_json_file(self.train_data_path)
-        if train_ratio < 1.0:
-            sample_size = int(len(full_train_data) * train_ratio)
+        if self.train_ratio < 1.0:
+            sample_size = int(len(full_train_data) * self.train_ratio)
             train_keys = np.random.choice(list(full_train_data.keys()), sample_size, replace=False)
             train_data = {k: full_train_data[k] for k in train_keys}
         else:
@@ -487,7 +495,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         print(f'Computing the score of "{self.initial_prompt[:50]}..." by prompting')
         
         initial_combined_score, initial_cancel_f1, initial_partial_f1, initial_results = self._evaluate_prompt_performance(
-            self.initial_prompt, train_data, scorer_model
+            self.initial_prompt, train_data, self.scorer_model
         )
         
         print(f"instruction: {self.initial_prompt[:50]}..., combined_score: {initial_combined_score:.3f}, cancel_f1: {initial_cancel_f1:.3f}, partial_f1: {initial_partial_f1:.3f}")
@@ -513,39 +521,39 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         prev_saved_instructions = {self.initial_prompt}
         
         # ============== Evolution ===============
-        for i_step in range(num_search_steps):
+        for i_step in range(self.num_search_steps):
             print(f"\n================== Step {i_step} =====================")
             if not i_step % 10:
                 print(f"old_instructions_and_scores: {[(p[:30], f'C:{combined:.2f}', f'Step:{st}') for p, combined, cancel, partial, st in self.old_instructions_and_scores]}")
             
-            print(f"current optimizer_temperature: {optimizer_temperature}")
+            print(f"current optimizer_temperature: {self.optimizer_temperature}")
             
             # Generate meta-prompt
             meta_prompt = self._generate_meta_prompt(
                 self.old_instructions_and_scores,
                 train_data,
-                num_examples,
-                optimizer_model
+                self.num_examples,
+                self.optimizer_model
             )
             
             print(f"\nmeta_prompt: \n\n{meta_prompt}\n")
             self.meta_prompts.append((meta_prompt, i_step))
             
             # Generate new instructions
-            remaining_num_instructions_to_generate = num_generated_instructions_in_each_step
+            remaining_num_instructions_to_generate = self.num_generated_instructions_in_each_step
             generated_instructions_raw = []
             
             while remaining_num_instructions_to_generate > 0:
                 optimizer_llm_input_text = meta_prompt
                 # Generate instructions
-                print(f"current temperature: {optimizer_temperature}")
+                print(f"current temperature: {self.optimizer_temperature}")
                 
                 try:
                     raw_outputs = [
                         self.client.call_openai_with_retry(
                             prompt=optimizer_llm_input_text,
-                            model=optimizer_model,
-                            temperature=optimizer_temperature,
+                            model=self.optimizer_model,
+                            temperature=self.optimizer_temperature,
                             max_tokens=1024
                         )
                         for _ in range(min(remaining_num_instructions_to_generate, 4))
@@ -594,7 +602,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                     print(f'Computing the score of "{instruction[:50]}..." by prompting')
                     
                     combined_score, cancel_f1, partial_f1, results = self._evaluate_prompt_performance(
-                        instruction, train_data, scorer_model
+                        instruction, train_data, self.scorer_model
                     )
                     
                     prev_saved_instructions.add(instruction)
@@ -758,12 +766,18 @@ def main():
                       help='Number of optimization steps (default: 10)')
     parser.add_argument('--num_generated_instructions_in_each_step', type=int, default=4,
                       help='Number of candidate prompts to generate per step (default: 4)')
+    parser.add_argument('--optimizer_model', type=str, default="gpt-4.1",
+                      help='Model for generating new prompts (default: gpt-4.1)')
+    parser.add_argument('--scorer_model', type=str, default="gpt-4o-mini",
+                      help='Model for evaluating prompts (default: gpt-4o-mini)')
+    parser.add_argument('--optimizer_temperature', type=float, default=1.0,
+                      help='Temperature for prompt generation (default: 1.0)')
     parser.add_argument('--train_ratio', type=float, default=0.5,
                       help='Fraction of training data to use (default: 0.25)')
     parser.add_argument('--num_examples', type=int, default=2,
                       help='Number of examples to include in meta-prompt (default: 2)')
-    parser.add_argument('--save_folder', type=str, default="results/gpt-5-verified/ava_opro_optimization",
-                      help='Folder to save optimization results (default: results/ava_opro_optimization)')
+    parser.add_argument('--save_folder', type=str, default="results/gpt-5-verified/",
+                      help='Folder to save optimization results (default: results/gpt-5-verified/)')
     parser.add_argument('--random_seed', type=int, default=42,
                       help='Random seed for reproducibility (default: 42)')
     parser.add_argument('--verbose', action='store_true', default=True,
@@ -776,17 +790,16 @@ def main():
         initial_prompt_file=args.initial_prompt_file,
         initial_prompt_key=args.initial_prompt_key,
         save_folder=args.save_folder,
+        num_search_steps=args.num_search_steps,
+        num_generated_instructions_in_each_step=args.num_generated_instructions_in_each_step,
+        train_ratio=args.train_ratio,
+        num_examples=args.num_examples,
         verbose=args.verbose,
         random_seed=args.random_seed
     )
     
     # Run optimization
-    results = optimizer.optimize(
-        num_search_steps=args.num_search_steps,
-        num_generated_instructions_in_each_step=args.num_generated_instructions_in_each_step,
-        train_ratio=args.train_ratio,
-        num_examples=args.num_examples,
-    )
+    results = optimizer.optimize()
     
     # Get best prompts
     best_prompts = optimizer.get_best_prompts(top_k=3)
