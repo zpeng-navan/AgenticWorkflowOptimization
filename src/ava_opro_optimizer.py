@@ -20,6 +20,7 @@ import hashlib
 import numpy as np
 import pandas as pd
 import random
+import argparse
 from typing import Dict, List, Tuple, Optional, Any
 from tqdm import tqdm
 import yaml
@@ -84,7 +85,7 @@ class AvaOproOptimizer:
         # OPRO configuration
         self.old_instruction_score_threshold = 0.5
         self.max_num_instructions = 10
-        self.num_score_buckets = 20
+        self.num_score_buckets = 100
         
         # Tracking variables (similar to OPRO)
         self.old_instructions_and_scores = []  # (prompt, combined_score, cancel_f1, partial_f1, step)
@@ -742,18 +743,49 @@ Generate a new concise prompt that will improve classification accuracy. Output 
 def main():
     """Example usage of the Ava OPRO optimizer."""
     
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Run OPRO optimization for Ava\'s prompt')
+    parser.add_argument('--train_data_path', type=str, 
+                      default="data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance_train.json",
+                      help='Path to training data JSON file')
+    parser.add_argument('--initial_prompt_file', type=str, 
+                      default="prompts/original/identify_partial.yaml",
+                      help='Path to YAML file with initial prompt')
+    parser.add_argument('--initial_prompt_key', type=str, 
+                      default="initial_prompt",
+                      help='Key in YAML file for prompt to optimize')
+    parser.add_argument('--num_search_steps', type=int, default=10,
+                      help='Number of optimization steps (default: 10)')
+    parser.add_argument('--num_generated_instructions_in_each_step', type=int, default=4,
+                      help='Number of candidate prompts to generate per step (default: 4)')
+    parser.add_argument('--train_ratio', type=float, default=0.5,
+                      help='Fraction of training data to use (default: 0.25)')
+    parser.add_argument('--num_examples', type=int, default=2,
+                      help='Number of examples to include in meta-prompt (default: 2)')
+    parser.add_argument('--save_folder', type=str, default="results/gpt-5-verified/ava_opro_optimization",
+                      help='Folder to save optimization results (default: results/ava_opro_optimization)')
+    parser.add_argument('--random_seed', type=int, default=42,
+                      help='Random seed for reproducibility (default: 42)')
+    parser.add_argument('--verbose', action='store_true', default=True,
+                      help='Enable verbose output (default: True)')
+    
+    args = parser.parse_args()
+    
     optimizer = AvaOproOptimizer(
-        save_folder="results/ava_opro_optimization",
-        verbose=True,
-        random_seed=42
+        train_data_path=args.train_data_path,
+        initial_prompt_file=args.initial_prompt_file,
+        initial_prompt_key=args.initial_prompt_key,
+        save_folder=args.save_folder,
+        verbose=args.verbose,
+        random_seed=args.random_seed
     )
     
     # Run optimization
     results = optimizer.optimize(
-        num_search_steps=2,  # Small number for testing
-        num_generated_instructions_in_each_step=4,
-        train_ratio=0.04,  # Use small subset for testing
-        num_examples=2,  # Small number of examples for testing
+        num_search_steps=args.num_search_steps,
+        num_generated_instructions_in_each_step=args.num_generated_instructions_in_each_step,
+        train_ratio=args.train_ratio,
+        num_examples=args.num_examples,
     )
     
     # Get best prompts
