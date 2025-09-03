@@ -570,28 +570,29 @@ Generate a new concise prompt that will improve classification accuracy. Output 
             generated_instructions_raw = [self._polish_prompt(prompt) for prompt in generated_instructions_raw]
             print(f"\ninitially generated instructions: {[p[:50] + '...' for p in generated_instructions_raw]}\n")
             
-            # Do not evaluate old instructions again
-            generated_instructions = []
-            for ins in generated_instructions_raw:
-                ins_md5_hashstring = self._instruction_to_filename(ins, md5_hashing=True)
-                if ins_md5_hashstring not in self.old_instruction_md5_hashstrings_set:
-                    generated_instructions.append(ins)
-                    self.old_instruction_md5_hashstrings_set.add(ins_md5_hashstring)
-                else:
-                    print(f"already evaluated '{ins[:30]}...' previously")
-            
-            generated_instructions = list(set(generated_instructions))
-            
-            # Filter generated instructions
-            to_evaluate_instructions = []
-            for instruction in generated_instructions:
+            # Filter generated instructions first (more efficient to filter before duplicate checking)
+            filtered_instructions = []
+            for instruction in generated_instructions_raw:
                 if len(instruction.split(" ")) > 1024:
                     print(f"Step {i_step}, instruction: {instruction[:30]}..., too long, skipped")
                     continue
                 if any(tag in instruction.upper() for tag in ['<PROMPT>', '</PROMPT>', 'PROMPT>']):
                     print(f"Step {i_step}, instruction: {instruction[:30]}..., contains tags, skipped")
                     continue
-                to_evaluate_instructions.append(instruction)
+                filtered_instructions.append(instruction)
+            
+            # Do not evaluate old instructions again (check duplicates after filtering)
+            to_evaluate_instructions = []
+            for ins in filtered_instructions:
+                ins_md5_hashstring = self._instruction_to_filename(ins, md5_hashing=True)
+                if ins_md5_hashstring not in self.old_instruction_md5_hashstrings_set:
+                    to_evaluate_instructions.append(ins)
+                    self.old_instruction_md5_hashstrings_set.add(ins_md5_hashstring)
+                else:
+                    print(f"already evaluated '{ins[:30]}...' previously")
+            
+            # Remove any remaining duplicates
+            to_evaluate_instructions = list(set(to_evaluate_instructions))
                 
             print(f"\nto-evaluate generated instructions: {[p[:50] + '...' for p in to_evaluate_instructions]}\n")
             
