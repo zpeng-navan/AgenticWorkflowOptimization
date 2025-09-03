@@ -71,13 +71,13 @@ class AvaOproOptimizer:
         self.initial_prompt_response_format_key = initial_prompt_key + "_response_format"
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         self.save_folder = join(save_folder, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
-        self.num_search_steps=num_search_steps,
-        self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step,
-        self.optimizer_model=optimizer_model,
-        self.scorer_model=scorer_model,
-        self.optimizer_temperature=optimizer_temperature,
-        self.train_ratio=train_ratio,
-        self.num_examples=num_examples,
+        self.num_search_steps=num_search_steps
+        self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step
+        self.optimizer_model=optimizer_model
+        self.scorer_model=scorer_model
+        self.optimizer_temperature=optimizer_temperature
+        self.train_ratio=train_ratio
+        self.num_examples=num_examples
         self.verbose = verbose
         self.random_seed = random_seed
         
@@ -102,10 +102,10 @@ class AvaOproOptimizer:
         self.num_score_buckets = 100
         
         # Tracking variables (similar to OPRO)
-        self.old_instructions_and_scores = []  # (prompt, combined_score, cancel_f1, partial_f1, step)
+        self.old_instructions_and_scores = []  # (prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step)
         self.old_instructions_and_scores_raw = []  # All generated including skipped
         self.meta_prompts = []  # (meta_prompt, step)
-        self.instruction_score_dict = {}  # {prompt: (combined_score, cancel_f1, partial_f1)}
+        self.instruction_score_dict = {}  # {prompt: (combined_score, cancel_adj_b_acc, partial_adj_b_acc)}
         self.old_instruction_md5_hashstrings_set = set()
         self.detailed_results_by_instruction = {}
         
@@ -172,7 +172,7 @@ class AvaOproOptimizer:
         """Generate substring with prompt-score pairs for meta-prompt."""
         # Sort by combined score first, then by word count (fewer words is better)
         def sort_key(x):
-            prompt, combined_score, cancel_f1, partial_f1, step = x
+            prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
             word_count = len(prompt.split())
             return (combined_score, -word_count)  # Higher score first, then fewer words
         
@@ -181,14 +181,14 @@ class AvaOproOptimizer:
         prompts_in_meta_prompt = []
         prompt_score_str = ""
         
-        for prompt, combined_score, cancel_f1, partial_f1, step in sorted_prompts:
+        for prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step in sorted_prompts:
             if combined_score >= score_threshold:
-                prompts_in_meta_prompt.append((prompt, combined_score, cancel_f1, partial_f1, step))
+                prompts_in_meta_prompt.append((prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step))
                 combined_score_display = self._bucketize_score(combined_score, self.num_score_buckets)
-                cancel_f1_display = self._bucketize_score(cancel_f1, self.num_score_buckets)
-                partial_f1_display = self._bucketize_score(partial_f1, self.num_score_buckets)
+                cancel_adj_b_acc_display = self._bucketize_score(cancel_adj_b_acc, self.num_score_buckets)
+                partial_adj_b_acc_display = self._bucketize_score(partial_adj_b_acc, self.num_score_buckets)
                 word_count = len(prompt.split())
-                prompt_score_str += f"\ntext:\n{prompt}\ncombined_score:\n{combined_score_display}\ncancel_f1:\n{cancel_f1_display}\npartial_f1:\n{partial_f1_display}\nwords:\n{word_count}\n"
+                prompt_score_str += f"\ntext:\n{prompt}\ncombined_score:\n{combined_score_display}\ncancel_adj_b_acc:\n{cancel_adj_b_acc_display}\npartial_adj_b_acc:\n{partial_adj_b_acc_display}\nwords:\n{word_count}\n"
         
         if return_str_only:
             return prompt_score_str
@@ -227,7 +227,6 @@ class AvaOproOptimizer:
         old_prompts_and_scores: List[Tuple[str, float, int]],
         train_data: Dict,
         num_examples: int = 3,
-        optimizer_llm_name: str = "gpt-4o"
     ) -> str:
         """Generate meta-prompt for prompt optimization."""
         
@@ -246,9 +245,9 @@ class AvaOproOptimizer:
 2. partial_or_full: Whether the user wants partial cancellation (specific legs) or full cancellation
 
 Below are some previous prompts with their scores. Each prompt has three scores:
-- combined_score: Average of cancel_f1 and partial_f1 (0 to {self.num_score_buckets}, higher is better)
-- cancel_f1: F1 score for cancel_not_for_all_passengers classification (0 to {self.num_score_buckets}, higher is better)  
-- partial_f1: F1 score for partial_or_full classification (0 to {self.num_score_buckets}, higher is better)
+- combined_score: Harmonic mean of cancel_adj_b_acc and partial_adj_b_acc (0 to {self.num_score_buckets}, higher is better)
+- cancel_adj_b_acc: Adjusted balanced accuracy for cancel_not_for_all_passengers classification (0 to {self.num_score_buckets}, higher is better)  
+- partial_adj_b_acc: Adjusted balanced accuracy for partial_or_full classification (0 to {self.num_score_buckets}, higher is better)
 - words: Word count (fewer is better when scores are equal)
 {prompt_score_str}{examples_str}
 
@@ -315,8 +314,14 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         train_data: Dict,
         model: str = "gpt-4o",
         temperature: float = 0
-    ) -> Tuple[float, Dict]:
-        """Evaluate a single prompt body and return combined score."""
+    ) -> Tuple[float, float, float, Dict]:
+        """
+        Evaluate a single prompt body and return combined score using harmonic mean.
+        
+        Returns:
+            Tuple of (combined_score, cancel_adj_b_acc, partial_adj_b_acc, evaluation_results)
+            where combined_score is the harmonic mean of the two adjusted balanced accuracies.
+        """
         
         try:
             
@@ -412,12 +417,16 @@ Generate a new concise prompt that will improve classification accuracy. Output 
             else:
                 partial_metrics = {'f1': 0.0}
             
-            # Combine F1 scores as the optimization objective
-            cancel_f1 = cancel_metrics.get('f1', 0.0)
-            partial_f1 = partial_metrics.get('f1', 0.0)
+            # Get adjusted balanced accuracy scores as the optimization objective
+            cancel_adj_b_acc = cancel_metrics.get('adjusted_balanced_accuracy', 0.0)
+            partial_adj_b_acc = partial_metrics.get('adjusted_balanced_accuracy', 0.0)
             
-            # Combined score (equal weight to both tasks)
-            combined_score = (cancel_f1 + partial_f1) / 2.0
+            # Combined score using Harmonic Mean (penalizes imbalanced performance)
+            if cancel_adj_b_acc > 0 and partial_adj_b_acc > 0:
+                combined_score = 2 * (cancel_adj_b_acc * partial_adj_b_acc) / (cancel_adj_b_acc + partial_adj_b_acc)
+            else:
+                # Handle edge case where one score is 0 or negative
+                combined_score = 0.0
             
             # Compile results
             evaluation_results = {
@@ -431,7 +440,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 'combined_score': combined_score
             }
             
-            return combined_score, cancel_f1, partial_f1, evaluation_results
+            return combined_score, cancel_adj_b_acc, partial_adj_b_acc, evaluation_results
             
         except Exception as e:
             if self.verbose:
@@ -447,8 +456,8 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         """Evaluate prompt on a subset of training data for faster iteration."""
         # This is a simplified version for faster evaluation during optimization
         # We could implement a faster evaluation here if needed
-        combined_score, cancel_f1, partial_f1, _ = self._evaluate_prompt_performance(prompt, train_data_subset, model)
-        return combined_score, cancel_f1, partial_f1
+        combined_score, cancel_adj_b_acc, partial_adj_b_acc, _ = self._evaluate_prompt_performance(prompt, train_data_subset, model)
+        return combined_score, cancel_adj_b_acc, partial_adj_b_acc
     
     def optimize(
         self,
@@ -494,11 +503,11 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         
         print(f'Computing the score of "{self.initial_prompt[:50]}..." by prompting')
         
-        initial_combined_score, initial_cancel_f1, initial_partial_f1, initial_results = self._evaluate_prompt_performance(
+        initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc, initial_results = self._evaluate_prompt_performance(
             self.initial_prompt, train_data, self.scorer_model
         )
         
-        print(f"instruction: {self.initial_prompt[:50]}..., combined_score: {initial_combined_score:.3f}, cancel_f1: {initial_cancel_f1:.3f}, partial_f1: {initial_partial_f1:.3f}")
+        print(f"instruction: {self.initial_prompt[:50]}..., combined_score: {initial_combined_score:.3f}, cancel_adj_b_acc: {initial_cancel_adj_b_acc:.3f}, partial_adj_b_acc: {initial_partial_adj_b_acc:.3f}")
         
         # Save initial results
         initial_filename = self._instruction_to_filename(self.initial_prompt)
@@ -509,9 +518,9 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         
         # Add initial prompt to tracking
         initial_word_count = len(self.initial_prompt.split(" "))
-        self.old_instructions_and_scores.append((self.initial_prompt, initial_combined_score, initial_cancel_f1, initial_partial_f1, initial_word_count))
-        self.old_instructions_and_scores_raw.append((self.initial_prompt, initial_combined_score, initial_cancel_f1, initial_partial_f1, initial_word_count))
-        self.instruction_score_dict[self.initial_prompt] = (initial_combined_score, initial_cancel_f1, initial_partial_f1)
+        self.old_instructions_and_scores.append((self.initial_prompt, initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc, initial_word_count))
+        self.old_instructions_and_scores_raw.append((self.initial_prompt, initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc, initial_word_count))
+        self.instruction_score_dict[self.initial_prompt] = (initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc)
         self.detailed_results_by_instruction[self.initial_prompt] = initial_results
         
         # Add initial prompt MD5 to hash set for duplicate detection (following OPRO pattern)
@@ -523,8 +532,8 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         # ============== Evolution ===============
         for i_step in range(self.num_search_steps):
             print(f"\n================== Step {i_step} =====================")
-            if not i_step % 10:
-                print(f"old_instructions_and_scores: {[(p[:30], f'C:{combined:.2f}', f'Step:{st}') for p, combined, cancel, partial, st in self.old_instructions_and_scores]}")
+            # if not i_step % 10:
+            #     print(f"old_instructions_and_scores: {[(p[:30], f'C:{combined:.2f}', f'Step:{st}') for p, combined, cancel, partial, st in self.old_instructions_and_scores]}")
             
             print(f"current optimizer_temperature: {self.optimizer_temperature}")
             
@@ -533,7 +542,6 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 self.old_instructions_and_scores,
                 train_data,
                 self.num_examples,
-                self.optimizer_model
             )
             
             print(f"\nmeta_prompt: \n\n{meta_prompt}\n")
@@ -601,7 +609,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 if instruction not in prev_saved_instructions:
                     print(f'Computing the score of "{instruction[:50]}..." by prompting')
                     
-                    combined_score, cancel_f1, partial_f1, results = self._evaluate_prompt_performance(
+                    combined_score, cancel_adj_b_acc, partial_adj_b_acc, results = self._evaluate_prompt_performance(
                         instruction, train_data, self.scorer_model
                     )
                     
@@ -614,12 +622,16 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                         results = json.load(f)
                     cancel_metrics = results.get('cancel_not_for_all_metrics', {})
                     partial_metrics = results.get('partial_or_full_metrics', {})
-                    cancel_f1 = cancel_metrics.get('f1', 0.0)
-                    partial_f1 = partial_metrics.get('f1', 0.0)
-                    combined_score = (cancel_f1 + partial_f1) / 2.0
+                    cancel_adj_b_acc = cancel_metrics.get('adjusted_balanced_accuracy', 0.0)
+                    partial_adj_b_acc = partial_metrics.get('adjusted_balanced_accuracy', 0.0)
+                    # Use harmonic mean for combined score
+                    if cancel_adj_b_acc > 0 and partial_adj_b_acc > 0:
+                        combined_score = 2 * (cancel_adj_b_acc * partial_adj_b_acc) / (cancel_adj_b_acc + partial_adj_b_acc)
+                    else:
+                        combined_score = 0.0
                     print(f'reading previously saved "{instruction[:50]}..." information')
                 
-                print(f"Step {i_step}, instruction: {instruction[:50]}..., combined_score: {combined_score:.3f}, cancel_f1: {cancel_f1:.3f}, partial_f1: {partial_f1:.3f}")
+                print(f"Step {i_step}, instruction: {instruction[:50]}..., combined_score: {combined_score:.3f}, cancel_adj_b_acc: {cancel_adj_b_acc:.3f}, partial_adj_b_acc: {partial_adj_b_acc:.3f}")
                 
                 # Save results
                 filename = self._instruction_to_filename(instruction)
@@ -630,16 +642,16 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 
                 # Update tracking
                 self.detailed_results_by_instruction[instruction] = results
-                self.old_instructions_and_scores.append((instruction, combined_score, cancel_f1, partial_f1, i_step))
-                self.instruction_score_dict[instruction] = (combined_score, cancel_f1, partial_f1)
+                self.old_instructions_and_scores.append((instruction, combined_score, cancel_adj_b_acc, partial_adj_b_acc, i_step))
+                self.instruction_score_dict[instruction] = (combined_score, cancel_adj_b_acc, partial_adj_b_acc)
             
             # Record all generated instructions
             for instruction in generated_instructions_raw:
                 if instruction in self.instruction_score_dict:
-                    combined_score, cancel_f1, partial_f1 = self.instruction_score_dict[instruction]
+                    combined_score, cancel_adj_b_acc, partial_adj_b_acc = self.instruction_score_dict[instruction]
                 else:
-                    combined_score, cancel_f1, partial_f1 = np.nan, np.nan, np.nan
-                self.old_instructions_and_scores_raw.append((instruction, combined_score, cancel_f1, partial_f1, i_step))
+                    combined_score, cancel_adj_b_acc, partial_adj_b_acc = np.nan, np.nan, np.nan
+                self.old_instructions_and_scores_raw.append((instruction, combined_score, cancel_adj_b_acc, partial_adj_b_acc, i_step))
             
             # Save intermediate results
             self._save_results()
@@ -653,15 +665,15 @@ Generate a new concise prompt that will improve classification accuracy. Output 
             
             # Show final best prompts with sorting by score then word count
             def sort_key(x):
-                prompt, combined_score, cancel_f1, partial_f1, step = x
+                prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
                 word_count = len(prompt.split())
                 return (combined_score, -word_count)
             
             best_prompts = sorted(self.old_instructions_and_scores, key=sort_key)[-5:]
             print(f"\n🏆 Top 5 final prompts (sorted by score, then word count):")
-            for i, (prompt, combined_score, cancel_f1, partial_f1, step) in enumerate(best_prompts):
+            for i, (prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step) in enumerate(best_prompts):
                 word_count = len(prompt.split())
-                print(f"  {i+1}. Combined: {combined_score:.3f}, Cancel F1: {cancel_f1:.3f}, Partial F1: {partial_f1:.3f}, Words: {word_count}, Step: {step}")
+                print(f"  {i+1}. Combined: {combined_score:.3f}, Cancel Adj B-Acc: {cancel_adj_b_acc:.3f}, Partial Adj B-Acc: {partial_adj_b_acc:.3f}, Words: {word_count}, Step: {step}")
                 print(f"     {prompt[:150]}...")
                 print()
         
@@ -689,7 +701,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         # Save as JSON (without detailed results to avoid size issues)
         # Sort by combined_score (higher better) then word_count (lower better)
         def sort_key_for_json(x):
-            prompt, combined_score, cancel_f1, partial_f1, step = x
+            prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
             word_count = len(prompt.split())
             return (-combined_score, word_count)  # Negative score for descending order
         
@@ -700,12 +712,12 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 {
                     'prompt': prompt, 
                     'combined_score': combined_score, 
-                    'cancel_f1': cancel_f1, 
-                    'partial_f1': partial_f1, 
+                    'cancel_adj_b_acc': cancel_adj_b_acc, 
+                    'partial_adj_b_acc': partial_adj_b_acc, 
                     'word_count': len(prompt.split()),
                     'step': step
                 }
-                for prompt, combined_score, cancel_f1, partial_f1, step in sorted_prompts
+                for prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step in sorted_prompts
             ],
             'config': results_dict['config']
         }
@@ -718,7 +730,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
     def get_best_prompts(self, top_k: int = 5) -> List[Tuple[str, float, float, float, int]]:
         """Get the top-k best prompts sorted by score, then word count."""
         def sort_key(x):
-            prompt, combined_score, cancel_f1, partial_f1, step = x
+            prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
             word_count = len(prompt.split())
             return (combined_score, -word_count)  # Higher score first, then fewer words
         
@@ -731,18 +743,18 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         
         # Get best prompt using the same sorting logic
         def sort_key(x):
-            prompt, combined_score, cancel_f1, partial_f1, step = x
+            prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step = x
             word_count = len(prompt.split())
             return (combined_score, -word_count)  # Higher score first, then fewer words
         
-        best_prompt, best_combined_score, best_cancel_f1, best_partial_f1, best_step = max(self.old_instructions_and_scores, key=sort_key)
+        best_prompt, best_combined_score, best_cancel_adj_b_acc, best_partial_adj_b_acc, best_step = max(self.old_instructions_and_scores, key=sort_key)
         best_word_count = len(best_prompt.split())
         
         if output_file is None:
             output_file = os.path.join(self.save_folder, "best_prompt.txt")
         
         with open(output_file, 'w') as f:
-            f.write(f"# Best Prompt (Combined: {best_combined_score:.3f}, Cancel F1: {best_cancel_f1:.3f}, Partial F1: {best_partial_f1:.3f}, Words: {best_word_count}, Step: {best_step})\n\n")
+            f.write(f"# Best Prompt (Combined: {best_combined_score:.3f}, Cancel Adj B-Acc: {best_cancel_adj_b_acc:.3f}, Partial Adj B-Acc: {best_partial_adj_b_acc:.3f}, Words: {best_word_count}, Step: {best_step})\n\n")
             f.write(best_prompt)
         
         return best_prompt
@@ -792,6 +804,9 @@ def main():
         save_folder=args.save_folder,
         num_search_steps=args.num_search_steps,
         num_generated_instructions_in_each_step=args.num_generated_instructions_in_each_step,
+        optimizer_model=args.optimizer_model,
+        scorer_model=args.scorer_model,
+        optimizer_temperature=args.optimizer_temperature,
         train_ratio=args.train_ratio,
         num_examples=args.num_examples,
         verbose=args.verbose,
@@ -804,8 +819,8 @@ def main():
     # Get best prompts
     best_prompts = optimizer.get_best_prompts(top_k=3)
     print("\n🏆 Best prompts:")
-    for i, (prompt, combined_score, cancel_f1, partial_f1, step) in enumerate(best_prompts):
-        print(f"{i+1}. Combined: {combined_score:.3f}, Cancel F1: {cancel_f1:.3f}, Partial F1: {partial_f1:.3f} (Step {step})")
+    for i, (prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step) in enumerate(best_prompts):
+        print(f"{i+1}. Combined: {combined_score:.3f}, Cancel Adj B-Acc: {cancel_adj_b_acc:.3f}, Partial Adj B-Acc: {partial_adj_b_acc:.3f} (Step {step})")
         print(f"   {prompt[:200]}...")
     
     # Save best prompt
