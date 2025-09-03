@@ -103,11 +103,8 @@ class AvaOproOptimizer:
         
         # Tracking variables (similar to OPRO)
         self.old_instructions_and_scores = []  # (prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step)
-        self.old_instructions_and_scores_raw = []  # All generated including skipped
         self.meta_prompts = []  # (meta_prompt, step)
-        self.instruction_score_dict = {}  # {prompt: (combined_score, cancel_adj_b_acc, partial_adj_b_acc)}
         self.old_instruction_md5_hashstrings_set = set()
-        self.detailed_results_by_instruction = {}
         self.step_statistics = []  # Step-level statistics for comprehensive tracking
         
     def _load_initial_prompt_parts(self) -> Tuple[str, str]:
@@ -520,15 +517,10 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         # Add initial prompt to tracking
         initial_word_count = len(self.initial_prompt.split(" "))
         self.old_instructions_and_scores.append((self.initial_prompt, initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc, initial_word_count))
-        self.old_instructions_and_scores_raw.append((self.initial_prompt, initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc, initial_word_count))
-        self.instruction_score_dict[self.initial_prompt] = (initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc)
-        self.detailed_results_by_instruction[self.initial_prompt] = initial_results
         
         # Add initial prompt MD5 to hash set for duplicate detection (following OPRO pattern)
         initial_prompt_md5 = self._instruction_to_filename(self.initial_prompt, md5_hashing=True)
         self.old_instruction_md5_hashstrings_set.add(initial_prompt_md5)
-        
-
         
         # ============== Evolution ===============
         for i_step in range(self.num_search_steps):
@@ -662,9 +654,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 step_metrics['partial_adj_balanced_accuracy'].append(partial_metrics.get('adjusted_balanced_accuracy', 0.0))
                 
                 # Update global tracking
-                self.detailed_results_by_instruction[instruction] = results
                 self.old_instructions_and_scores.append((instruction, combined_score, cancel_adj_b_acc, partial_adj_b_acc, i_step))
-                self.instruction_score_dict[instruction] = (combined_score, cancel_adj_b_acc, partial_adj_b_acc)
             
             # Compute step-level statistics (mean and std for each metric)
             if step_metrics['md5_hashes']:
@@ -699,14 +689,6 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 print(f"  Partial adj b-acc: {step_stats['partial_adj_balanced_accuracy_mean']:.3f} ± {step_stats['partial_adj_balanced_accuracy_std']:.3f}")
                 print(f"  Word count: {step_stats['word_counts_mean']:.1f} ± {step_stats['word_counts_std']:.1f}")
             
-            # Record all generated instructions (including filtered ones)
-            for instruction in generated_instructions_raw:
-                if instruction in self.instruction_score_dict:
-                    combined_score, cancel_adj_b_acc, partial_adj_b_acc = self.instruction_score_dict[instruction]
-                else:
-                    combined_score, cancel_adj_b_acc, partial_adj_b_acc = np.nan, np.nan, np.nan
-                self.old_instructions_and_scores_raw.append((instruction, combined_score, cancel_adj_b_acc, partial_adj_b_acc, i_step))
-            
             # Save intermediate results
             self._save_results()
         
@@ -738,8 +720,6 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         results_dict = {
             'meta_prompts': self.meta_prompts,
             'old_instructions_and_scores': self.old_instructions_and_scores,
-            'old_instructions_and_scores_raw': self.old_instructions_and_scores_raw,
-            'instruction_score_dict': self.instruction_score_dict,
             'step_statistics': self.step_statistics,  # Include step-level statistics
             'config': {
                 'train_data_path': self.train_data_path,
