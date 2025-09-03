@@ -581,6 +581,16 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                     continue
                 filtered_instructions.append(instruction)
             
+            # Step-level tracking for metrics (defined early to collect results from both new and duplicate instructions)
+            step_metrics = {
+                'md5_hashes': [],
+                'instructions': [],
+                'combined_scores': [],
+                'cancel_precision': [], 'cancel_recall': [], 'cancel_f1': [], 'cancel_accuracy': [], 'cancel_balanced_accuracy': [], 'cancel_adj_balanced_accuracy': [],
+                'partial_precision': [], 'partial_recall': [], 'partial_f1': [], 'partial_accuracy': [], 'partial_balanced_accuracy': [], 'partial_adj_balanced_accuracy': [],
+                'word_counts': []
+            }
+            
             # Do not evaluate old instructions again (check duplicates after filtering)
             to_evaluate_instructions = []
             for ins in filtered_instructions:
@@ -590,21 +600,56 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                     self.old_instruction_md5_hashstrings_set.add(ins_md5_hashstring)
                 else:
                     print(f"already evaluated '{ins[:30]}...' previously")
+                    # Load previously saved results and add to step metrics
+                    try:
+                        filename = self._instruction_to_filename(ins)
+                        result_file_path = os.path.join(self.save_folder, f"{filename}.json")
+                        with open(result_file_path, 'r') as f:
+                            results = json.load(f)
+                        
+                        cancel_metrics = results.get('cancel_not_for_all_metrics', {})
+                        partial_metrics = results.get('partial_or_full_metrics', {})
+                        
+                        # Calculate combined score
+                        cancel_adj_b_acc = cancel_metrics.get('adjusted_balanced_accuracy', 0.0)
+                        partial_adj_b_acc = partial_metrics.get('adjusted_balanced_accuracy', 0.0)
+                        if cancel_adj_b_acc > 0 and partial_adj_b_acc > 0:
+                            combined_score = 2 * (cancel_adj_b_acc * partial_adj_b_acc) / (cancel_adj_b_acc + partial_adj_b_acc)
+                        else:
+                            combined_score = 0.0
+                        
+                        # Add to step metrics
+                        word_count = len(ins.split())
+                        step_metrics['md5_hashes'].append(ins_md5_hashstring)
+                        step_metrics['instructions'].append(ins)
+                        step_metrics['combined_scores'].append(combined_score)
+                        step_metrics['word_counts'].append(word_count)
+                        
+                        # Cancel metrics
+                        step_metrics['cancel_precision'].append(cancel_metrics.get('precision', 0.0))
+                        step_metrics['cancel_recall'].append(cancel_metrics.get('recall', 0.0))
+                        step_metrics['cancel_f1'].append(cancel_metrics.get('f1', 0.0))
+                        step_metrics['cancel_accuracy'].append(cancel_metrics.get('accuracy', 0.0))
+                        step_metrics['cancel_balanced_accuracy'].append(cancel_metrics.get('balanced_accuracy', 0.0))
+                        step_metrics['cancel_adj_balanced_accuracy'].append(cancel_adj_b_acc)
+                        
+                        # Partial metrics
+                        step_metrics['partial_precision'].append(partial_metrics.get('precision', 0.0))
+                        step_metrics['partial_recall'].append(partial_metrics.get('recall', 0.0))
+                        step_metrics['partial_f1'].append(partial_metrics.get('f1', 0.0))
+                        step_metrics['partial_accuracy'].append(partial_metrics.get('accuracy', 0.0))
+                        step_metrics['partial_balanced_accuracy'].append(partial_metrics.get('balanced_accuracy', 0.0))
+                        step_metrics['partial_adj_balanced_accuracy'].append(partial_adj_b_acc)
+                        
+                        print(f"reused results: combined_score: {combined_score:.3f}, cancel_adj_b_acc: {cancel_adj_b_acc:.3f}, partial_adj_b_acc: {partial_adj_b_acc:.3f}")
+                        
+                    except Exception as e:
+                        print(f"Warning: Could not load results for duplicate instruction: {e}")
             
             # Remove any remaining duplicates
             to_evaluate_instructions = list(set(to_evaluate_instructions))
                 
             print(f"\nto-evaluate generated instructions: {[p[:50] + '...' for p in to_evaluate_instructions]}\n")
-            
-            # Step-level tracking for metrics
-            step_metrics = {
-                'md5_hashes': [],
-                'instructions': [],
-                'combined_scores': [],
-                'cancel_precision': [], 'cancel_recall': [], 'cancel_f1': [], 'cancel_accuracy': [], 'cancel_balanced_accuracy': [], 'cancel_adj_balanced_accuracy': [],
-                'partial_precision': [], 'partial_recall': [], 'partial_f1': [], 'partial_accuracy': [], 'partial_balanced_accuracy': [], 'partial_adj_balanced_accuracy': [],
-                'word_counts': []
-            }
             
             # Evaluate newly generated instructions on the training set
             for instruction in to_evaluate_instructions:
