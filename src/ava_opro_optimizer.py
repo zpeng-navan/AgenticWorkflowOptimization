@@ -399,7 +399,10 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 cancel_pred = [r['pred_cancel_not_for_all'] for r in cancel_not_for_all_results]
                 cancel_metrics = compute_binary_metrics(cancel_gt, cancel_pred)
             else:
-                cancel_metrics = {'f1': 0.0}
+                cancel_metrics = {
+                    'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'accuracy': 0.0,
+                    'balanced_accuracy': 0.0, 'adjusted_balanced_accuracy': 0.0
+                }
             
             # Compute metrics for partial_or_full (ignore null)
             partial_results = [
@@ -413,7 +416,10 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 partial_pred = [r['pred_partial_or_full'].lower() == "partial" for r in partial_results]
                 partial_metrics = compute_binary_metrics(partial_gt, partial_pred)
             else:
-                partial_metrics = {'f1': 0.0}
+                partial_metrics = {
+                    'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'accuracy': 0.0,
+                    'balanced_accuracy': 0.0, 'adjusted_balanced_accuracy': 0.0
+                }
             
             # Get adjusted balanced accuracy scores as the optimization objective
             cancel_adj_b_acc = cancel_metrics.get('adjusted_balanced_accuracy', 0.0)
@@ -485,8 +491,12 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         
         # Load and sample training data
         full_train_data = load_json_file(self.train_data_path)
+        if not full_train_data:
+            raise ValueError(f"No training data found in {self.train_data_path}")
+            
         if self.train_ratio < 1.0:
-            sample_size = int(len(full_train_data) * self.train_ratio)
+            sample_size = max(1, int(len(full_train_data) * self.train_ratio))  # Ensure at least 1 sample
+            sample_size = min(sample_size, len(full_train_data))  # Don't exceed available data
             train_keys = np.random.choice(list(full_train_data.keys()), sample_size, replace=False)
             train_data = {k: full_train_data[k] for k in train_keys}
         else:
