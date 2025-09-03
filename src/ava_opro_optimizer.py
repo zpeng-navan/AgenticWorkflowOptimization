@@ -525,8 +525,6 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         # ============== Evolution ===============
         for i_step in range(self.num_search_steps):
             print(f"\n================== Step {i_step} =====================")
-            # if not i_step % 10:
-            #     print(f"old_instructions_and_scores: {[(p[:30], f'C:{combined:.2f}', f'Step:{st}') for p, combined, cancel, partial, st in self.old_instructions_and_scores]}")
             
             print(f"current optimizer_temperature: {self.optimizer_temperature}")
             
