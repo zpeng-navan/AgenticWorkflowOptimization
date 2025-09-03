@@ -914,6 +914,89 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
     plt.close()
 
 
+def show_api_price(output_dir: str = "imgs/baselines") -> None:
+    """
+    Create a grouped bar chart showing API pricing for different models.
+    Red bars for input cost per 1M tokens, blue bars for output cost per 1M tokens.
+    
+    Args:
+        output_dir: Directory to save the output graphs
+    """
+    print(f"🚀 Creating API pricing comparison bar chart")
+    
+    # Updated API pricing data
+    api_pricing = API_COST_PER_MILLION_TOKENS
+    
+    # Extract data
+    models = list(api_pricing.keys())
+    input_costs = [api_pricing[model]["input"] for model in models]
+    output_costs = [api_pricing[model]["output"] for model in models]
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(14, 8))
+    
+    # Create x positions for grouped bars
+    x = np.arange(len(models))
+    bar_width = 0.35
+    
+    # Plot grouped bars
+    bars_input = ax.bar(x - bar_width/2, input_costs, bar_width, 
+                       color=CUSTOM_RED, alpha=0.8, label='Input Cost per 1M tokens')
+    bars_output = ax.bar(x + bar_width/2, output_costs, bar_width,
+                        color=CUSTOM_BLUE, alpha=0.8, label='Output Cost per 1M tokens')
+    
+    # Customize axes
+    ax.set_xlabel('Models', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Cost (USD per 1M tokens)', fontsize=14, fontweight='bold')
+    ax.set_title('API Pricing Comparison: Input vs Output Costs', 
+                fontsize=16, fontweight='bold', pad=20)
+    
+    # Set x-axis ticks and labels
+    ax.set_xticks(x)
+    ax.set_xticklabels(models, rotation=45, ha='right')
+    
+    # Add value labels on bars
+    def add_value_labels_on_bars(bars, costs):
+        for bar, cost in zip(bars, costs):
+            height = bar.get_height()
+            ax.annotate(f'${cost:.2f}',
+                       xy=(bar.get_x() + bar.get_width()/2, height),
+                       xytext=(0, 3),
+                       textcoords='offset points', ha='center', va='bottom',
+                       fontsize=10, fontweight='bold')
+    
+    add_value_labels_on_bars(bars_input, input_costs)
+    add_value_labels_on_bars(bars_output, output_costs)
+    
+    # Add grid
+    ax.grid(True, alpha=0.3)
+    
+    # Create legend
+    ax.legend(loc='upper left', fontsize=12)
+    
+    # Set y-axis to start from 0 for better comparison
+    ax.set_ylim(bottom=0)
+    
+    # Adjust layout
+    plt.tight_layout()
+    
+    # Save files
+    os.makedirs(output_dir, exist_ok=True)
+    base_filename = "api_pricing_comparison"
+    
+    png_path = os.path.join(output_dir, f"{base_filename}.png")
+    pdf_path = os.path.join(output_dir, f"{base_filename}.pdf")
+    
+    plt.savefig(png_path, dpi=300, bbox_inches='tight')
+    plt.savefig(pdf_path, bbox_inches='tight')
+    
+    print(f"💾 Saved PNG: {png_path}")
+    print(f"💾 Saved PDF: {pdf_path}")
+    
+    plt.show()
+    plt.close()
+
+
 def create_all_metric_comparisons(prompt_name: str, 
                                 results_dir: str = "prompts/original/gpt-5-verified",
                                 output_dir: str = "imgs/baselines") -> None:
@@ -954,3 +1037,6 @@ if __name__ == "__main__":
     
     # Test the new grouped bar chart function
     metric_cost_latency_two_prompt_grouped_bars("adjusted_balanced_accuracy")
+    
+    # Test the new API pricing chart function
+    show_api_price()
