@@ -516,7 +516,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         
         # Add initial prompt to tracking
         initial_word_count = len(self.initial_prompt.split(" "))
-        self.old_instructions_and_scores.append((self.initial_prompt, initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc, initial_word_count))
+        self.old_instructions_and_scores.append((self.initial_prompt, initial_combined_score, initial_cancel_adj_b_acc, initial_partial_adj_b_acc, -1))
         
         # Add initial prompt MD5 to hash set for duplicate detection (following OPRO pattern)
         initial_prompt_md5 = self._instruction_to_filename(self.initial_prompt, md5_hashing=True)
