@@ -124,7 +124,10 @@ def evaluate_single_instruction(args_tuple):
             cancel_pred = [r['pred_cancel_not_for_all'] for r in cancel_not_for_all_results]
             cancel_metrics = compute_binary_metrics(cancel_gt, cancel_pred)
         else:
-            cancel_metrics = {'adjusted_balanced_accuracy': 0.0}
+            cancel_metrics = {
+                'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'accuracy': 0.0,
+                'balanced_accuracy': 0.0, 'adjusted_balanced_accuracy': 0.0
+            }
         
         # Compute metrics for partial_or_full (ignore null)
         partial_results = [
@@ -138,7 +141,10 @@ def evaluate_single_instruction(args_tuple):
             partial_pred = [r['pred_partial_or_full'].lower() == "partial" for r in partial_results]
             partial_metrics = compute_binary_metrics(partial_gt, partial_pred)
         else:
-            partial_metrics = {'adjusted_balanced_accuracy': 0.0}
+            partial_metrics = {
+                'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'accuracy': 0.0,
+                'balanced_accuracy': 0.0, 'adjusted_balanced_accuracy': 0.0
+            }
         
         # Get adjusted balanced accuracy scores
         cancel_adj_b_acc = cancel_metrics.get('adjusted_balanced_accuracy', 0.0)
@@ -236,6 +242,8 @@ class AvaOproOptimizer:
         self.initial_prompt_body_key = initial_prompt_key + "_body"
         self.initial_prompt_response_format_key = initial_prompt_key + "_response_format"
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
+        if not self.api_key:
+            raise ValueError("OpenAI API key is required. Set OPENAI_API_KEY environment variable or pass api_key parameter.")
         self.save_folder = join(save_folder, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
         self.num_search_steps=num_search_steps
         self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step
@@ -276,8 +284,18 @@ class AvaOproOptimizer:
         
     def _load_initial_prompt_parts(self) -> Tuple[str, str]:
         """Load initial prompt body and response format from YAML file."""
-        with open(self.initial_prompt_file, 'r', encoding='utf-8') as f:
-            prompt_data = yaml.safe_load(f)
+        try:
+            with open(self.initial_prompt_file, 'r', encoding='utf-8') as f:
+                prompt_data = yaml.safe_load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Initial prompt file not found: {self.initial_prompt_file}")
+        except yaml.YAMLError as e:
+            raise ValueError(f"Error parsing YAML file {self.initial_prompt_file}: {e}")
+        except Exception as e:
+            raise ValueError(f"Error loading initial prompt file {self.initial_prompt_file}: {e}")
+        
+        if not isinstance(prompt_data, dict):
+            raise ValueError(f"YAML file {self.initial_prompt_file} must contain a dictionary at root level")
         
         # Check if both keys exist
         if self.initial_prompt_body_key not in prompt_data:
@@ -658,8 +676,12 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         
         # Load and sample training data
         full_train_data = load_json_file(self.train_data_path)
+        if not full_train_data:
+            raise ValueError(f"No training data found in {self.train_data_path}")
+            
         if self.train_ratio < 1.0:
-            sample_size = int(len(full_train_data) * self.train_ratio)
+            sample_size = max(1, int(len(full_train_data) * self.train_ratio))  # Ensure at least 1 sample
+            sample_size = min(sample_size, len(full_train_data))  # Don't exceed available data
             train_keys = np.random.choice(list(full_train_data.keys()), sample_size, replace=False)
             train_data = {k: full_train_data[k] for k in train_keys}
         else:
@@ -696,7 +718,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         self.old_instruction_md5_hashstrings_set.add(initial_prompt_md5)
         
         # ============== Evolution ===============
-        for i_step in range(self.num_search_steps):
+        for i_step in tqdm(range(self.num_search_steps)):
             print(f"\n================== Step {i_step} =====================")
             
             print(f"current optimizer_temperature: {self.optimizer_temperature}")
@@ -770,7 +792,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 ins_md5_hashstring = self._instruction_to_filename(ins, md5_hashing=True)
                 if ins_md5_hashstring not in self.old_instruction_md5_hashstrings_set:
                     to_evaluate_instructions.append(ins)
-                    self.old_instruction_md5_hashstrings_set.add(ins_md5_hashstring)
+                    # Note: MD5 hash will be added to set only AFTER successful evaluation and file saving
                 else:
                     print(f"already evaluated '{ins[:30]}...' previously")
                     # Load previously saved results and add to step metrics
@@ -895,6 +917,9 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                         
                         # Extract all metrics for step-level tracking
                         md5_hash = self._instruction_to_filename(instruction, md5_hashing=True)
+                        
+                        # Only add to MD5 set after successful evaluation and file save
+                        self.old_instruction_md5_hashstrings_set.add(md5_hash)
                         word_count = len(instruction.split())
                         
                         cancel_metrics = results.get('cancel_not_for_all_metrics', {})
