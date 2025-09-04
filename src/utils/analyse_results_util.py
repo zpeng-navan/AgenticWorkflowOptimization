@@ -127,11 +127,64 @@ def extract_metric_values(results: Dict[str, Dict], metric_name: str) -> Tuple[L
     return cancel_values, partial_values
 
 
+def extract_metric_std_values(results: Dict[str, Dict], metric_name: str) -> Tuple[List[float], List[float]]:
+    """
+    Extract metric standard deviation values for both labels from results.
+    
+    Args:
+        results: Dictionary mapping model names to their evaluation results
+        metric_name: Name of the metric to extract std for (e.g., 'f1', 'accuracy', 'precision')
+    
+    Returns:
+        Tuple of (cancel_not_for_all_std_values, partial_or_full_std_values)
+    """
+    # Model display order as specified
+    model_order = [
+        'gpt-3.5-turbo',  # 3.5-turbo
+        'gpt-4o-mini',    # 4o-mini  
+        'gpt-4o',         # 4o
+        'o3-mini',        # o3-mini
+        'o3',             # o3
+        'gpt-4.1-mini',   # 4.1-mini
+        'gpt-4.1',        # 4.1
+        'gpt-5-mini',     # 5-mini
+        'gpt-5'           # 5
+    ]
+    
+    cancel_std_values = []
+    partial_std_values = []
+    
+    for model in model_order:
+        if model in results:
+            data = results[model]
+            
+            # Extract cancel_not_for_all metric std
+            if 'cancel_not_for_all_statistics' in data and metric_name in data['cancel_not_for_all_statistics']:
+                cancel_std = data['cancel_not_for_all_statistics'][metric_name]['std']
+                cancel_std_values.append(cancel_std)
+            else:
+                cancel_std_values.append(0.0)  # Default value if missing
+            
+            # Extract partial_or_full metric std  
+            if 'partial_or_full_statistics' in data and metric_name in data['partial_or_full_statistics']:
+                partial_std = data['partial_or_full_statistics'][metric_name]['std']
+                partial_std_values.append(partial_std)
+            else:
+                partial_std_values.append(0.0)  # Default value if missing
+        else:
+            # Model not found, add zero values
+            cancel_std_values.append(0.0)
+            partial_std_values.append(0.0)
+    
+    return cancel_std_values, partial_std_values
+
+
 def two_labels_diff_model(metric_name: str, prompt_name: str, 
                          results_dir: str = "prompts/original/gpt-5-verified",
                          output_dir: str = "imgs/baselines") -> None:
     """
     Create a bar graph comparing two labels across different models for a given metric.
+    Includes error bars showing standard deviation.
     
     Args:
         metric_name: Name of the metric to compare (e.g., 'balanced_accuracy', 'f1', 'precision')
@@ -148,8 +201,9 @@ def two_labels_diff_model(metric_name: str, prompt_name: str,
         print("❌ No results loaded. Cannot create graph.")
         return
     
-    # Extract metric values
+    # Extract metric values (mean and std)
     cancel_values, partial_values = extract_metric_values(results, metric_name)
+    cancel_std_values, partial_std_values = extract_metric_std_values(results, metric_name)
     
     # Model labels for display (shortened versions)
     model_labels = [
@@ -170,11 +224,11 @@ def two_labels_diff_model(metric_name: str, prompt_name: str,
     x = np.arange(len(model_labels))  # Label locations
     width = 0.35  # Width of bars
     
-    # Create bars
+    # Create bars with error bars
     bars1 = ax.bar(x - width/2, cancel_values, width, label='cancel_not_for_all', 
-                   color=CUSTOM_BLUE, alpha=0.8)
+                   color=CUSTOM_BLUE, alpha=0.8, yerr=cancel_std_values, capsize=5)
     bars2 = ax.bar(x + width/2, partial_values, width, label='partial_or_full', 
-                   color=CUSTOM_RED, alpha=0.8)
+                   color=CUSTOM_RED, alpha=0.8, yerr=partial_std_values, capsize=5)
     
     # Customize the plot
     ax.set_xlabel('Models', fontsize=12, fontweight='bold')
@@ -736,7 +790,7 @@ if __name__ == "__main__":
     metric_cost_latency("adjusted_balanced_accuracy", "initial_prompt_simple")
     
     # Test the new grouped bar chart function
-    metric_cost_latency_two_prompt_grouped_bars("adjusted_balanced_accuracy")
+    # metric_cost_latency_two_prompt_grouped_bars("adjusted_balanced_accuracy")
     
     # Test the new API pricing chart function
     # show_api_price()
