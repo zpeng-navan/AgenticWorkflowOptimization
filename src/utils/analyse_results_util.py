@@ -179,6 +179,54 @@ def extract_metric_std_values(results: Dict[str, Dict], metric_name: str) -> Tup
     return cancel_std_values, partial_std_values
 
 
+def extract_individual_runs_values(results: Dict[str, Dict], metric_name: str) -> Tuple[List[List[float]], List[List[float]]]:
+    """
+    Extract individual run values (not aggregated means) for both labels from results.
+    
+    Args:
+        results: Dictionary mapping model names to their evaluation results
+        metric_name: Name of the metric to extract (e.g., 'adjusted_balanced_accuracy')
+    
+    Returns:
+        Tuple of (cancel_individual_runs, partial_individual_runs) where each is a list of lists
+        containing individual values for each model across all runs
+    """
+    model_order = [
+        'gpt-3.5-turbo', 'gpt-4o-mini', 'gpt-4o', 'o3-mini', 'o3',
+        'gpt-4.1-mini', 'gpt-4.1', 'gpt-5-mini', 'gpt-5'
+    ]
+    
+    cancel_individual_runs = []
+    partial_individual_runs = []
+    
+    for model in model_order:
+        if model in results:
+            data = results[model]
+            
+            # Extract individual run values
+            cancel_runs = []
+            partial_runs = []
+            
+            if 'individual_runs' in data:
+                for run in data['individual_runs']:
+                    # Extract cancel_not_for_all metric for this run
+                    if 'cancel_not_for_all_metrics' in run and metric_name in run['cancel_not_for_all_metrics']:
+                        cancel_runs.append(run['cancel_not_for_all_metrics'][metric_name])
+                    
+                    # Extract partial_or_full metric for this run
+                    if 'partial_or_full_metrics' in run and metric_name in run['partial_or_full_metrics']:
+                        partial_runs.append(run['partial_or_full_metrics'][metric_name])
+            
+            cancel_individual_runs.append(cancel_runs)
+            partial_individual_runs.append(partial_runs)
+        else:
+            # Model not found, add empty lists
+            cancel_individual_runs.append([])
+            partial_individual_runs.append([])
+    
+    return cancel_individual_runs, partial_individual_runs
+
+
 def two_labels_diff_model(metric_name: str, prompt_name: str, 
                          results_dir: str = "prompts/original/gpt-5-verified",
                          output_dir: str = "imgs/baselines") -> None:
@@ -349,12 +397,15 @@ def metric_cost_latency(metric_name: str,
                        output_dir: str = "imgs/baselines") -> None:
     """
     Create a triple-axis graph showing:
-    1. Average metric of both labels (bars)
+    1. Harmonic mean of both labels across individual runs (bars with error bars)
     2. Cost per 1M calls (line)
     3. Latency (line)
     
+    The harmonic mean is computed for each individual run pair (cancel_not_for_all, partial_or_full),
+    then averaged across runs with standard deviation shown as error bars.
+    
     Args:
-        metric_name: Name of the metric to plot
+        metric_name: Name of the metric to plot (typically 'adjusted_balanced_accuracy')
         prompt_name: Name of the prompt ('initial_prompt' or 'initial_prompt_simple')
         results_dir: Directory containing the JSON result files
         output_dir: Directory to save the output graphs
@@ -367,10 +418,10 @@ def metric_cost_latency(metric_name: str,
         print(f"❌ No results found for {prompt_name}")
         return
     
-    # Extract metric values for both labels
-    cancel_values, partial_values = extract_metric_values(results, metric_name)
+    # Extract individual run values for both labels  
+    cancel_individual_runs, partial_individual_runs = extract_individual_runs_values(results, metric_name)
     
-    # Calculate harmonic mean of both labels (penalizes imbalanced performance)
+    # Define harmonic mean function
     def harmonic_mean(cancel_val, partial_val):
         if cancel_val > 0 and partial_val > 0:
             return 2 * (cancel_val * partial_val) / (cancel_val + partial_val)
@@ -378,7 +429,21 @@ def metric_cost_latency(metric_name: str,
             # Handle edge case where one score is 0 or negative
             return 0.0
     
-    avg_metric_values = [harmonic_mean(c, p) for c, p in zip(cancel_values, partial_values)]
+    # Compute harmonic means for each model across all runs, then get mean and std
+    avg_metric_values = []
+    metric_std_values = []
+    
+    for cancel_runs, partial_runs in zip(cancel_individual_runs, partial_individual_runs):
+        if cancel_runs and partial_runs and len(cancel_runs) == len(partial_runs):
+            # Compute harmonic mean for each run
+            harmonic_means = [harmonic_mean(c, p) for c, p in zip(cancel_runs, partial_runs)]
+            # Calculate mean and std of harmonic means
+            avg_metric_values.append(np.mean(harmonic_means))
+            metric_std_values.append(np.std(harmonic_means) if len(harmonic_means) > 1 else 0.0)
+        else:
+            # If no valid runs, use 0
+            avg_metric_values.append(0.0)
+            metric_std_values.append(0.0)
     
     # Extract cost and latency values
     cost_values = extract_latency_or_cost_values(results, "cost")
@@ -391,10 +456,11 @@ def metric_cost_latency(metric_name: str,
     # Create figure and primary axis
     fig, ax1 = plt.subplots(figsize=(14, 8))
     
-    # Create bars for average metric (primary y-axis)
+    # Create bars for average metric (primary y-axis) with error bars
     x = np.arange(len(models))
     bars = ax1.bar(x, avg_metric_values, color=CUSTOM_BLUE, alpha=0.7, 
-                   label=f'Avg {metric_name.replace("_", " ").title()}', width=0.6)
+                   label=f'Avg {metric_name.replace("_", " ").title()}', width=0.6,
+                   yerr=metric_std_values, capsize=5)
     
     # Customize primary y-axis
     ax1.set_xlabel('Models', fontsize=12, fontweight='bold')
