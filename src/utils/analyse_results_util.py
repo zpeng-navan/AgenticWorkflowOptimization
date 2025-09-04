@@ -554,12 +554,16 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
                                                output_dir: str = "imgs/baselines") -> None:
     """
     Create a grouped bar chart comparing both initial_prompt and initial_prompt_simple showing:
-    - 3 groups per model: avg metric, cost, latency
+    - 3 groups per model: avg metric (with error bars), cost, latency
     - 2 bars per group: initial_prompt (blue) vs initial_prompt_simple (red)
     - Different hatch patterns for each metric type
     
+    For metric bars: Harmonic mean is computed for each individual run pair (cancel_not_for_all, partial_or_full),
+    then averaged across runs with standard deviation shown as error bars.
+    For cost/latency bars: Use aggregated values without error bars.
+    
     Args:
-        metric_name: Name of the metric to plot
+        metric_name: Name of the metric to plot (typically 'adjusted_balanced_accuracy')
         results_dir: Directory containing the JSON result files
         output_dir: Directory to save the output graphs
     """
@@ -580,15 +584,44 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
         else:
             return 0.0
     
-    # Extract data for initial_prompt
-    cancel_values_init, partial_values_init = extract_metric_values(results_initial, metric_name)
-    avg_metric_values_init = [harmonic_mean(c, p) for c, p in zip(cancel_values_init, partial_values_init)]
+    # Extract individual run values for metric computation
+    cancel_individual_runs_init, partial_individual_runs_init = extract_individual_runs_values(results_initial, metric_name)
+    cancel_individual_runs_simple, partial_individual_runs_simple = extract_individual_runs_values(results_simple, metric_name)
+    
+    # Compute harmonic means for each model across all runs, then get mean and std
+    avg_metric_values_init = []
+    metric_std_values_init = []
+    
+    for cancel_runs, partial_runs in zip(cancel_individual_runs_init, partial_individual_runs_init):
+        if cancel_runs and partial_runs and len(cancel_runs) == len(partial_runs):
+            # Compute harmonic mean for each run
+            harmonic_means = [harmonic_mean(c, p) for c, p in zip(cancel_runs, partial_runs)]
+            # Calculate mean and std of harmonic means
+            avg_metric_values_init.append(np.mean(harmonic_means))
+            metric_std_values_init.append(np.std(harmonic_means) if len(harmonic_means) > 1 else 0.0)
+        else:
+            # If no valid runs, use 0
+            avg_metric_values_init.append(0.0)
+            metric_std_values_init.append(0.0)
+    
+    avg_metric_values_simple = []
+    metric_std_values_simple = []
+    
+    for cancel_runs, partial_runs in zip(cancel_individual_runs_simple, partial_individual_runs_simple):
+        if cancel_runs and partial_runs and len(cancel_runs) == len(partial_runs):
+            # Compute harmonic mean for each run
+            harmonic_means = [harmonic_mean(c, p) for c, p in zip(cancel_runs, partial_runs)]
+            # Calculate mean and std of harmonic means
+            avg_metric_values_simple.append(np.mean(harmonic_means))
+            metric_std_values_simple.append(np.std(harmonic_means) if len(harmonic_means) > 1 else 0.0)
+        else:
+            # If no valid runs, use 0
+            avg_metric_values_simple.append(0.0)
+            metric_std_values_simple.append(0.0)
+    
+    # Extract cost and latency values (no change needed for these)
     cost_values_init = extract_latency_or_cost_values(results_initial, "cost")
     latency_values_init = extract_latency_or_cost_values(results_initial, "latency")
-    
-    # Extract data for initial_prompt_simple
-    cancel_values_simple, partial_values_simple = extract_metric_values(results_simple, metric_name)
-    avg_metric_values_simple = [harmonic_mean(c, p) for c, p in zip(cancel_values_simple, partial_values_simple)]
     cost_values_simple = extract_latency_or_cost_values(results_simple, "cost")
     latency_values_simple = extract_latency_or_cost_values(results_simple, "latency")
     
@@ -649,12 +682,14 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
         pos3_init = base_pos + 2 * (group_width / n_groups) + bar_width/2
         pos3_simple = pos3_init + bar_width
         
-        # Plot metric bars
+        # Plot metric bars with error bars
         ax.bar(pos1_init, norm_metric_init[i], bar_width, 
                color=CUSTOM_BLUE, hatch=metric_hatch, alpha=0.8,
+               yerr=metric_std_values_init[i], capsize=3,
                label='Initial Prompt - Metric' if i == 0 else '')
         ax.bar(pos1_simple, norm_metric_simple[i], bar_width,
                color=CUSTOM_RED, hatch=metric_hatch, alpha=0.8,
+               yerr=metric_std_values_simple[i], capsize=3,
                label='Initial Prompt Simple - Metric' if i == 0 else '')
         
         # Plot cost bars
@@ -848,15 +883,15 @@ if __name__ == "__main__":
     print("=" * 50)
     
     # Create a single comparison
-    # two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt")
-    # two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt_simple")
+    two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt")
+    two_labels_diff_model("adjusted_balanced_accuracy", "initial_prompt_simple")
     
     # Test the new triple-axis function
     metric_cost_latency("adjusted_balanced_accuracy", "initial_prompt")
     metric_cost_latency("adjusted_balanced_accuracy", "initial_prompt_simple")
     
     # Test the new grouped bar chart function
-    # metric_cost_latency_two_prompt_grouped_bars("adjusted_balanced_accuracy")
+    metric_cost_latency_two_prompt_grouped_bars("adjusted_balanced_accuracy")
     
     # Test the new API pricing chart function
-    # show_api_price()
+    show_api_price()
