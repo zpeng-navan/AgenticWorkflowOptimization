@@ -244,7 +244,7 @@ class AvaOproOptimizer:
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OpenAI API key is required. Set OPENAI_API_KEY environment variable or pass api_key parameter.")
-        self.save_folder = join(save_folder, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
+        self.save_folder = join(save_folder, initial_prompt_key, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
         self.num_search_steps=num_search_steps
         self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step
         self.optimizer_model=optimizer_model
@@ -384,12 +384,15 @@ class AvaOproOptimizer:
             return ""
         
         # Sample random examples
-        sample_keys = np.random.choice(list(train_data.keys()), 
-                                      min(num_examples, len(train_data)), 
-                                      replace=False)
+        # sample_keys = np.random.choice(list(train_data.keys()), 
+        #                               min(num_examples, len(train_data)), 
+        #                               replace=False)
+        sample_keys = ["47daf4ee-6900-48c0-9f3f-a38ee67c64c9", "801ecf63-0eef-4327-9774-21f9e9d95481", "31aa8030-7ba1-492a-bae2-cea7d347623c", "06fd2754-2d0a-4840-bd5b-2ad3bb37352e"]
+        labels = ["FULL", "PARTIAL", "true", "false"]
+
         
         examples_str = "\n\nHere are some examples from the training data:\n"
-        for i, key in enumerate(sample_keys):
+        for i, (key, label) in enumerate(zip(sample_keys, labels)):
             element = train_data[key]
             ava_data = element.get("Ava", {})
             flight_booking_legs = ava_data.get("flight_booking_legs", "")
@@ -400,8 +403,10 @@ class AvaOproOptimizer:
             examples_str += f"\nExample {i+1}:\n"
             examples_str += f"Flight booking legs: {flight_booking_legs}\n"
             examples_str += f"Chat history: {chat_history}\n"
-            examples_str += f"Ground truth - cancel_not_for_all_passengers: {cancel_not_for_all}\n"
-            examples_str += f"Ground truth - partial_or_full: {partial_or_full}\n"
+            if label == "true" or label == "false":
+                examples_str += f"Ground truth - cancel_not_for_all_passengers: {label}\n"
+            else:
+                examples_str += f"Ground truth - partial_or_full: {label}\n"
         
         return examples_str
     
@@ -1069,7 +1074,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         return sorted(self.old_instructions_and_scores, key=sort_key)[:top_k]
     
     def save_best_prompt(self, output_file: str = None) -> str:
-        """Save the best prompt to a file."""
+        """Save the best prompt to a YAML file with performance metrics."""
         if not self.old_instructions_and_scores:
             raise ValueError("No prompts have been evaluated yet")
         
@@ -1082,12 +1087,28 @@ Generate a new concise prompt that will improve classification accuracy. Output 
         best_prompt, best_combined_score, best_cancel_adj_b_acc, best_partial_adj_b_acc, best_step = sorted(self.old_instructions_and_scores, key=sort_key)[0]
         best_word_count = len(best_prompt.split())
         
-        if output_file is None:
-            output_file = os.path.join(self.save_folder, "best_prompt.txt")
+        # Concatenate best prompt with response format
+        full_optimized_prompt = f"{best_prompt.strip()}\n{self.initial_prompt_response_format.strip()}"
         
-        with open(output_file, 'w') as f:
-            f.write(f"# Best Prompt (Combined: {best_combined_score:.3f}, Cancel Adj B-Acc: {best_cancel_adj_b_acc:.3f}, Partial Adj B-Acc: {best_partial_adj_b_acc:.3f}, Words: {best_word_count}, Step: {best_step})\n\n")
-            f.write(best_prompt)
+        if output_file is None:
+            output_file = os.path.join(self.save_folder, "optimized_prompt.yaml")
+        
+        # Create YAML data structure
+        yaml_data = {
+            self.initial_prompt_key: full_optimized_prompt,
+            'best_combined_score': float(best_combined_score),
+            'best_cancel_adj_b_acc': float(best_cancel_adj_b_acc),
+            'best_partial_adj_b_acc': float(best_partial_adj_b_acc),
+            'best_step': int(best_step),
+            'best_word_count': best_word_count
+        }
+        
+        # Save to YAML file
+        with open(output_file, 'w', encoding='utf-8') as f:
+            yaml.dump(yaml_data, f, default_flow_style=False, allow_unicode=True, indent=2)
+        
+        print(f"💾 Saved optimized prompt to: {output_file}")
+        print(f"📊 Performance: Combined={best_combined_score:.3f}, Cancel={best_cancel_adj_b_acc:.3f}, Partial={best_partial_adj_b_acc:.3f}, Step={best_step}")
         
         return best_prompt
 
