@@ -210,6 +210,7 @@ class AvaOproOptimizer:
         train_data_path: str = "data/processed/logs/04222025-08182025/ground_truth/verified_ground_truth_balance_train.json",
         initial_prompt_file: str = "prompts/original/identify_partial.yaml",
         initial_prompt_key: str = "initial_prompt",
+        meta_prompt_key: str = "v1",
         api_key: Optional[str] = None,
         save_folder: str = "results/gpt-5-verified/",
         num_search_steps: int = 10,
@@ -230,6 +231,7 @@ class AvaOproOptimizer:
             train_data_path: Path to training data JSON
             initial_prompt_file: Path to YAML file with initial prompt
             initial_prompt_key: Key in YAML file for prompt to optimize
+            meta_prompt_key: Key in meta prompt YAML file to use (default: "v1")
             api_key: OpenAI API key
             save_folder: Directory to save results
             max_processes: Maximum number of parallel processes (None = CPU count)
@@ -239,12 +241,13 @@ class AvaOproOptimizer:
         self.train_data_path = train_data_path
         self.initial_prompt_file = initial_prompt_file
         self.initial_prompt_key = initial_prompt_key
+        self.meta_prompt_key = meta_prompt_key
         self.initial_prompt_body_key = initial_prompt_key + "_body"
         self.initial_prompt_response_format_key = initial_prompt_key + "_response_format"
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OpenAI API key is required. Set OPENAI_API_KEY environment variable or pass api_key parameter.")
-        self.save_folder = join(save_folder, initial_prompt_key, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
+        self.save_folder = join(save_folder, f"meta_prompt_{meta_prompt_key}", initial_prompt_key, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
         self.num_search_steps=num_search_steps
         self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step
         self.optimizer_model=optimizer_model
@@ -415,6 +418,7 @@ class AvaOproOptimizer:
         old_prompts_and_scores: List[Tuple[str, float, int]],
         train_data: Dict,
         num_examples: int = 3,
+        meta_prompt_key: str = "v1"
     ) -> str:
         """Generate meta-prompt for prompt optimization."""
         
@@ -427,28 +431,33 @@ class AvaOproOptimizer:
         # Add few-shot examples
         examples_str = self._sample_few_shot_examples(train_data, num_examples)
         
-        meta_prompt = f"""Your task is to generate prompts for a classification task. The prompts will be used to classify flight cancellation conversations into two categories:
-
-1. cancel_not_for_all_passengers: Whether the user wants to cancel for fewer than all passengers
-2. partial_or_full: Whether the user wants partial cancellation (specific legs) or full cancellation
-
-Below are some previous prompts with their scores. Each prompt has three scores:
-- combined_score: Harmonic mean of cancel_adj_b_acc and partial_adj_b_acc (0 to {self.num_score_buckets}, higher is better)
-- cancel_adj_b_acc: Adjusted balanced accuracy for cancel_not_for_all_passengers classification (0 to {self.num_score_buckets}, higher is better)  
-- partial_adj_b_acc: Adjusted balanced accuracy for partial_or_full classification (0 to {self.num_score_buckets}, higher is better)
-- words: Word count (fewer is better when scores are equal)
-{prompt_score_str}{examples_str}
-
-Your task is to generate a new prompt that will achieve a higher score than the previous ones while being concise.
-
-Requirements for the new prompt:
-- It should help the AI assistant accurately classify cancel_not_for_all_passengers and partial_or_full
-- Keep it concise while maintaining accuracy
-
-Generate a new concise prompt that will improve classification accuracy. Output your prompt between <PROMPT> and </PROMPT> tags.
-
-<PROMPT>
-"""
+        # Load meta prompt template from YAML file
+        meta_prompt_file = "prompts/meta/meta_prompt.yaml"
+        try:
+            with open(meta_prompt_file, 'r', encoding='utf-8') as f:
+                meta_prompt_data = yaml.safe_load(f)
+            
+            if not isinstance(meta_prompt_data, dict):
+                raise ValueError(f"Meta prompt YAML file should contain a dictionary")
+            
+            if meta_prompt_key not in meta_prompt_data:
+                raise ValueError(f"Meta prompt key '{meta_prompt_key}' not found in {meta_prompt_file}")
+            
+            meta_prompt_template = meta_prompt_data[meta_prompt_key]
+            
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Meta prompt file not found: {meta_prompt_file}")
+        except yaml.YAMLError as e:
+            raise ValueError(f"Error parsing meta prompt YAML file: {e}")
+        except Exception as e:
+            raise ValueError(f"Error loading meta prompt: {e}")
+        
+        # Format the template with variables
+        meta_prompt = meta_prompt_template.format(
+            num_score_buckets=self.num_score_buckets,
+            prompt_score_str=prompt_score_str,
+            examples_str=examples_str
+        ) + "\n"
         
         return meta_prompt
     
@@ -733,6 +742,7 @@ Generate a new concise prompt that will improve classification accuracy. Output 
                 self.old_instructions_and_scores,
                 train_data,
                 self.num_examples,
+                self.meta_prompt_key
             )
             
             print(f"\nmeta_prompt: \n\n{meta_prompt}\n")
@@ -1127,6 +1137,9 @@ def main():
     parser.add_argument('--initial_prompt_key', type=str, 
                       default="initial_prompt",
                       help='Key in YAML file for prompt to optimize')
+    parser.add_argument('--meta_prompt_key', type=str, 
+                      default="v1",
+                      help='Key in meta prompt YAML file to use (default: v1)')
     parser.add_argument('--num_search_steps', type=int, default=10,
                       help='Number of optimization steps (default: 10)')
     parser.add_argument('--num_generated_instructions_in_each_step', type=int, default=4,
@@ -1156,6 +1169,7 @@ def main():
         train_data_path=args.train_data_path,
         initial_prompt_file=args.initial_prompt_file,
         initial_prompt_key=args.initial_prompt_key,
+        meta_prompt_key=args.meta_prompt_key,
         save_folder=args.save_folder,
         num_search_steps=args.num_search_steps,
         num_generated_instructions_in_each_step=args.num_generated_instructions_in_each_step,
