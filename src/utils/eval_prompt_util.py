@@ -493,6 +493,36 @@ def evaluate_prompt_multiple_runs(
     cancel_statistics = compute_metrics_statistics(cancel_metrics_list)
     partial_statistics = compute_metrics_statistics(partial_metrics_list)
     
+    # Compute combined adjusted balanced accuracy using harmonic mean
+    combined_adj_b_acc_statistics = {}
+    if (cancel_metrics_list and partial_metrics_list and 
+        len(cancel_metrics_list) == len(partial_metrics_list)):
+        
+        combined_values = []
+        for cancel_metrics, partial_metrics in zip(cancel_metrics_list, partial_metrics_list):
+            if ('adjusted_balanced_accuracy' in cancel_metrics and 
+                'adjusted_balanced_accuracy' in partial_metrics):
+                
+                cancel_adj_b_acc = cancel_metrics['adjusted_balanced_accuracy']
+                partial_adj_b_acc = partial_metrics['adjusted_balanced_accuracy']
+                
+                # Compute harmonic mean
+                if cancel_adj_b_acc > 0 and partial_adj_b_acc > 0:
+                    harmonic_mean = 2 * (cancel_adj_b_acc * partial_adj_b_acc) / (cancel_adj_b_acc + partial_adj_b_acc)
+                else:
+                    harmonic_mean = 0.0
+                
+                combined_values.append(harmonic_mean)
+        
+        if combined_values:
+            combined_adj_b_acc_statistics = {
+                'combined_adjusted_balanced_accuracy': {
+                    'mean': float(np.mean(combined_values)),
+                    'std': float(np.std(combined_values)),
+                    'values': combined_values
+                }
+            }
+    
     # Compute avg_thought_words statistics
     thought_statistics = {}
     if avg_thought_words_list:
@@ -543,6 +573,7 @@ def evaluate_prompt_multiple_runs(
         'individual_runs': all_runs,
         'cancel_not_for_all_statistics': cancel_statistics,
         'partial_or_full_statistics': partial_statistics,
+        'combined_adjusted_balanced_accuracy_statistics': combined_adj_b_acc_statistics,
         'thought_statistics': thought_statistics,
         'input_words_statistics': input_words_statistics,
         'output_words_statistics': output_words_statistics,
@@ -573,6 +604,11 @@ def evaluate_prompt_multiple_runs(
         if partial_statistics:
             for metric_name, stats in partial_statistics.items():
                 print(f"{metric_name.upper()}: {stats['mean']:.3f} ± {stats['std']:.3f}")
+        
+        print(f"\n📊 COMBINED ADJUSTED BALANCED ACCURACY STATISTICS:")
+        if combined_adj_b_acc_statistics:
+            for metric_name, stats in combined_adj_b_acc_statistics.items():
+                print(f"{metric_name.upper().replace('_', ' ')}: {stats['mean']:.3f} ± {stats['std']:.3f}")
         
         print(f"\n💭 THOUGHT WORDS STATISTICS:")
         if thought_statistics:
