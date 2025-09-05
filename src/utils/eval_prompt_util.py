@@ -20,6 +20,17 @@ from tqdm import tqdm
 
 from src.utils.open_ai_util import OpenAIClient
 from src.utils.data_util import load_json_file, extract_json_from_string
+API_COST_PER_MILLION_TOKENS = {
+    "gpt-3.5-turbo": {"input": 0.50 , "output": 1.50},
+    "gpt-4o-mini": {"input": 0.15, "output": 0.60},
+    "gpt-4o": {"input": 2.50, "output": 10.00},
+    "o3-mini": {"input": 1.10, "output": 4.40},
+    "o3": {"input": 2.00, "output": 8.00},
+    "gpt-4.1-mini": {"input": 0.40, "output": 1.60},
+    "gpt-4.1": {"input": 2.00, "output": 8.00},
+    "gpt-5-mini": {"input": 0.25, "output": 2.00},
+    "gpt-5": {"input": 1.25, "output": 10.00}
+}
 
 
 def load_prompt_from_yaml(prompt_file_path: str, prompt_name: str) -> str:
@@ -40,6 +51,50 @@ def load_prompt_from_yaml(prompt_file_path: str, prompt_name: str) -> str:
         raise ValueError(f"Prompt '{prompt_name}' not found in {prompt_file_path}")
     
     return prompt_data[prompt_name]
+
+
+def calculate_cost_for_1M_calls(avg_input_words: float, avg_output_words: float, model: str) -> Dict[str, Any]:
+    """
+    Calculate cost for 1M LLM calls based on average input/output words.
+    
+    Args:
+        avg_input_words: Average number of input words per call
+        avg_output_words: Average number of output words per call
+        model: Model name (must be in API_COST_PER_MILLION_TOKENS)
+        
+    Returns:
+        Dictionary with cost breakdown and statistics
+    """
+    if model not in API_COST_PER_MILLION_TOKENS:
+        return {}
+    
+    # Get cost per 1M tokens for the model
+    model_costs = API_COST_PER_MILLION_TOKENS[model]
+    input_cost_per_1M_tokens = model_costs["input"]
+    output_cost_per_1M_tokens = model_costs["output"]
+    
+    # Roughly estimate: 1 word ≈ 1 token
+    avg_input_tokens = avg_input_words
+    avg_output_tokens = avg_output_words
+    
+    # Calculate cost for 1M LLM calls
+    num_calls = 1_000_000
+    
+    # Calculate costs
+    input_cost = avg_input_tokens * input_cost_per_1M_tokens
+    output_cost = avg_output_tokens * output_cost_per_1M_tokens
+    total_cost = input_cost + output_cost
+    
+    return {
+        'total_cost': float(total_cost),
+        'input_cost': float(input_cost),
+        'output_cost': float(output_cost),
+        'avg_input_words': float(avg_input_words),
+        'avg_output_words': float(avg_output_words),
+        'avg_input_tokens': float(avg_input_tokens),
+        'avg_output_tokens': float(avg_output_tokens),
+        'cost_per_call': float(total_cost / num_calls)
+    }
 
 
 def substitute_prompt_variables(prompt_template: str, flight_booking_legs: str, chat_history: str) -> str:
@@ -429,8 +484,8 @@ def evaluate_prompt_multiple_runs(
         Dictionary with evaluation results, individual runs, and statistics
     """
     if run_num == 1:
-        # Single run - return original results
-        return evaluate_prompt(
+        # Single run - return original results with cost calculation
+        single_results = evaluate_prompt(
             prompt_file_path=prompt_file_path,
             prompt_name=prompt_name,
             test_data_path=test_data_path,
@@ -439,6 +494,37 @@ def evaluate_prompt_multiple_runs(
             api_key=api_key,
             verbose=verbose
         )
+        
+        # Add cost calculation for single run
+        if ('avg_input_words' in single_results and 
+            'avg_output_words' in single_results):
+            
+            cost_info = calculate_cost_for_1M_calls(
+                single_results['avg_input_words'],
+                single_results['avg_output_words'],
+                model
+            )
+            
+            if cost_info:
+                single_results['cost_statistics'] = {
+                    'cost_for_1M_calls': cost_info
+                }
+            
+            # Print cost information for single run
+            if verbose and 'cost_statistics' in single_results:
+                cost_info = single_results['cost_statistics']['cost_for_1M_calls']
+                print(f"\n💰 COST STATISTICS (for 1M LLM calls):")
+                print(f"Model: {model}")
+                print(f"Average Input Words: {cost_info['avg_input_words']:.1f}")
+                print(f"Average Output Words: {cost_info['avg_output_words']:.1f}")
+                print(f"Average Input Tokens: {cost_info['avg_input_tokens']:.1f}")
+                print(f"Average Output Tokens: {cost_info['avg_output_tokens']:.1f}")
+                print(f"Input Cost: ${cost_info['input_cost']:.2f}")
+                print(f"Output Cost: ${cost_info['output_cost']:.2f}")
+                print(f"TOTAL COST FOR 1M CALLS: ${cost_info['total_cost']:.2f}")
+                print(f"Cost per call: ${cost_info['cost_per_call']:.6f}")
+        
+        return single_results
     
     # Multiple runs
     if verbose:
@@ -567,6 +653,20 @@ def evaluate_prompt_multiple_runs(
             }
         }
     
+    # Compute cost statistics for 1M LLM calls
+    cost_statistics = {}
+    if avg_input_words_list and avg_output_words_list:
+        # Calculate average input/output words across all runs
+        avg_input_words = float(np.mean(avg_input_words_list))
+        avg_output_words = float(np.mean(avg_output_words_list))
+        
+        cost_info = calculate_cost_for_1M_calls(avg_input_words, avg_output_words, model)
+        
+        if cost_info:
+            cost_statistics = {
+                'cost_for_1M_calls': cost_info
+            }
+    
     # Compile aggregated results
     aggregated_results = {
         'run_num': run_num,
@@ -578,6 +678,7 @@ def evaluate_prompt_multiple_runs(
         'input_words_statistics': input_words_statistics,
         'output_words_statistics': output_words_statistics,
         'latency_statistics': latency_statistics,
+        'cost_statistics': cost_statistics,
         'config': {
             'prompt_file_path': prompt_file_path,
             'prompt_name': prompt_name,
@@ -627,6 +728,19 @@ def evaluate_prompt_multiple_runs(
         if latency_statistics:
             for metric_name, stats in latency_statistics.items():
                 print(f"{metric_name.upper().replace('_', ' ')}: {stats['mean']:.1f}ms ± {stats['std']:.1f}ms")
+        
+        print(f"\n💰 COST STATISTICS (for 1M LLM calls):")
+        if cost_statistics:
+            cost_info = cost_statistics['cost_for_1M_calls']
+            print(f"Model: {model}")
+            print(f"Average Input Words: {cost_info['avg_input_words']:.1f}")
+            print(f"Average Output Words: {cost_info['avg_output_words']:.1f}")
+            print(f"Average Input Tokens: {cost_info['avg_input_tokens']:.1f}")
+            print(f"Average Output Tokens: {cost_info['avg_output_tokens']:.1f}")
+            print(f"Input Cost: ${cost_info['input_cost']:.2f}")
+            print(f"Output Cost: ${cost_info['output_cost']:.2f}")
+            print(f"TOTAL COST FOR 1M CALLS: ${cost_info['total_cost']:.2f}")
+            print(f"Cost per call: ${cost_info['cost_per_call']:.6f}")
     
     return aggregated_results
 
