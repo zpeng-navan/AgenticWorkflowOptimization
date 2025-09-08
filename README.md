@@ -1,42 +1,48 @@
-# AgenticWorkflowOptimization
-Internship project to optimize Ava's workflow
+# Data-Driven Optimization of Ava’s Human-Written Prompts
+
+## Description
+Ava’s workflow contains numerous LLM-based nodes whose prompts are written by human experts, so their performance, cost, and latency are not necessarily optimal. Automated prompt-optimization techniques can refine these prompts. Among them, [OPRO](https://arxiv.org/abs/2309.03409) is both simple to implement and highly effective. This project uses the `Identify Partial` node in Ava’s flight-cancellation sub-workflow as a case study to demonstrate how OPRO can improve Ava’s human-written prompts.
 
 ## Environment Setup
 ```sh
-# in vscode cmd+shift+p, choose the following options in order
-# Python: Select Python Interpret
-# Create Virtual Environment
-# .venv
-# to create python virutal environment
-# 1. install pytorch
-pip3 install torch torchvision torchaudio
-# 2. install TextGrad
-pip install textgrad[vllm]
-# 3. install Trace
-# 4. install DSPy
+# the env is based on python=3.13.5
+# 1. create python virtual env
+python -m venv .venv
+
+# 2. activate the env
+source .venv/bin/activate
+
+# 3. install the requirements
+pip install -r requirements.txt
 ```
 
-## Data Collection 
+## Data Collection
+Automatically gathering and labeling training and test data is crucial to this project, as manual annotation is hard to obtain. Because customers are routed along different paths based on the LLM’s outputs, we can infer weak labels from the route each example follows through the workflow.
 
-### New Relic Script
-Customers' logs can be mined from `New Relic` with the following quereis:
+![Ava Workflow - Cancel not for all passengers (Full cancellation)](draw.io/Ava/cancel_not_for_all=False-PARTIAL-v2.png)
+*Figure 1: Ava's cancellation workflow for partial booking cancellation when cancel_not_for_all_passengers=False*
 
-```sh
-# to filter all the LLM's inputs and outputs
-applicationName:"ml-flow-svc" environment:"prod" NODE_ID:"vsat41bgk-lyyx97j8" ("prompt:" OR "completion:")
-# to filter certain nodes' info
-applicationName:"ml-flow-svc" environment:"prod" NODE_ID:"mr32xen3g-lxoztnxo"
+![Ava Workflow - Cancel not for all passengers (Full cancellation)](draw.io/Ava/cancel_not_for_all=False-FULL-v2.png)
+*Figure 2: Ava's cancellation workflow for full booking cancellation when cancel_not_for_all_passengers=False*
+
+![Ava Workflow - Cancel not for all passengers (Full cancellation)](draw.io/Ava/cancel_not_for_all=True-null-v2.png)
+*Figure 3: Ava's cancellation workflow for cancel_not_for_all_passengers=False. Further data filtering is needed for this data and please refer to the paper for more details*
+
+Please refer to [Query](data/raw/logs/04222025-08182025/README.md) for the exact queires of collecting the data. For statistic of the collected dataset, please refer to [ori](data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_log.txt) and [training & test](data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_split_log.txt).
+
+## How to run
+
+```python
+# 1. opro training
+python -m src.ava_opro_optimizer_parallel --train_data_path data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance_train.json --initial_prompt_file prompts/original/identify_partial.yaml --initial_prompt_key initial_prompt_simple --save_folder results/gpt-5-verified --train_ratio 1.0 --max_processes 4 --num_search_steps 100 --meta_prompt_key v1 --max_num_instructions 10
+
+# 2. evaluation
+python -m src.utils.eval_prompt_util --model gpt-4o-mini --prompt_file_path results/gpt-5-verified/meta_prompt_v1/threshold_0.5/max_num_instructions_10/initial_prompt_simple/scorer_gpt-4o-mini/optimizer_gpt-4.1/train_ratio_1.0/num_search_steps_100/num_gen_inst_4_num_exp_2_opt_temperature_1.0/optimized_prompt.yaml --prompt_name initial_prompt_simple --test_data_path data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance_test.json --data_source gpt-5-verified --verbose --run_num 5
 ```
-Each session has an unique id `CHANNEL_ID` which can be utilized to extract the interactions for certain session. Once interactions are extracted, use `time` to sort them by order. 
 
-New Relic can only download the recent 5000 rows of logs.
 
-### Jun 1, 12:00 AM to Jun 14, 12:00 AM
-Use this time range `Jun 1, 12:00 am to Jun 14, 12:00 am (PDT)` to extract the following information.
 
-1. for LLM-based node, only extract the prompts and responses
-2. for first node from which the workflow starts and the last node at which the workflow ends, only the `ENTER_NODE` and `EXIT_NODE` messages are extracted
-3. for other nodes, export all the messages
+
 
 
 
