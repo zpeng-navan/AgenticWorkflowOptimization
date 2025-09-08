@@ -207,4 +207,9 @@ marimo/_lsp/
 __marimo__/
 
 .vscode/
+vendor/
 data/
+logs/
+src/backups/
+prompts/
+results/
