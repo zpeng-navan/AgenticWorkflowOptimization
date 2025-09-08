@@ -281,7 +281,7 @@ class AvaOproOptimizer:
         # OPRO configuration
         self.old_instruction_score_threshold = old_instruction_score_threshold
         self.max_num_instructions = max_num_instructions
-        self.num_score_buckets = 100
+        self.num_score_buckets = 10000
         
         # Tracking variables (similar to OPRO)
         self.old_instructions_and_scores = []  # (prompt, combined_score, cancel_adj_b_acc, partial_adj_b_acc, step)
