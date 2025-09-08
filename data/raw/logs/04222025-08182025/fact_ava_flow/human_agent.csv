@@ -1,0 +1,913 @@
+FLOW_UUID,FLOW,INTERACTION_UUID,CHANNEL_SID,CHANNEL_CREATION_DATETIME,NAVAN_CONVERSATION_UUID,GENESYS_CONVERSATION_UUID,FLOW_START_DATETIME,FLOW_END_DATETIME,FLOW_INDEX,IS_FLOW_ABANDONED,BOOKING_UUID,BOOKING_STATUS,BOOKING_TYPE,BOOKING_PROVIDER,BOOKING_MODIFICATION_STATUS,IS_BOOKING_CHANGEABLE,IS_BOOKING_CANCELLABLE,DOMAIN,PRODUCT,TASK,EXPERIENCE,REASON,THINKING,OUTCOME,EXIT_CODE_ARRAY
+a82d808625bea8066e04a44a4e90f2f9,cancel_booking,2ac24b1e2663f149b99a34b13075b3f3,a5c63f45-fa70-4269-8a94-ec212ea94952,2025-05-29 16:09:15.323,a5c63f45-fa70-4269-8a94-ec212ea94952,641f4aac-1bed-4330-8925-b9955bff9dfb,2025-05-29 16:22:50.121,2025-05-29 16:23:08.081,2,false,bf35d8fd-fa60-48cd-98d4-244cd558f1e7,ticketed,flight,verteil,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-29 16:23:08.078"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-29 16:23:08.081"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+69c18fd2336820d5093548b944a55c27,cancel_booking,75e669d285dc6a382dea6304a5041fce,f242fea3-6665-4e7f-bd72-9adedbe89756,2025-06-01 14:03:01.138,f242fea3-6665-4e7f-bd72-9adedbe89756,c0e36204-1160-4031-bdcc-376b9d78c8d5,2025-06-01 14:03:42.495,2025-06-01 14:03:55.252,1,false,21fa6811-eb39-43da-bf55-d3f0d68d0ce8,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-01 14:03:55.249"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-01 14:03:55.252"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+3d0b5e1399c82e1f2230d1109a0d6da8,cancel_booking,3524261d72fe91b0b087fab73a6dc83f,bc5f6700-62a0-4e71-979c-35448e6f235e,2025-06-04 10:48:39.658,bc5f6700-62a0-4e71-979c-35448e6f235e,33a764d2-4317-4b29-b630-56910882643d,2025-06-04 10:52:41.942,2025-06-04 10:53:58.461,2,false,5402a109-582d-428e-b2dd-3498d103a490,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-04 10:53:58.457"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-04 10:53:58.461"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+63d9a8ad17d663595c0159598a84322e,cancel_booking,2120e8dc5d9ab75437a8b772b2e071e5,73310473-acb8-49ea-8948-c8cbb91ad0cf,2025-05-12 19:32:24.988,73310473-acb8-49ea-8948-c8cbb91ad0cf,517841e1-1b77-437a-b4d8-325b33871cc0,2025-05-12 19:36:37.948,2025-05-12 19:38:39.582,1,false,9a9abc7a-de66-4df3-8fb3-ef84520110f2,voided,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-12 19:38:39.578"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-12 19:38:39.582"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+e44aff008e956c945de6363bd2c5fc54,cancel_booking,aeb4b89d134ddbc5b69278b4af700b90,2764348f-ef20-432c-9b91-8294a2d8e0a9,2025-05-06 07:28:17.414,2764348f-ef20-432c-9b91-8294a2d8e0a9,621e7bd3-29eb-4735-ba80-05a1354c8033,2025-05-06 07:29:29.886,2025-05-06 07:31:21.726,1,false,480fa1a4-f150-4027-afc1-59307ab1922b,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-06 07:31:21.723"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-06 07:31:21.726"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+0e601d6548696c0876e6dd7b3d2513c3,cancel_booking,f7d5b233536d17cbcfde2b4953c39db2,a6fa0a4f-c32b-4135-9fd5-d9aba6be26e7,2025-04-26 03:00:29.534,a6fa0a4f-c32b-4135-9fd5-d9aba6be26e7,5e2f33ab-5d77-4de2-b78d-a13cfb9767a6,2025-04-26 03:01:57.051,2025-04-26 03:02:52.173,1,false,01db7d9e-2c57-4699-bb3e-2a64c32eb727,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-04-26 03:02:52.170"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-04-26 03:02:52.173"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+69738b31c59c1ffd3c2138783a2867e8,cancel_booking,236fc97a79ae214d8757ba7793910c97,a8b3508d-48bf-4080-93db-f63cb9827186,2025-07-28 06:08:22.813,a8b3508d-48bf-4080-93db-f63cb9827186,da16cfb3-879c-4f06-b5b7-06c7912d5bd8,2025-07-28 06:08:57.245,2025-07-28 06:09:51.257,1,false,ea27dd73-aac3-45cb-a551-073dbc2c444c,voided,flight,amadeus,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-28 06:09:51.247"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-28 06:09:51.257"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+f63189066b6cc65e9ce300f8828f4539,cancel_booking,94e2c2fc017aa1ee25006d136a587745,fd8b5f48-b5e6-40f7-bfa2-3a19bb61ba01,2025-05-31 00:19:39.815,fd8b5f48-b5e6-40f7-bfa2-3a19bb61ba01,6fa2b31e-9d50-4464-bdfd-db66e6bd5c59,2025-05-31 00:20:16.306,2025-05-31 00:22:01.644,1,false,01549be6-4602-4117-8d2d-6f10579c3e93,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-31 00:22:01.639"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-31 00:22:01.644"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+efe9f8cc34b0099688880dc871f17413,cancel_booking,86231392a813bc85e93f6a12eaac1063,9d95e7b2-2ec8-4eb6-a068-dc9551833378,2025-06-30 14:47:28.056,9d95e7b2-2ec8-4eb6-a068-dc9551833378,26990d7a-9606-4001-8f63-4587d22e8d61,2025-06-30 14:52:52.661,2025-06-30 14:53:33.232,2,false,73384ae2-bb1a-4805-aa82-b05f1b18cd5a,ticketed,flight,verteil,airport_control,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-30 14:53:33.228"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-30 14:53:33.232"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+37a143cfc91e503519b477cc965b62b9,cancel_booking,506cb87e9fc56d23ece186daac1b2565,ebd3801f-63a3-4d51-b534-be5399c6f08b,2025-04-23 13:22:42.178,ebd3801f-63a3-4d51-b534-be5399c6f08b,3d0e5d0c-e482-4c43-89cd-72be29c0858e,2025-04-23 13:23:26.275,2025-04-23 13:24:00.970,1,false,6399d98f-603a-49bb-9279-9ae27a60892c,ticketed,flight,farelogix,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-04-23 13:24:00.966"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-04-23 13:24:00.970"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+528b07416877556ddf033e1b118ac963,cancel_booking,fc6eb828c9762a3b9d7a3bf18fd5e530,0ff83221-ef96-4b0e-a0eb-0e9f56a278bd,2025-05-05 18:13:40.463,0ff83221-ef96-4b0e-a0eb-0e9f56a278bd,7d15fc65-1024-4355-8780-5a05b0cb8e1c,2025-05-05 18:15:07.862,2025-05-05 18:15:11.863,2,false,eb9b530b-5181-4cf7-9a74-f0ba85108e39,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-05 18:15:11.860"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-05 18:15:11.863"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+6599e4929196897bf4d0d831432b4550,cancel_booking,570431d2530d22986ba40bcd841c817c,cbc4d39f-0eec-4ec5-9296-44d01ba62e88,2025-05-05 20:41:10.863,cbc4d39f-0eec-4ec5-9296-44d01ba62e88,06d1ee98-c15c-4bca-8d96-06e7b9bd9ba4,2025-05-05 20:42:50.251,2025-05-05 20:44:05.815,1,false,029d1423-30fc-4b1a-a673-8fc44f74d0b7,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-05 20:44:05.811"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-05 20:44:05.815"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+f822ffaefc1141d2cdc2969fa11b7c74,cancel_booking,d96fb12b877606337c78537b85bbcde9,43562a67-5759-455a-ba53-633dc5b62dcc,2025-06-09 21:48:25.414,43562a67-5759-455a-ba53-633dc5b62dcc,6a8ff0d0-2be8-4603-976d-b77a20a4357f,2025-06-09 21:57:17.118,2025-06-09 21:58:36.801,1,false,d5454e13-50a1-4f0d-9a43-446a92c3ce2f,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-09 21:58:36.798"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-09 21:58:36.801"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+4847e49a4a401de9327f25bd29369b5d,cancel_booking,d9f4f3d076c40f21abbd97a72fdceb9f,61f5938d-dc8b-4b7f-88a3-1bd8d8ac8776,2025-05-28 20:51:20.468,61f5938d-dc8b-4b7f-88a3-1bd8d8ac8776,0bb40f87-a06c-45b6-92a3-912f6d6c3834,2025-05-28 20:52:18.344,2025-05-28 21:05:19.306,1,false,42efbbb1-8e81-4b22-a350-6ac18fe9cf0a,ticketed,flight,farelogix,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-28 21:05:19.303"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-28 21:05:19.306"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+8b7a52951ab43b9e2bcc5b8d2c6c7d17,cancel_booking,97f5a5afa82ab89a3c3d44f55fb94bab,3ef1726d-b347-461e-9714-3021efd988aa,2025-05-29 16:00:59.166,3ef1726d-b347-461e-9714-3021efd988aa,bb721fb1-641f-48f1-922c-6e7b8d78706c,2025-05-29 16:02:36.800,2025-05-29 16:02:59.701,2,false,76e054d1-40f1-464c-bb02-4322bf0fdff3,ticketed,flight,farelogix,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-29 16:02:59.697"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-29 16:02:59.701"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+1219e2744b6218d67c4914a4afbbf46e,cancel_booking,b18619e15d4c0cb777affaee682c5d17,90f0af9b-60c4-45bf-b85a-73401f35807b,2025-05-09 16:14:42.539,90f0af9b-60c4-45bf-b85a-73401f35807b,1a17dd19-a848-4aab-9306-bfa95ff3aa9e,2025-05-09 16:17:09.818,2025-05-09 16:22:03.495,1,false,9d03d662-b374-49a7-afc3-663f1c08f00e,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-09 16:22:03.492"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-09 16:22:03.495"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+324bd07e5355615024b7ec129ff7a5c8,cancel_booking,73bfb594e1c9141bb26cd461ec61d7c5,c96f295e-dd08-470e-a808-ec62d6989e7a,2025-06-05 13:03:03.164,c96f295e-dd08-470e-a808-ec62d6989e7a,d00aa32e-7e90-49df-8721-b35e2036918e,2025-06-05 13:03:39.653,2025-06-05 13:04:52.086,1,false,2615efe8-3e41-4d5c-ad77-2c73b3e3cf2b,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-05 13:04:52.082"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-05 13:04:52.086"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+df5c1383dccc2b82c2c0318167d180fb,cancel_booking,cd6703660e5ed7da664e6900a2496c13,7ae30d8c-d49f-4937-af0e-34648e2004dd,2025-05-08 21:04:50.714,7ae30d8c-d49f-4937-af0e-34648e2004dd,75f6324e-0c80-4f0e-ad3b-296b3b2b3a83,2025-05-08 21:06:41.824,2025-05-08 21:08:02.964,1,false,72b10a40-e90a-4650-8551-06af4eb98eca,ticketed,flight,farelogix,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-08 21:08:02.961"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-08 21:08:02.964"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+e3a190d2ada066ad1298400b4fb7b5b9,cancel_booking,601f24180914d1688909c15905ebcc09,3c4da00b-7b20-4347-9412-1f1e7283ebf1,2025-05-14 00:47:55.565,3c4da00b-7b20-4347-9412-1f1e7283ebf1,eca0d253-5963-4883-9a11-6e58a0fe9942,2025-05-14 00:48:48.437,2025-05-14 00:49:44.227,1,false,9f943e03-5c19-4255-9f7b-e9ec92da5ee0,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-14 00:49:44.224"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-14 00:49:44.227"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+de5603f7fe5676ee21272630d9f633fa,cancel_booking,3a1f6b7e0b8827607bb4943555fe0274,6f99792d-07ba-4ed1-8900-5403be108d34,2025-08-01 08:06:03.688,6f99792d-07ba-4ed1-8900-5403be108d34,9139aa19-5c35-4789-825a-e2793d95b4fe,2025-08-01 08:08:40.925,2025-08-01 08:09:36.484,2,false,cd021adb-cc06-4c14-a641-eb8f6889d52c,ticketed,flight,farelogix,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-08-01 08:09:36.481"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-08-01 08:09:36.484"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+21a0ebaf88a56096bd8c16f09c8819a6,cancel_booking,0e2460a610e16e178aa36883bae3fff0,292ae1ff-f8b8-463b-a94f-16826eef9451,2025-04-28 14:40:04.155,292ae1ff-f8b8-463b-a94f-16826eef9451,83152818-1f79-4860-866c-5a5141f1ec6d,2025-04-28 14:41:05.352,2025-04-28 14:45:50.159,1,false,d5140417-9d53-413a-93f3-c9487cc248e8,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-04-28 14:45:50.154"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-04-28 14:45:50.159"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+fc55fd79064db97e128f55d661b6991b,cancel_booking,e8d8ea6e1061941ba595c3f1c6aadeea,bfdd8a33-74ac-47ac-8474-0cbd72534f57,2025-07-01 17:12:30.776,bfdd8a33-74ac-47ac-8474-0cbd72534f57,1729187a-4d70-48f9-a9db-1ba9b5e9b9a4,2025-07-01 17:13:12.064,2025-07-01 17:13:37.802,1,false,445d44ac-2e38-4907-9c27-a9c371825dce,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-01 17:13:37.798"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-01 17:13:37.802"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+42c30603047a5faff338e02e9f348ce7,cancel_booking,76667cdf24eea1d5d914aee4260c71bb,faafecb6-b00b-4923-9ca7-7f4cd2fac310,2025-05-19 17:03:39.599,faafecb6-b00b-4923-9ca7-7f4cd2fac310,011bd379-8937-4d09-abd4-9430adb3fe3e,2025-05-19 17:06:06.150,2025-05-19 17:08:38.593,1,false,2e445d31-6b13-4834-ae46-3b5d150fda0c,ticketed,flight,sabre,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-19 17:08:38.589"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-19 17:08:38.593"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+5a7788c96b8d5306b286eb23736a7bc4,cancel_booking,a506870300284b490a45bf85a978bad1,c162438e-9f89-4db4-9174-fcce33eb8d11,2025-06-28 23:26:38.637,c162438e-9f89-4db4-9174-fcce33eb8d11,7c7a1331-c0b7-4418-a284-df122abf81f9,2025-06-28 23:32:10.896,2025-06-28 23:35:08.538,1,false,2c235008-720b-4c0f-883f-b31af1b6d0da,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-28 23:35:08.536"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-28 23:35:08.538"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+7036d9d853a3d5703a8595c86eae2440,cancel_booking,30b69e6110f1293a9253feac05a1839c,8d6814bc-6139-45b4-8c2c-e258a82551c5,2025-05-16 14:51:27.066,8d6814bc-6139-45b4-8c2c-e258a82551c5,b87e04a5-7c85-4dcd-8396-81dd036c2482,2025-05-16 14:53:15.450,2025-05-16 14:54:15.666,1,false,164fd51f-e79b-46ce-8005-d516bd7605d8,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-16 14:54:15.663"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-16 14:54:15.666"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+fbced706865e71741ff1fb268ee48c43,cancel_booking,e575e38c4fcdcc3f432c22420226624a,6a4343db-5272-4ba7-b27e-bd3094858e57,2025-07-17 12:20:07.816,6a4343db-5272-4ba7-b27e-bd3094858e57,8799da74-b4ea-4e07-91e7-b0ca657827db,2025-07-17 12:22:58.444,2025-07-17 12:23:32.132,3,false,d5bc2ed9-21f4-44e0-aaf4-fa5ad9644ab4,ticketed,flight,amadeus,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-17 12:23:32.128"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-17 12:23:32.132"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+bc69fde8e54001795a10c6db46ab33b8,cancel_booking,d75bbcf8f524abbf39475cd0f6e14258,2b7f5a48-9f62-46e0-8083-a04022f98b67,2025-07-15 04:13:28.825,2b7f5a48-9f62-46e0-8083-a04022f98b67,a5e47e07-46e4-4d5a-bb83-5f7ecce822c9,2025-07-15 04:14:38.211,2025-07-15 04:15:00.018,1,false,587d77b9-04cb-4145-a5d1-2d4cf1d2f0fc,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-15 04:15:00.013"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-15 04:15:00.018"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+a68b0996ed8b56cc82d625038add004d,cancel_booking,afecf5ab492011f2c6ccf5a073e161eb,33c4cb61-40de-4996-87b7-3a5ef55e4193,2025-05-08 20:42:37.866,33c4cb61-40de-4996-87b7-3a5ef55e4193,6351d3f7-41a8-4b30-b5e8-8c103619f09e,2025-05-08 20:43:39.191,2025-05-08 20:43:51.892,1,false,5a4dcf3d-81d5-447b-b26a-e8ddd01a16fa,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-08 20:43:51.888"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-08 20:43:51.892"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+ff034db5a7db92ad03d3ad6b0af030ef,cancel_booking,b916c6e27397536ba9827928189d2d56,870f5f61-5323-48d1-b238-9c1f898a101a,2025-05-05 10:27:20.005,870f5f61-5323-48d1-b238-9c1f898a101a,93545eb9-3e99-4074-ad56-1540f4a5e2d1,2025-05-05 10:29:34.134,2025-05-05 10:30:23.229,2,false,65b2a9a4-4fe9-4399-91f1-52c4f3ba9f1f,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-05 10:30:23.224"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-05 10:30:23.229"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+187eeaca4479ba590cd955d0d25eaa14,cancel_booking,2c7720100bd9a55d57618abc916f641b,f829642d-7644-41da-a9e6-74eb76400d60,2025-06-03 06:36:11.094,f829642d-7644-41da-a9e6-74eb76400d60,f9aa10a4-05c1-4bc9-8199-cdee0a7e832d,2025-06-03 06:37:44.770,2025-06-03 06:38:27.010,2,false,839fbcec-a50e-4fb4-8221-bcd556302459,ticketed,flight,farelogix,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-03 06:38:27.006"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-03 06:38:27.010"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+fcd3a9ae1533713a47c84737fd0e9ed0,cancel_booking,4afadd2e1d0e2bbabc31919cf27db867,32bf3e2c-6d86-476b-9ace-2d05366648f0,2025-08-01 13:09:44.323,32bf3e2c-6d86-476b-9ace-2d05366648f0,7324de29-682f-4652-849d-764ab3fc94fe,2025-08-01 13:10:43.389,2025-08-01 13:11:06.152,1,false,895cc337-5cde-4cf3-882f-dcf2d54846ce,hold,flight,sabre,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-08-01 13:11:06.148"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-08-01 13:11:06.152"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+1417d7bf621655f57ee174c26387d410,cancel_booking,49b84db4ea666b94b7be995d3b74a85c,cfecac54-89bb-425e-851c-c13ad3c7272a,2025-06-18 11:14:45.882,cfecac54-89bb-425e-851c-c13ad3c7272a,fd93449c-75e0-4c09-9cbf-74823b8b67fe,2025-06-18 11:21:39.101,2025-06-18 11:25:10.757,1,false,bcf70fba-3f23-4f99-88e8-88c8b94ff157,ticketed,flight,farelogix,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-18 11:25:10.752"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-18 11:25:10.757"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+411bfa6cf635c58ea07b5212d50194c3,cancel_booking,5d53f4f0bf00d2107ad1334ddb0d59ca,2a2e9396-d9c7-4e03-9948-557a9d34da56,2025-05-02 01:27:34.337,2a2e9396-d9c7-4e03-9948-557a9d34da56,c5d7ec4f-c7e7-4c9e-8900-48c0d0e69db3,2025-05-02 01:29:37.489,2025-05-02 01:30:48.123,1,false,40d705fc-28d2-469e-989d-3fad4659d4ac,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-02 01:30:48.118"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-02 01:30:48.123"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+a4e84cbc459006e895c95774c4e6b38c,cancel_booking,32deb171a02664159513618296067b65,e40271b0-2307-4042-a3dd-4befa0b63290,2025-04-25 14:54:26.130,e40271b0-2307-4042-a3dd-4befa0b63290,55d03a8d-f0e5-4e52-b544-89786ac700f2,2025-04-25 14:55:26.930,2025-04-25 14:56:08.765,1,false,4ee8f7a3-fb24-47b1-b76f-f8ea6bd94885,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-04-25 14:56:08.761"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-04-25 14:56:08.765"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+be255f498e58354c2ed7d7e144395577,cancel_booking,59afd0143e46c853cf9e051217b57d12,ad4e3e4d-8107-41fd-8510-822482761790,2025-06-25 17:38:02.996,ad4e3e4d-8107-41fd-8510-822482761790,4f88c48b-4499-40b3-9938-c7a5d09ab74e,2025-06-25 17:39:27.979,2025-06-25 17:39:48.727,1,false,788db6e5-985d-44c0-87e2-c56aa116d417,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-25 17:39:48.722"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-25 17:39:48.727"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+fceea0be5017acc19bbd1d65a2bb71df,cancel_booking,044478736536c35ac96431fcfe655043,dd0b2b55-1793-480b-8f2b-7263a459ff3c,2025-05-27 17:57:38.461,dd0b2b55-1793-480b-8f2b-7263a459ff3c,58a36fda-6d2a-4d1d-b3fa-9650405928bf,2025-05-27 18:00:16.085,2025-05-27 18:00:53.793,1,false,c13a970b-3833-4337-b867-92ae9cfdf7c4,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-27 18:00:53.789"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-27 18:00:53.793"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+4008b22e79c373d74b25285267b92e44,cancel_booking,8808e18407fb6178299c1b5b92122c3e,08e8bd5a-81d9-4f95-b98d-97b08071bfec,2025-05-12 20:28:38.218,08e8bd5a-81d9-4f95-b98d-97b08071bfec,03653f7f-af60-44fb-846d-ade587729d92,2025-05-12 20:29:56.377,2025-05-12 20:30:15.695,1,false,1f4a3493-3ffe-4ccd-9c30-20ce8d8a6533,ticketed,flight,sabre,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-12 20:30:15.689"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-12 20:30:15.695"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+0b3ebc0701282f30f058f9c3fb27c3e1,cancel_booking,d565fd0f1459d1d013de30fa435a1522,9093278c-e035-4275-be7a-04083c5b4267,2025-07-06 23:13:34.895,9093278c-e035-4275-be7a-04083c5b4267,b6fe152d-60af-41b6-91fb-1b0682ed4a67,2025-07-06 23:14:15.880,2025-07-06 23:15:56.103,1,false,e3490fac-34ea-4c48-841d-8ef814029818,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-06 23:15:56.098"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-06 23:15:56.103"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+3e45d01972e6f7fc8029f4d40b62cd66,cancel_booking,b332f4aded5bbe44fc4329dbdba64b03,4e026411-b492-4abe-b845-89df22aff95b,2025-07-23 15:40:30.101,4e026411-b492-4abe-b845-89df22aff95b,73557817-d798-4176-8454-11e62ade063b,2025-07-23 15:41:22.324,2025-07-23 15:42:55.225,1,false,55cef478-00e1-48e5-bde7-737521fe6dc3,ticketed,flight,farelogix,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-23 15:42:55.218"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-23 15:42:55.225"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+9fda4cbd39ce045196f070a824d424a0,cancel_booking,f76a21feade858002cc88a38eeb4c021,aebc9b60-96cc-4f8c-bf76-89843e26e9a5,2025-05-27 16:57:49.067,aebc9b60-96cc-4f8c-bf76-89843e26e9a5,e714adae-639f-42cf-8ef0-c31b787fe67d,2025-05-27 16:59:26.425,2025-05-27 17:00:20.487,1,false,5e87d987-f661-407a-8c94-67536af3b906,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-27 17:00:20.484"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-27 17:00:20.487"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+587208db26612ea4085de9eb92cb4677,cancel_booking,ae858e198ca770afae33a4f8e3eec055,a204d946-787e-45f0-a646-a99b46f4aea3,2025-08-01 14:44:50.563,a204d946-787e-45f0-a646-a99b46f4aea3,6aee5f30-704d-4cb1-a5a9-4b0131c20f9b,2025-08-01 14:45:53.219,2025-08-01 14:48:06.879,1,false,4cab2f6a-f37b-4e24-a36d-6a6f983880ac,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-08-01 14:48:06.876"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-08-01 14:48:06.879"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+994b3106b4311884a70b278e6ddea252,cancel_booking,abb182e9acd24f4eb34336eae2c09710,09274f7a-d42b-4bbb-b4b9-56118544ca28,2025-07-22 17:22:31.858,09274f7a-d42b-4bbb-b4b9-56118544ca28,5ff2dfdb-246d-4f9c-8570-c35fc2eac082,2025-07-22 17:23:24.646,2025-07-22 17:23:32.973,2,false,96448dc3-ddbb-46a5-a5ad-5ce2195e4019,ticketed,flight,tripeur,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-22 17:23:32.969"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-22 17:23:32.973"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+3d15bbd2864e3468181a806c45502aed,cancel_booking,3189b106589fea81fa2ff09203e48bf2,a7308d36-e3a1-4643-be1f-4fe38ff7121b,2025-05-10 15:02:45.410,a7308d36-e3a1-4643-be1f-4fe38ff7121b,3dee105c-19c4-416e-893d-e9b2af690e75,2025-05-10 15:04:38.449,2025-05-10 15:05:00.513,1,false,6ac6be44-75eb-48d9-8bdf-27bff4a027ff,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-10 15:05:00.509"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-10 15:05:00.513"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+38fffc32794d36257117dfc423b5023e,cancel_booking,da923607612f1ebc1cf77f49a2a32274,8d7d9ce7-c37c-49e5-9a3a-5be6b3c559f5,2025-07-14 01:04:23.452,8d7d9ce7-c37c-49e5-9a3a-5be6b3c559f5,f37cf28d-91de-414e-b3da-e662918a1c21,2025-07-14 01:06:51.412,2025-07-14 01:09:19.296,1,false,6b23754e-0171-4d96-b730-e65f0be88ea6,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-14 01:09:19.292"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-14 01:09:19.296"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+e59218c694eb33e51ae3e7d1bb035fcb,cancel_booking,9aa3ec7cd0b111c2dde7e459eb77476e,c5a521e4-61e6-4651-973d-1be788428c81,2025-07-03 14:22:08.249,c5a521e4-61e6-4651-973d-1be788428c81,a3ee1ba9-8400-45db-8638-110ec081d5e7,2025-07-03 14:23:25.033,2025-07-03 14:24:17.452,1,false,538c7362-e716-4403-a191-3fc8d05945b9,ticketed,flight,sabre,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-03 14:24:17.446"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-03 14:24:17.452"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+c57d21ff66ca5640e0210942be340d57,cancel_booking,3028dccce477a84e2a0096db0afc7293,d6b380e2-0f90-4c7a-99ad-194e80f78268,2025-06-06 15:44:49.433,d6b380e2-0f90-4c7a-99ad-194e80f78268,196c6d47-60e3-437c-8ffc-d5f1c67a6e9e,2025-06-06 15:47:17.449,2025-06-06 15:47:47.139,1,false,6dd8e568-f39c-4f42-86b2-289eec5da0aa,ticketed,flight,farelogix,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-06 15:47:47.135"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-06 15:47:47.139"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+6f6bd5caf109e2749c0b73338d57e068,cancel_booking,3095fb2ab0c11dd9d75da18aa123c2b3,c52f688f-2656-432f-9ffa-f530f9a01788,2025-07-03 13:18:13.375,c52f688f-2656-432f-9ffa-f530f9a01788,9e649c57-69a7-4cbd-8bb1-04037289f271,2025-07-03 13:19:07.544,2025-07-03 13:19:22.856,1,false,95b27708-c56f-414d-967f-47c2cd6f2a35,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-03 13:19:22.851"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-03 13:19:22.856"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+5fdd84dd4a109c031b76c2446fdc037a,cancel_booking,ede48ecc01ea6e5a1ff4a79def71e274,aa8722e6-3f69-4cec-b9e1-28391344caac,2025-08-11 19:50:17.627,aa8722e6-3f69-4cec-b9e1-28391344caac,04f6293a-7f4d-476c-baf1-7fa6c73e1d90,2025-08-11 19:52:06.925,2025-08-11 19:52:46.541,2,false,5ddfae06-1b43-444a-a8eb-c1754326ca82,ticketed,flight,farelogix,unused_ticket,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-08-11 19:52:46.536"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-08-11 19:52:46.541"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+a47330551f6038f4e7e4ae6cc91a7b8e,cancel_booking,b88920452172c7a9b469c06956c1e4c3,d956e7fd-6445-4ed5-b639-4a7ce7c8741b,2025-08-13 12:38:42.732,d956e7fd-6445-4ed5-b639-4a7ce7c8741b,890f550c-8429-481b-8066-12db10a29935,2025-08-13 12:43:16.312,2025-08-13 12:45:29.183,2,false,31855468-42e6-454c-9dea-21be7a719602,ticketed,flight,tripeur,ok,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-08-13 12:45:29.178"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-08-13 12:45:29.183"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+f42ca2a274c5994affc954930e228ced,cancel_booking,f6eab174f98b389311b78cff399d5b24,3efac999-012f-4efb-b721-ca78cfdf5c69,2025-08-14 00:56:04.538,3efac999-012f-4efb-b721-ca78cfdf5c69,fe296c67-8fa8-4369-917c-69873a4dd202,2025-08-14 00:57:01.341,2025-08-14 00:57:46.299,1,false,ae7a66de-853b-4edb-845a-91f92385302a,ticketed,flight,sabre,ok,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-08-14 00:57:46.294"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-08-14 00:57:46.299"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+02a013619d718d6bb4b0f909037d0bb9,cancel_booking,42c3b2b363d47f7cba79a7e752687256,4b0203b6-033b-4d1c-af08-68e1b7e96d58,2025-05-22 02:34:42.882,4b0203b6-033b-4d1c-af08-68e1b7e96d58,93902767-2efa-45f3-88e6-3897184b6d9f,2025-05-22 02:37:47.002,2025-05-22 02:39:23.755,1,false,73d5becc-1723-4bb2-812c-cc10e1831d27,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-22 02:39:23.752"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-22 02:39:23.755"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+0bfa2ea8028aa2d0860ea0da0fb48dbe,cancel_booking,7bc6d92794cd62da036ebfe6ea84e39e,27dffb52-b189-47f3-9893-d32cae7f4258,2025-07-29 00:43:30.308,27dffb52-b189-47f3-9893-d32cae7f4258,c2e2685a-79fa-4d46-a0a6-df3eb2647295,2025-07-29 00:46:31.568,2025-07-29 00:47:29.951,1,false,df55dab6-e5c5-4517-b3b6-bcfb565b3be3,ticketed,flight,farelogix,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-29 00:47:29.946"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-29 00:47:29.951"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+e4a2dbc3801e0cb06b3704287b6a1109,cancel_booking,eb52866556195fd1a1e1560c6cdd3dd2,7f24ee2b-1625-4d8c-a775-501357bbdb48,2025-05-12 16:30:33.635,7f24ee2b-1625-4d8c-a775-501357bbdb48,a8211029-8ac5-42aa-9097-d6c1ae85f185,2025-05-12 16:31:32.971,2025-05-12 16:31:46.822,1,false,db2f3e96-750c-483f-a76b-c55bd033cb54,ticketed,flight,sabre,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-12 16:31:46.815"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-12 16:31:46.822"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+b9c700de055aaed0622fd4596f66b9fc,cancel_booking,432082841dbfdc21e69728e5e6c66c4c,9a06dcfe-da87-4487-865a-a92de4bd8845,2025-06-24 14:18:43.471,9a06dcfe-da87-4487-865a-a92de4bd8845,90c58293-0452-48e8-9b61-72d0fe4eb35a,2025-06-24 14:19:18.249,2025-06-24 14:19:34.037,1,false,cc5a4141-092c-4e82-906e-f709f0f4f43e,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-24 14:19:34.034"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-24 14:19:34.037"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+eabfb399202ce0faa269e32d3a1f843c,cancel_booking,696860d90c2cff07c924994aef6b920c,0aa7d1ac-cf4e-45fb-8d69-0caa812e2f52,2025-06-08 18:40:41.104,0aa7d1ac-cf4e-45fb-8d69-0caa812e2f52,fe3719a2-9bd1-47db-8972-6536a97abd98,2025-06-08 18:41:12.827,2025-06-08 18:41:26.950,1,false,3eb2938d-8c4f-4984-b0cf-bf0bea2ad2df,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-06-08 18:41:26.947"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-06-08 18:41:26.950"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+b8bd346fef13e44823e5fadd2651ec8b,cancel_booking,9daccd0e6f99132b2edd64f44e7ea734,c1d00d4f-d5af-4759-ba15-c1afd96da3da,2025-05-13 02:27:01.855,c1d00d4f-d5af-4759-ba15-c1afd96da3da,ea70116e-7b19-4180-bc11-6b90bc2f7431,2025-05-13 02:27:36.754,2025-05-13 02:27:55.499,1,false,d0970c83-8aec-4c8f-9213-22f219ac41f8,ticketed,flight,sabre,,false,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-05-13 02:27:55.495"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-05-13 02:27:55.499"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"
+8206c22a17a41af64129706934df73ad,cancel_booking,e6b2105502eb75fea6185c7a662c6d2b,3c958404-07f9-4945-ac42-1ae44c71afd1,2025-07-22 10:58:21.158,3c958404-07f9-4945-ac42-1ae44c71afd1,d7167221-24a4-4dce-84a4-5e4ca318500b,2025-07-22 11:04:13.205,2025-07-22 11:04:35.821,2,false,53e05ac3-e93f-4378-b58e-4fb16838b6b2,ticketed,flight,sabre,,true,true,travel,flight,cancel,transactional,,,agent,"[
+  {
+    ""event_time"": ""2025-07-22 11:04:35.815"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""reason"": ""user_asked_for_agent"",
+    ""task"": ""cancel"",
+    ""thinking"": ""user asked to speak to an agent""
+  },
+  {
+    ""event_time"": ""2025-07-22 11:04:35.821"",
+    ""outcome"": ""agent"",
+    ""product"": ""flight"",
+    ""task"": ""cancel""
+  }
+]"

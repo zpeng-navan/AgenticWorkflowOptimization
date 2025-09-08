@@ -1,0 +1,85 @@
+(.venv) zpeng@NVNJ0LC222QVJ AgenticWorkflowOptimization % python src/utils/ground_truth_split_util.py 
+🚀 Ground Truth Balancing and Splitting
+============================================================
+📁 Loading ground truth data from: /Users/zpeng/Documents/Research/Projects/AgenticWorkflowOptimization/data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth.json
+
+📊 Original Dataset Distribution
+--------------------------------------------------
+Total sessions: 1079
+
+cancel_not_for_all distribution:
+  false: 994 (92.1%)
+  true: 85 (7.9%)
+
+partial_or_full distribution:
+  full: 923 (85.5%)
+  null: 85 (7.9%)
+  partial: 71 (6.6%)
+🎯 Creating Balanced Dataset
+==================================================
+📋 Original session counts:
+  cancel_not_for_all=true: 85
+  cancel_not_for_all=false: 994
+  partial_or_full=partial: 71
+  partial_or_full=full: 923
+
+🎯 Balancing targets:
+  cancel_not_for_all: 85 each for true/false
+  partial_or_full: 71 each for partial/full
+
+✅ Balanced dataset created with 298 sessions
+
+📊 Balanced Dataset Distribution
+--------------------------------------------------
+Total sessions: 298
+
+cancel_not_for_all distribution:
+  false: 213 (71.5%)
+  true: 85 (28.5%)
+
+partial_or_full distribution:
+  full: 142 (47.7%)
+  null: 85 (28.5%)
+  partial: 71 (23.8%)
+💾 Balanced dataset saved to: /Users/zpeng/Documents/Research/Projects/AgenticWorkflowOptimization/data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance.json
+
+🔀 Splitting Dataset
+==============================
+Total sessions: 298
+Train: 149 (50.0%)
+Dev: 59 (19.8%)
+Test: 90 (30.2%)
+💾 Training set saved to: /Users/zpeng/Documents/Research/Projects/AgenticWorkflowOptimization/data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance_train.json
+💾 Test set saved to: /Users/zpeng/Documents/Research/Projects/AgenticWorkflowOptimization/data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance_test.json
+
+📊 Training Set Distribution
+--------------------------------------------------
+Total sessions: 208
+
+cancel_not_for_all distribution:
+  false: 148 (71.2%)
+  true: 60 (28.8%)
+
+partial_or_full distribution:
+  full: 100 (48.1%)
+  null: 60 (28.8%)
+  partial: 48 (23.1%)
+
+📊 Test Set Distribution
+--------------------------------------------------
+Total sessions: 90
+
+cancel_not_for_all distribution:
+  false: 65 (72.2%)
+  true: 25 (27.8%)
+
+partial_or_full distribution:
+  full: 42 (46.7%)
+  null: 25 (27.8%)
+  partial: 23 (25.6%)
+
+🎉 All datasets created successfully!
+📊 Final summary:
+  Balanced dataset: 298 sessions
+  Training set: 208 sessions
+  Test set: 90 sessions
