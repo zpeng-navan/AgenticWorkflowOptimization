@@ -208,7 +208,7 @@ __marimo__/
 
 .vscode/
 vendor/
-data/
+apps/
 logs/
 src/backups/
 prompts/
