@@ -221,6 +221,7 @@ class AvaOproOptimizer:
         train_ratio: float = 1.0,
         num_examples: int = 3,
         max_num_instructions: int = 10,
+        old_instruction_score_threshold: float = 0.5,
         max_processes: int = None,
         verbose: bool = True,
         random_seed: int = 42
@@ -236,6 +237,7 @@ class AvaOproOptimizer:
             api_key: OpenAI API key
             save_folder: Directory to save results
             max_num_instructions: Maximum number of instructions in prompt history (default: 10)
+            old_instruction_score_threshold: Minimum score threshold for including old instructions (default: 0.5)
             max_processes: Maximum number of parallel processes (None = CPU count)
             verbose: Whether to print detailed progress
             random_seed: Random seed for reproducibility
@@ -249,7 +251,7 @@ class AvaOproOptimizer:
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OpenAI API key is required. Set OPENAI_API_KEY environment variable or pass api_key parameter.")
-        self.save_folder = join(save_folder, f"meta_prompt_{meta_prompt_key}", f"max_num_instructions_{max_num_instructions}", initial_prompt_key, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
+        self.save_folder = join(save_folder, f"meta_prompt_{meta_prompt_key}", f"threshold_{old_instruction_score_threshold}", f"max_num_instructions_{max_num_instructions}", initial_prompt_key, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
         self.num_search_steps=num_search_steps
         self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step
         self.optimizer_model=optimizer_model
@@ -277,7 +279,7 @@ class AvaOproOptimizer:
         self.initial_prompt = self.initial_prompt_body
         
         # OPRO configuration
-        self.old_instruction_score_threshold = 0.5
+        self.old_instruction_score_threshold = old_instruction_score_threshold
         self.max_num_instructions = max_num_instructions
         self.num_score_buckets = 100
         
@@ -1158,6 +1160,8 @@ def main():
                       help='Number of examples to include in meta-prompt (default: 2)')
     parser.add_argument('--max_num_instructions', type=int, default=10,
                       help='Maximum number of instructions in prompt history (default: 10)')
+    parser.add_argument('--old_instruction_score_threshold', type=float, default=0.5,
+                      help='Minimum score threshold for including old instructions (default: 0.5)')
     parser.add_argument('--max_processes', type=int, default=None,
                       help='Maximum number of parallel processes (default: CPU count)')
     parser.add_argument('--save_folder', type=str, default="results/gpt-5-verified/",
@@ -1183,6 +1187,7 @@ def main():
         train_ratio=args.train_ratio,
         num_examples=args.num_examples,
         max_num_instructions=args.max_num_instructions,
+        old_instruction_score_threshold=args.old_instruction_score_threshold,
         max_processes=args.max_processes,
         verbose=args.verbose,
         random_seed=args.random_seed
