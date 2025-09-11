@@ -211,6 +211,7 @@ class AvaOproOptimizer:
         initial_prompt_file: str = "prompts/original/identify_partial.yaml",
         initial_prompt_key: str = "initial_prompt",
         meta_prompt_key: str = "v1",
+        exp_mode: str = "initial",
         api_key: Optional[str] = None,
         save_folder: str = "results/gpt-5-verified/",
         num_search_steps: int = 10,
@@ -234,6 +235,7 @@ class AvaOproOptimizer:
             initial_prompt_file: Path to YAML file with initial prompt
             initial_prompt_key: Key in YAML file for prompt to optimize
             meta_prompt_key: Key in meta prompt YAML file to use (default: "v1")
+            exp_mode: Experiment mode for few-shot examples ("initial", "fix", or "random")
             api_key: OpenAI API key
             save_folder: Directory to save results
             max_num_instructions: Maximum number of instructions in prompt history (default: 10)
@@ -246,12 +248,13 @@ class AvaOproOptimizer:
         self.initial_prompt_file = initial_prompt_file
         self.initial_prompt_key = initial_prompt_key
         self.meta_prompt_key = meta_prompt_key
+        self.exp_mode = exp_mode
         self.initial_prompt_body_key = initial_prompt_key + "_body"
         self.initial_prompt_response_format_key = initial_prompt_key + "_response_format"
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OpenAI API key is required. Set OPENAI_API_KEY environment variable or pass api_key parameter.")
-        self.save_folder = join(save_folder, f"meta_prompt_{meta_prompt_key}", f"threshold_{old_instruction_score_threshold}", f"max_num_instructions_{max_num_instructions}", initial_prompt_key, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
+        self.save_folder = join(save_folder, f"meta_prompt_{meta_prompt_key}", f"exp_mode_{exp_mode}", f"threshold_{old_instruction_score_threshold}", f"max_num_instructions_{max_num_instructions}", initial_prompt_key, f"scorer_{scorer_model}", f"optimizer_{optimizer_model}", f"train_ratio_{train_ratio}", f"num_search_steps_{num_search_steps}", f"num_gen_inst_{num_generated_instructions_in_each_step}_num_exp_{num_examples}_opt_temperature_{optimizer_temperature}")
         self.num_search_steps=num_search_steps
         self.num_generated_instructions_in_each_step=num_generated_instructions_in_each_step
         self.optimizer_model=optimizer_model
@@ -288,6 +291,10 @@ class AvaOproOptimizer:
         self.meta_prompts = []  # (meta_prompt, step)
         self.old_instruction_md5_hashstrings_set = set()
         self.step_statistics = []  # Step-level statistics for comprehensive tracking
+        
+        # Pre-filter valid keys for sampling (exclude null labels)
+        # This is computed once in init to avoid repeated filtering
+        self.valid_train_keys = None  # Will be populated when train data is loaded
         
     def _load_initial_prompt_parts(self) -> Tuple[str, str]:
         """Load initial prompt body and response format from YAML file."""
@@ -386,34 +393,64 @@ class AvaOproOptimizer:
             return prompt_score_str, prompts_in_meta_prompt
     
     def _sample_few_shot_examples(self, train_data: Dict, num_examples: int = 3) -> str:
-        """Sample few-shot examples from training data."""
+        """Sample few-shot examples from training data based on exp_mode."""
         if num_examples == 0 or not train_data:
             return ""
         
-        # Sample random examples
-        # sample_keys = np.random.choice(list(train_data.keys()), 
-        #                               min(num_examples, len(train_data)), 
-        #                               replace=False)
-        sample_keys = ["47daf4ee-6900-48c0-9f3f-a38ee67c64c9", "801ecf63-0eef-4327-9774-21f9e9d95481", "31aa8030-7ba1-492a-bae2-cea7d347623c", "06fd2754-2d0a-4840-bd5b-2ad3bb37352e"]
-        labels = ["FULL", "PARTIAL", "true", "false"]
-
-        
         examples_str = "\n\nHere are some examples from the training data:\n"
-        for i, (key, label) in enumerate(zip(sample_keys, labels)):
-            element = train_data[key]
-            ava_data = element.get("Ava", {})
-            flight_booking_legs = ava_data.get("flight_booking_legs", "")
-            chat_history = ava_data.get("chat_history", "")
-            cancel_not_for_all = element.get("cancel_not_for_all", False)
-            partial_or_full = element.get("partial_or_full", "FULL")
+        
+        if self.exp_mode == "fix":
+            # Use fixed examples with specific labels
+            sample_keys = ["47daf4ee-6900-48c0-9f3f-a38ee67c64c9", "801ecf63-0eef-4327-9774-21f9e9d95481", "31aa8030-7ba1-492a-bae2-cea7d347623c", "06fd2754-2d0a-4840-bd5b-2ad3bb37352e"]
+            labels = ["FULL", "PARTIAL", "true", "false"]
             
-            examples_str += f"\nExample {i+1}:\n"
-            examples_str += f"Flight booking legs: {flight_booking_legs}\n"
-            examples_str += f"Chat history: {chat_history}\n"
-            if label == "true" or label == "false":
-                examples_str += f"Ground truth - cancel_not_for_all_passengers: {label}\n"
-            else:
-                examples_str += f"Ground truth - partial_or_full: {label}\n"
+            for i, (key, label) in enumerate(zip(sample_keys, labels)):
+                if key not in train_data:
+                    continue
+                element = train_data[key]
+                ava_data = element.get("Ava", {})
+                flight_booking_legs = ava_data.get("flight_booking_legs", "")
+                chat_history = ava_data.get("chat_history", "")
+                
+                examples_str += f"\nExample {i+1}:\n"
+                examples_str += f"Flight booking legs: {flight_booking_legs}\n"
+                examples_str += f"Chat history: {chat_history}\n"
+                if label == "true" or label == "false":
+                    examples_str += f"Ground truth - cancel_not_for_all_passengers: {label}\n"
+                else:
+                    examples_str += f"Ground truth - partial_or_full: {label}\n"
+        
+        else:
+            # For both "random" and "initial" modes - only difference is which keys to use
+            if self.exp_mode == "random":
+                # Use pre-filtered valid keys (exclude null labels)
+                available_keys = [key for key in self.valid_train_keys if key in train_data]
+            else:  # exp_mode == "initial" (default)
+                # Use all keys
+                available_keys = list(train_data.keys())
+            
+            if not available_keys:
+                return ""
+            
+            # Sample from available keys
+            sample_keys = np.random.choice(available_keys, 
+                                         min(num_examples, len(available_keys)), 
+                                         replace=False)
+            
+            # Generate examples (same logic for both modes)
+            for i, key in enumerate(sample_keys):
+                element = train_data[key]
+                ava_data = element.get("Ava", {})
+                flight_booking_legs = ava_data.get("flight_booking_legs", "")
+                chat_history = ava_data.get("chat_history", "")
+                cancel_not_for_all = element.get("cancel_not_for_all", False)
+                partial_or_full = element.get("partial_or_full", "FULL")
+                
+                examples_str += f"\nExample {i+1}:\n"
+                examples_str += f"Flight booking legs: {flight_booking_legs}\n"
+                examples_str += f"Chat history: {chat_history}\n"
+                examples_str += f"Ground truth - cancel_not_for_all_passengers: {cancel_not_for_all}\n"
+                examples_str += f"Ground truth - partial_or_full: {partial_or_full}\n"
         
         return examples_str
     
@@ -696,6 +733,14 @@ class AvaOproOptimizer:
         full_train_data = load_json_file(self.train_data_path)
         if not full_train_data:
             raise ValueError(f"No training data found in {self.train_data_path}")
+        
+        # Pre-filter valid keys once (exclude null labels for efficient sampling)
+        if self.valid_train_keys is None:
+            self.valid_train_keys = []
+            for key, element in full_train_data.items():
+                partial_or_full = element.get("partial_or_full", "")
+                if partial_or_full and partial_or_full.lower() != "null":
+                    self.valid_train_keys.append(key)
             
         if self.train_ratio < 1.0:
             sample_size = max(1, int(len(full_train_data) * self.train_ratio))  # Ensure at least 1 sample
@@ -1144,6 +1189,9 @@ def main():
     parser.add_argument('--meta_prompt_key', type=str, 
                       default="v1",
                       help='Key in meta prompt YAML file to use (default: v1)')
+    parser.add_argument('--exp_mode', type=str, default="initial",
+                      choices=["initial", "fix", "random"],
+                      help='Experiment mode for few-shot examples (default: initial)')
     parser.add_argument('--num_search_steps', type=int, default=10,
                       help='Number of optimization steps (default: 10)')
     parser.add_argument('--num_generated_instructions_in_each_step', type=int, default=4,
@@ -1178,6 +1226,7 @@ def main():
         initial_prompt_file=args.initial_prompt_file,
         initial_prompt_key=args.initial_prompt_key,
         meta_prompt_key=args.meta_prompt_key,
+        exp_mode=args.exp_mode,
         save_folder=args.save_folder,
         num_search_steps=args.num_search_steps,
         num_generated_instructions_in_each_step=args.num_generated_instructions_in_each_step,
