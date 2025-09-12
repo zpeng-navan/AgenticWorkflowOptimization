@@ -284,8 +284,8 @@ def two_labels_diff_model(metric_name: str, prompt_name: str,
     ax.set_title(f'{metric_name.replace("_", " ").title()} vs Models with {prompt_name.replace("_", " ").title()}', 
                  fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(x)
-    ax.set_xticklabels(model_labels, rotation=45, ha='right')
-    ax.legend(fontsize=10)
+    ax.set_xticklabels(model_labels, rotation=45, ha='right', fontsize=12, fontweight='bold')
+    ax.legend(fontsize=12)
     
     # Add value labels on bars
     def add_value_labels(bars):
@@ -468,7 +468,7 @@ def metric_cost_latency(metric_name: str,
                    fontsize=12, fontweight='bold', color=CUSTOM_BLUE)
     ax1.tick_params(axis='y', labelcolor=CUSTOM_BLUE)
     ax1.set_xticks(x)
-    ax1.set_xticklabels(models, rotation=45, ha='right')
+    ax1.set_xticklabels(models, rotation=45, ha='right', fontsize=12, fontweight='bold')
     ax1.grid(True, alpha=0.3)
     
     # Add value labels on bars
@@ -523,7 +523,7 @@ def metric_cost_latency(metric_name: str,
     lines2, labels2 = ax2.get_legend_handles_labels()
     lines3, labels3 = ax3.get_legend_handles_labels()
     ax1.legend(lines1 + lines2 + lines3, labels1 + labels2 + labels3, 
-              loc='upper left', bbox_to_anchor=(0.005, 0.98))
+              loc='upper left', bbox_to_anchor=(0.005, 0.98), fontsize=12)
     
     # Set title
     title = f'{metric_name.replace("_", " ").title()} (Harmonic Mean), Cost & Latency vs Models ({prompt_name.replace("_", " ").title()})'
@@ -737,7 +737,7 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
     
     # Set x-axis ticks and labels
     ax.set_xticks(model_positions)
-    ax.set_xticklabels(models, rotation=45, ha='right')
+    ax.set_xticklabels(models, rotation=45, ha='right', fontsize=12, fontweight='bold')
     
     # Add group separators
     for i in range(1, n_models):
@@ -747,7 +747,7 @@ def metric_cost_latency_two_prompt_grouped_bars(metric_name: str,
     ax.grid(True, alpha=0.3, axis='y')
     
     # Create legend in upper left corner
-    ax.legend(bbox_to_anchor=(0.02, 0.98), loc='upper left')
+    ax.legend(bbox_to_anchor=(0.02, 0.98), loc='upper left', fontsize=12)
     
     # Adjust layout
     plt.tight_layout()
@@ -808,7 +808,7 @@ def show_api_price(output_dir: str = "imgs/baselines") -> None:
     
     # Set x-axis ticks and labels
     ax.set_xticks(x)
-    ax.set_xticklabels(models, rotation=45, ha='right')
+    ax.set_xticklabels(models, rotation=45, ha='right', fontsize=12, fontweight='bold')
     
     # Add value labels on bars
     def add_value_labels_on_bars(bars, costs):
