@@ -5,6 +5,7 @@ Ava’s workflow contains numerous LLM-based nodes whose prompts are written by 
 
 ## Results
 ![Final Results](imgs/results.png)
+
 Ava's current approach is gpt-4.1 with reasoning. The performance are:
 
 adjusted balanced accuracy: 94.14
