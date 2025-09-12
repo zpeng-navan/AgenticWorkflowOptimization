@@ -1,0 +1,3582 @@
+{
+  "prompts_and_scores": [
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking with one or more legs and a chat history about flight cancellation, classify as follows:\n\n1. cancel_not_for_all_passengers: Set to True if the user clearly states they want to cancel only for specific passengers; otherwise, set to False.\n2. partial_or_full: \n   - Set to PARTIAL if the user specifies cancelling only certain legs (e.g., mentions departure, return, or specific airports/routes).\n   - Set to FULL if the user does not specify and wants to cancel the entire booking.\n\nBase your decision only on explicit user statements in the chat.",
+      "combined_score": 0.9618476675000404,
+      "cancel_adj_b_acc": 0.9753401360544216,
+      "partial_adj_b_acc": 0.9487234042553192,
+      "word_count": 100,
+      "step": 0
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking (may have one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user clearly asks to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: Set to PARTIAL if the user specifies canceling only certain legs (e.g., mentions departure, return, or specific routes/airports); otherwise, FULL.\n\nUse only explicit user statements in the chat to decide.",
+      "combined_score": 0.9578367406118603,
+      "cancel_adj_b_acc": 0.9666666666666668,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 77,
+      "step": 1
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (such as departure, return, or particular routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.957422324510932,
+      "cancel_adj_b_acc": 0.9454545454545453,
+      "partial_adj_b_acc": 0.9696969696969697,
+      "word_count": 73,
+      "step": 18
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly says to cancel for certain passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies canceling only specific legs (e.g., departure, return, or named routes/airports); otherwise, FULL.\n\nDecide strictly based on clear, explicit statements from the user.",
+      "combined_score": 0.9566664592795372,
+      "cancel_adj_b_acc": 0.9642857142857144,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 70,
+      "step": 26
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly asks to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user explicitly requests to cancel only certain legs (e.g., departure, return, or specific routes/airports); otherwise, FULL.\n\nRely only on the user\u2019s explicit statements in the chat to decide.",
+      "combined_score": 0.9563553805607595,
+      "cancel_adj_b_acc": 0.9642857142857144,
+      "partial_adj_b_acc": 0.9485544217687074,
+      "word_count": 73,
+      "step": 22
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking (with one or more legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly states they want to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only certain legs (e.g., mentions departure, return, or specific airports/routes); otherwise, FULL.\n\nBase your answers strictly on clear, explicit user statements in the chat.",
+      "combined_score": 0.955670535589428,
+      "cancel_adj_b_acc": 0.9622641509433962,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 78,
+      "step": 4
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly says to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user specifically states to cancel only certain legs (e.g., departure, return, or named routes/airports); else, FULL.\n\nDecide based solely on clear, explicit user statements in the chat.",
+      "combined_score": 0.9545613269314709,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9591666666666665,
+      "word_count": 72,
+      "step": 17
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly specifies cancelling for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user explicitly says to cancel only certain legs (e.g., departure, return, or specific routes/airports); otherwise, FULL.\n\nDecide strictly based on explicit user statements from the user in the chat.",
+      "combined_score": 0.9541333293859032,
+      "cancel_adj_b_acc": 0.9491525423728815,
+      "partial_adj_b_acc": 0.9591666666666665,
+      "word_count": 74,
+      "step": 21
+    },
+    {
+      "prompt": "You are Ava at the Navan flight kiosk. Given a flight booking (may have multiple legs) and a cancellation chat, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers; otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only certain flight legs (e.g., mentions departure, return, or specific routes/airports); otherwise, FULL.\n\nDecide based strictly on clear user statements in the chat.",
+      "combined_score": 0.953968854066157,
+      "cancel_adj_b_acc": 0.9692451071761417,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 68,
+      "step": 28
+    },
+    {
+      "prompt": "You are Ava at the Navan flight kiosk. Given a flight booking (may have multiple legs) and a cancellation chat, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly asks to cancel only certain legs (such as departure, return, or specific airport/route); otherwise, FULL.\n\nDecide based strictly on clear user statements in the chat.",
+      "combined_score": 0.9535131154808507,
+      "cancel_adj_b_acc": 0.9683046683046683,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 70,
+      "step": 28
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and chat history about cancellation, classify as follows:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for less than all passengers; else, False.\n2. partial_or_full: PARTIAL if the user clearly asks to cancel only specific flight legs (e.g., mentions departure, return, or particular routes/airports); otherwise, FULL.\n\nBase both answers strictly on the user\u2019s explicit statements in the chat.",
+      "combined_score": 0.9534905396588685,
+      "cancel_adj_b_acc": 0.9482758620689655,
+      "partial_adj_b_acc": 0.9587628865979383,
+      "word_count": 77,
+      "step": 21
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may include multiple legs) and a chat about cancellation, determine:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not all). Otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only particular legs (like departure, return, or named airports/routes). Otherwise, FULL.\n\nBase your answers strictly on explicit statements from the user in the chat.",
+      "combined_score": 0.9516578523263458,
+      "cancel_adj_b_acc": 0.9649122807017543,
+      "partial_adj_b_acc": 0.9387626262626263,
+      "word_count": 72,
+      "step": 23
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (one or more legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True ONLY if the user clearly says to cancel for certain passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user specifically asks to cancel only particular legs (e.g. just departure, return, or named airports/routes); otherwise, FULL.\n\nUse ONLY the user\u2019s explicit statements in the chat to decide.",
+      "combined_score": 0.9515604478078679,
+      "cancel_adj_b_acc": 0.9642857142857144,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 73,
+      "step": 6
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly requests cancellation for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user specifies cancelling only particular legs (e.g., departure, return, certain airports/routes); otherwise, FULL.\n\nUse only explicit user statements in the chat to decide.",
+      "combined_score": 0.9513530164447184,
+      "cancel_adj_b_acc": 0.9642857142857144,
+      "partial_adj_b_acc": 0.9387626262626263,
+      "word_count": 67,
+      "step": 8
+    },
+    {
+      "prompt": "You are Ava at the Navan flight kiosk. Given a flight booking (may have multiple legs) and a cancellation chat, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly requests canceling for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user explicitly asks to cancel only specific legs (e.g., departure, return, airport/route); else, FULL.\n\nDecide based strictly on clear user statements in the chat.",
+      "combined_score": 0.9513530164447184,
+      "cancel_adj_b_acc": 0.9642857142857144,
+      "partial_adj_b_acc": 0.9387626262626263,
+      "word_count": 67,
+      "step": 28
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking (may have one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user clearly asks to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: \n   - Set to PARTIAL if the user asks to cancel only certain legs (mentions departure, return, or specific routes/airports).\n   - Set to FULL if the user wants to cancel the entire booking or doesn\u2019t specify.\n\nBase both decisions strictly on explicit user statements in the chat.",
+      "combined_score": 0.9508165378793915,
+      "cancel_adj_b_acc": 0.9636363636363636,
+      "partial_adj_b_acc": 0.9383333333333335,
+      "word_count": 93,
+      "step": 1
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user clearly states they want to cancel for specific passengers, not all; otherwise, False.\n2. partial_or_full: PARTIAL if the user explicitly asks to cancel only certain legs (such as departure, return, or particular airports/routes); otherwise, FULL.\n\nDecide strictly based on explicit user statements in the chat.",
+      "combined_score": 0.9495831505046073,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 73,
+      "step": 5
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user clearly specifies cancelling for specific passengers (not all); otherwise, False.\n2. partial_or_full: Set to PARTIAL if the user explicitly mentions cancelling only certain legs (such as departure, return, or specific routes/airports); otherwise, FULL.\n\nRely only on clear, explicit user statements in the chat.",
+      "combined_score": 0.9495831505046073,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 74,
+      "step": 13
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user clearly specifies cancelling for specific passengers (not all); otherwise, False.\n2. partial_or_full: Set to PARTIAL if the user explicitly mentions cancelling only certain legs (such as departure, return, or specific routes/airports); otherwise, FULL.\n\nRely only on direct, explicit user statements in the chat.",
+      "combined_score": 0.9495831505046073,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 74,
+      "step": 13
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user explicitly requests cancellation for specific passengers; otherwise, False.\n2. partial_or_full: Set to PARTIAL if the user clearly mentions cancelling only specific legs (such as departure, return, or particular airports/routes). Otherwise, set to FULL.\n\nDecide strictly based on clear, explicit user statements in the chat.",
+      "combined_score": 0.9495831505046073,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 75,
+      "step": 3
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only certain legs (e.g., departure, return, or particular routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat; do not infer intent.",
+      "combined_score": 0.9495831505046073,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 75,
+      "step": 15
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user clearly says to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user explicitly asks to cancel only certain legs (e.g., departure, return, named routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.9494314781567923,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9488636363636362,
+      "word_count": 71,
+      "step": 16
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (can have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly asks to cancel for some (not all) passengers; else, False.\n2. partial_or_full: PARTIAL if the user specifically requests cancelling only selected legs (like just departure, return, or named segments/airports); else, FULL.\n\nDecide only based on unambiguous user statements in the chat.",
+      "combined_score": 0.9485249443056775,
+      "cancel_adj_b_acc": 0.9807692307692308,
+      "partial_adj_b_acc": 0.9183333333333334,
+      "word_count": 71,
+      "step": 7
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat history about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly states they want to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only certain legs (e.g., mentions departure, return, or specific airports/routes); otherwise, FULL.\n\nBase your answers strictly on clear, explicit user statements in the chat.",
+      "combined_score": 0.9484995803698161,
+      "cancel_adj_b_acc": 0.9482758620689655,
+      "partial_adj_b_acc": 0.9487234042553192,
+      "word_count": 76,
+      "step": 3
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking with one or more legs and a chat history about flight cancellation, classify as follows:\n\n1. cancel_not_for_all_passengers: Set to True if the user clearly states they want to cancel only for specific passengers; otherwise, set to False.\n2. partial_or_full: \n   - Set to PARTIAL if the user specifies cancelling only certain legs (e.g., mentions departure, return, or specific airports/routes).\n   - Set to FULL if the user does not specify and wants to cancel the entire booking.\n\nBase your decision only on explicit user statements about passengers or flight legs in the chat history.",
+      "combined_score": 0.9484880508771513,
+      "cancel_adj_b_acc": 0.9695373339441136,
+      "partial_adj_b_acc": 0.9283333333333332,
+      "word_count": 106,
+      "step": 0
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only certain legs (e.g., departure, return, or particular routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.948348112505348,
+      "cancel_adj_b_acc": 0.9482758620689655,
+      "partial_adj_b_acc": 0.9484203739522887,
+      "word_count": 71,
+      "step": 15
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking with one or more legs and a chat history about flight cancellation, classify as follows:\n\n1. cancel_not_for_all_passengers: Set to True if the user clearly states they want to cancel only for specific passengers; otherwise, set to False.\n2. partial_or_full: \n   - Set to PARTIAL if the user specifies cancelling only certain legs (e.g., mentions departure, return, or specific airports/routes).\n   - Set to FULL if the user does not specify and wants to cancel the entire booking.\n\nBase your labels only on explicit user statements about passengers or flight legs in the chat history.",
+      "combined_score": 0.9474961106029104,
+      "cancel_adj_b_acc": 0.9458314246449839,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 106,
+      "step": 0
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly says to cancel for certain passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies canceling only specific legs (e.g., departure, return, or named routes/airports); otherwise, FULL.\n\nDecide strictly based on clear, explicit statements from the user in the chat.",
+      "combined_score": 0.9474903041764159,
+      "cancel_adj_b_acc": 0.9464285714285714,
+      "partial_adj_b_acc": 0.9485544217687074,
+      "word_count": 73,
+      "step": 26
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and user chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly asks to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly requests cancelling only selected legs (e.g., specifies departure, return, or particular airports/routes); else, FULL.\n\nDecide based only on explicit user statements in the chat.",
+      "combined_score": 0.9469098150636623,
+      "cancel_adj_b_acc": 0.9547817047817047,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 72,
+      "step": 19
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. For each flight booking (may have multiple legs) and related cancellation chat:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not everyone); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly asks to cancel only certain legs (e.g., mentions departure, return, or specific routes/airports); otherwise, FULL.\n\nDecide strictly based on clear, direct user statements in the chat.",
+      "combined_score": 0.9466506908301194,
+      "cancel_adj_b_acc": 0.9666666666666668,
+      "partial_adj_b_acc": 0.9274468085106382,
+      "word_count": 70,
+      "step": 10
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancelling for specific passengers (not all). Otherwise, False.\n2. partial_or_full: PARTIAL only if the user clearly specifies cancelling certain legs (e.g., only departure, return, or specific airports/routes). Otherwise, FULL.\n\nDecide solely based on explicit statements from the user in the chat.",
+      "combined_score": 0.9466488829609869,
+      "cancel_adj_b_acc": 0.9444444444444444,
+      "partial_adj_b_acc": 0.9488636363636362,
+      "word_count": 72,
+      "step": 25
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking (with one or more legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly states they want to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only certain legs (e.g., mentions departure, return, or exact airports/routes); otherwise, FULL.\n\nBase your answers strictly on clear, explicit user statements in the chat.",
+      "combined_score": 0.9464949714257193,
+      "cancel_adj_b_acc": 0.9444444444444444,
+      "partial_adj_b_acc": 0.9485544217687074,
+      "word_count": 78,
+      "step": 4
+    },
+    {
+      "prompt": "You are Ava at the Navan flight kiosk. Given a flight booking (may have multiple legs) and a cancellation chat, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests canceling for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only specific legs (e.g., departure, return, airport/route); else, FULL.\n\nDecide based strictly on clear user statements in the chat.",
+      "combined_score": 0.9451539416638405,
+      "cancel_adj_b_acc": 0.9414731409805301,
+      "partial_adj_b_acc": 0.9488636363636362,
+      "word_count": 67,
+      "step": 28
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (such as departure, return, or particular routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.9443953762109254,
+      "cancel_adj_b_acc": 0.9396718146718146,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 74,
+      "step": 24
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (possibly with multiple legs) and chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly says to cancel for certain passengers (not all); else, False.\n2. partial_or_full: PARTIAL only if the user clearly states to cancel specific legs (e.g., just departure, return, or named routes/airports); else, FULL.\n\nDecide solely based on explicit statements by the user in the chat.",
+      "combined_score": 0.9439424921854591,
+      "cancel_adj_b_acc": 0.9387755102040818,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 73,
+      "step": 20
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may include multiple legs) and a chat about cancellation, determine:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only particular legs (like departure, return, or named airports/routes); otherwise, FULL.\n\nBase your answers strictly on explicit statements from the user in the chat.",
+      "combined_score": 0.9434952643540255,
+      "cancel_adj_b_acc": 0.9482758620689655,
+      "partial_adj_b_acc": 0.9387626262626263,
+      "word_count": 72,
+      "step": 23
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly specifies cancelling for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user explicitly says to cancel only certain legs (e.g., departure, return, or specific routes/airports); otherwise, FULL.\n\nDecide strictly based on explicit user statements from the user.",
+      "combined_score": 0.9434426783902603,
+      "cancel_adj_b_acc": 0.96,
+      "partial_adj_b_acc": 0.9274468085106382,
+      "word_count": 71,
+      "step": 21
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly requests cancellation for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user specifies cancelling only particular legs (e.g., departure, return, certain airports/routes); otherwise, FULL.\n\nBase both answers strictly on direct, explicit user statements in the chat.",
+      "combined_score": 0.9423326942869598,
+      "cancel_adj_b_acc": 0.9364996746909564,
+      "partial_adj_b_acc": 0.9482388316151202,
+      "word_count": 69,
+      "step": 8
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly specifies cancelling for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly says to cancel only certain legs (e.g., just departure, just return, or specific routes/airports); otherwise, FULL.\n\nDecide based only on clear, explicit user statements in the chat.",
+      "combined_score": 0.9416181623658976,
+      "cancel_adj_b_acc": 0.9347826086956523,
+      "partial_adj_b_acc": 0.9485544217687074,
+      "word_count": 74,
+      "step": 13
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (such as departure, return, or particular routes/airports); otherwise, FULL.\n\nBase both answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.9415949640555742,
+      "cancel_adj_b_acc": 0.9444444444444444,
+      "partial_adj_b_acc": 0.9387626262626263,
+      "word_count": 73,
+      "step": 18
+    },
+    {
+      "prompt": "Your name is Ava. You work for Navan, a company that builds a Corporate travel & expense management system. You are an assistant at the flight kiosk, where user wants to cancel their flight. Flight booking consists of legs. For example, if user has a one way flight, then there will be only one leg. If user books a round trip flight from New York to San Francisco, in that case such flight booking has 2 legs, first leg from New York to San Francisco, and second leg from San Francisco back to New York.\n\n### Your task ###\nYou have a task to identify if user wants to cancel only part of their flight booking and if user wants to cancel the booking for fewer than all passengers in the reservation.\n\nUser wants to make a partial cancellation in the following cases:\n- if they explicitly mention that they want to cancel their departure  flight or return flight\n- if they mention specific airports that match legs in their flight booking\n\nIf user request does not mention anything about specific part of their flight booking, it means they want to cancel the entire booking so partial_or_full should be FULL. Otherwise, partial_or_full should be PARTIAL.\n\nWhen analyzing chat history, check if the user explicitly mentions wanting to cancel the booking for fewer than all passengers in the reservation. Set the flag cancel_not_for_all_passengers to true if the cancellation is not for all passengers. Set the flag cancel_not_for_all_passengers to false if the cancellation applies to the entire passengers in booking.",
+      "combined_score": 0.9412005408057046,
+      "cancel_adj_b_acc": 0.9432432432432432,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 258,
+      "step": -1
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly asks to cancel for specific passengers (not everyone); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only specific legs (e.g., departure, return, or particular airports/routes); otherwise, FULL.\n\nRely solely on clear, explicit statements by the user in the chat.",
+      "combined_score": 0.9411834144901874,
+      "cancel_adj_b_acc": 0.9333333333333333,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 72,
+      "step": 12
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and chat history about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user clearly specifies cancelling for specific passengers (not all); otherwise, False.\n2. partial_or_full: Set to PARTIAL if the user explicitly mentions cancelling only certain legs (such as departure, return, or specific routes/airports); otherwise, FULL.\n\nRely only on clear, explicit user statements in the chat.",
+      "combined_score": 0.940608553989835,
+      "cancel_adj_b_acc": 0.9322033898305084,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 74,
+      "step": 13
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking (with one or more legs) and a chat about cancellation, classify as follows:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user explicitly asks to cancel only certain legs (e.g., mentions departure, return, or specific airports/routes); otherwise, FULL.\n\nRely strictly on clear, direct user statements\u2014do not infer intent.",
+      "combined_score": 0.940536655486344,
+      "cancel_adj_b_acc": 0.9642857142857144,
+      "partial_adj_b_acc": 0.9179292929292928,
+      "word_count": 76,
+      "step": 5
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. For each flight booking (may have multiple legs) and related cancellation chat:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not everyone); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly asks to cancel only certain legs (e.g., says departure, return, or specific routes/airports); otherwise, FULL.\n\nDecide strictly based on clear, direct user statements in the chat.",
+      "combined_score": 0.9404597348077611,
+      "cancel_adj_b_acc": 0.9322033898305084,
+      "partial_adj_b_acc": 0.9488636363636362,
+      "word_count": 70,
+      "step": 10
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True if the user clearly says to cancel for specific passengers only; otherwise, False.\n2. partial_or_full: PARTIAL if the user specifies cancelling only certain legs (e.g., departure, return, or specific routes/airports); otherwise, FULL.\n\nUse only explicit user statements in the chat. Do not assume or infer intent beyond what the user directly states.",
+      "combined_score": 0.9399235198707044,
+      "cancel_adj_b_acc": 0.9415191053122087,
+      "partial_adj_b_acc": 0.9383333333333335,
+      "word_count": 77,
+      "step": 16
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and user chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly asks to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly requests cancellation for only certain legs (e.g., mentions a specific departure, return, or airport/route); otherwise, FULL.\n\nDecide strictly based on clear, explicit user instructions in the chat.",
+      "combined_score": 0.9398886100918095,
+      "cancel_adj_b_acc": 0.9406116642958748,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 75,
+      "step": 19
+    },
+    {
+      "prompt": "You are Ava, the Navan flight assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states they want to cancel only specific legs (e.g., departure, return, or certain routes/airports); else, FULL.\n\nUse only clear, explicit user statements in the chat to decide.",
+      "combined_score": 0.9386275070339889,
+      "cancel_adj_b_acc": 0.9491525423728815,
+      "partial_adj_b_acc": 0.9283333333333332,
+      "word_count": 73,
+      "step": 29
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking (may have one or more legs) and a chat history about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user clearly requests cancellation for specific passengers; otherwise, False.\n2. partial_or_full: PARTIAL if the user explicitly mentions cancelling certain legs (such as departure, return, or specific airports/routes); otherwise, FULL.\n\nDecide strictly based on explicit user statements in the chat.",
+      "combined_score": 0.9377542907917503,
+      "cancel_adj_b_acc": 0.9473684210526314,
+      "partial_adj_b_acc": 0.9283333333333332,
+      "word_count": 71,
+      "step": 2
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (one or more legs) and a chat about cancellation, classify as follows:\n\n1. cancel_not_for_all_passengers: True only if the user clearly requests cancellation for some, but not all, passengers. Otherwise, False.\n2. partial_or_full: PARTIAL if the user specifies cancelling only certain legs (e.g., mentions specific routes, departure, return, or airports). Otherwise, FULL.\n\nBase both decisions strictly on unambiguous user statements in the chat.",
+      "combined_score": 0.9363193956939213,
+      "cancel_adj_b_acc": 0.9554614298549609,
+      "partial_adj_b_acc": 0.9179292929292928,
+      "word_count": 74,
+      "step": 11
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user clearly says to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user explicitly asks to cancel only certain legs (e.g., specific routes, departure, or return); else, FULL.\n\nDecide strictly based on clear, explicit user statements in the chat.",
+      "combined_score": 0.9356720732416052,
+      "cancel_adj_b_acc": 0.9322033898305084,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 72,
+      "step": 16
+    },
+    {
+      "prompt": "You are Ava, an assistant at the Navan flight kiosk. Given a flight booking (may have one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user clearly asks to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: \n   - PARTIAL if the user specifies cancelling only certain legs (e.g., mentions departure, return, or specific routes/airports).\n   - FULL if they want to cancel the entire booking, or do not mention specific legs.\n\nBase both decisions strictly on explicit user statements in the chat.",
+      "combined_score": 0.935610070419294,
+      "cancel_adj_b_acc": 0.9655172413793105,
+      "partial_adj_b_acc": 0.9075,
+      "word_count": 91,
+      "step": 1
+    },
+    {
+      "prompt": "You are Ava, the Navan flight assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (such as departure, return, or particular routes/airports); else, FULL.\n\nBase your answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.9338983050847458,
+      "cancel_adj_b_acc": 0.95,
+      "partial_adj_b_acc": 0.9183333333333334,
+      "word_count": 72,
+      "step": 29
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may include multiple legs) and a chat about cancellation, determine:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only particular legs (e.g., only departure, return, or certain routes/airports); otherwise, FULL.\n\nDecide solely based on the user\u2019s explicit statements in the chat.",
+      "combined_score": 0.933577609729477,
+      "cancel_adj_b_acc": 0.9615384615384617,
+      "partial_adj_b_acc": 0.9071969696969697,
+      "word_count": 71,
+      "step": 23
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly asks to cancel only certain legs (such as departure, return, or particular routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat; do not infer intent.",
+      "combined_score": 0.9329534314428055,
+      "cancel_adj_b_acc": 0.9491525423728815,
+      "partial_adj_b_acc": 0.9172979797979797,
+      "word_count": 77,
+      "step": 15
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (possibly with multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests cancellation for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL only if the user clearly asks to cancel specific legs (e.g., departure, return, particular airports/routes); otherwise, FULL.\n\nDecide solely based on explicit user statements in the chat.",
+      "combined_score": 0.9326336161977072,
+      "cancel_adj_b_acc": 0.9166666666666665,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 68,
+      "step": 14
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly asks to cancel for specific passengers (not everyone); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (e.g., departure, return, or specific airports/routes); otherwise, FULL.\n\nRely solely on clear, explicit statements by the user in the chat.",
+      "combined_score": 0.9326336161977072,
+      "cancel_adj_b_acc": 0.9166666666666665,
+      "partial_adj_b_acc": 0.9491666666666667,
+      "word_count": 72,
+      "step": 12
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with possible multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True ONLY if the user explicitly states cancellation is for certain passengers, not all; otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies canceling only certain legs (like departure, return, or named routes/airports); otherwise, FULL.\n\nDecide strictly from explicit user statements in the chat.",
+      "combined_score": 0.9323379682394953,
+      "cancel_adj_b_acc": 0.9166666666666665,
+      "partial_adj_b_acc": 0.9485544217687074,
+      "word_count": 68,
+      "step": 9
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly asks to cancel for some (not all) passengers; else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only specific legs (e.g., only departure, return, or named routes/airports); else, FULL.\n\nDecide strictly based on the user\u2019s clear, explicit statements in the chat.",
+      "combined_score": 0.9316966100317048,
+      "cancel_adj_b_acc": 0.9454545454545453,
+      "partial_adj_b_acc": 0.9183333333333334,
+      "word_count": 75,
+      "step": 11
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for some (not all) passengers; else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only specific legs (e.g., only departure, return, or named routes/airports); else, FULL.\n\nDecide strictly based on the user\u2019s clear, explicit statements in the chat.",
+      "combined_score": 0.9308194233044038,
+      "cancel_adj_b_acc": 0.9454545454545453,
+      "partial_adj_b_acc": 0.9166304819800262,
+      "word_count": 75,
+      "step": 11
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly says to cancel for specific passengers; otherwise, False.\n2. partial_or_full: PARTIAL only if the user clearly states to cancel certain legs (such as departure, return, or specific airports/routes); otherwise, FULL.\n\nDecide strictly by explicit user statements in the chat\u2014do not assume.",
+      "combined_score": 0.9304075235109718,
+      "cancel_adj_b_acc": 0.9333333333333333,
+      "partial_adj_b_acc": 0.9275,
+      "word_count": 71,
+      "step": 17
+    },
+    {
+      "prompt": "You are Ava, the Navan flight assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (such as departure, return, or particular routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.930264336577441,
+      "cancel_adj_b_acc": 0.9322033898305084,
+      "partial_adj_b_acc": 0.9283333333333332,
+      "word_count": 72,
+      "step": 29
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: Set to True only if the user explicitly requests cancellation for specific passengers; otherwise, False.\n2. partial_or_full: Set to PARTIAL if the user clearly asks to cancel specific legs (such as mentioning departure, return, or certain routes/airports); otherwise, set to FULL.\n\nBase your answers strictly on clear, explicit user statements in the chat.",
+      "combined_score": 0.930264336577441,
+      "cancel_adj_b_acc": 0.9322033898305084,
+      "partial_adj_b_acc": 0.9283333333333332,
+      "word_count": 77,
+      "step": 3
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with possible multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True ONLY if the user explicitly states they want to cancel for certain passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly mentions cancelling only specific legs (such as departure, return, or particular airports/routes); otherwise, FULL.\n\nDecide strictly using explicit user statements from the chat.",
+      "combined_score": 0.9252163824817964,
+      "cancel_adj_b_acc": 0.9322033898305084,
+      "partial_adj_b_acc": 0.9183333333333334,
+      "word_count": 71,
+      "step": 9
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (such as departure, return, or particular routes/airports); else, FULL.\n\nBase your answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.9195054981177225,
+      "cancel_adj_b_acc": 0.9006506506506506,
+      "partial_adj_b_acc": 0.9391666666666665,
+      "word_count": 74,
+      "step": 24
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (can have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly asks to cancel for some, not all, passengers; else False.\n2. partial_or_full: PARTIAL if the user explicitly requests canceling only specific legs (like just departure, return, or named segments); otherwise, FULL.\n\nDecide only from clear, explicit user statements in the chat.",
+      "combined_score": 0.918611363074132,
+      "cancel_adj_b_acc": 0.9090909090909092,
+      "partial_adj_b_acc": 0.9283333333333332,
+      "word_count": 71,
+      "step": 7
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with possible multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True ONLY if the user explicitly states to cancel for certain passengers, not all; otherwise, False.\n2. partial_or_full: PARTIAL if the user clearly specifies cancelling only particular legs (e.g., departure, return, or specific airports/routes); otherwise, FULL.\n\nRely strictly on direct, explicit user statements in the chat.",
+      "combined_score": 0.9185266525029242,
+      "cancel_adj_b_acc": 0.9298245614035088,
+      "partial_adj_b_acc": 0.9075,
+      "word_count": 69,
+      "step": 9
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (one or more legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True ONLY if the user clearly asks to cancel for specific passengers (not all); otherwise, False.\n2. partial_or_full: PARTIAL if the user specifically mentions cancelling just some legs (e.g., departure, return, certain routes/airports); otherwise, FULL.\n\nBase both answers strictly on clear, explicit statements by the user in the chat.",
+      "combined_score": 0.9171694294212209,
+      "cancel_adj_b_acc": 0.9074074074074074,
+      "partial_adj_b_acc": 0.9271437782076082,
+      "word_count": 73,
+      "step": 6
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True ONLY if the user clearly requests cancellation for specific passengers (not all others); else, False.\n2. partial_or_full: PARTIAL if the user explicitly asks to cancel only certain legs (such as just one direction, a specific segment, or particular airports/routes); else, FULL.\n\nDecide strictly using only clear, explicit user statements in the chat.",
+      "combined_score": 0.9162361686167981,
+      "cancel_adj_b_acc": 0.924277726001864,
+      "partial_adj_b_acc": 0.9083333333333332,
+      "word_count": 78,
+      "step": 8
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly requests to cancel for specific passengers (not all); else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only certain legs (such as departure, return, or particular routes/airports); else, FULL.\n\nBase both answers strictly on explicit user statements in the chat.",
+      "combined_score": 0.9127639052620298,
+      "cancel_adj_b_acc": 0.8793103448275863,
+      "partial_adj_b_acc": 0.9488636363636362,
+      "word_count": 73,
+      "step": 15
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (with one or more legs) and a chat about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True ONLY if the user explicitly requests to cancel for some (not all) passengers; else, False.\n2. partial_or_full: PARTIAL if the user clearly states to cancel only specific legs (e.g., only departure, return, or named routes/airports); else, FULL.\n\nDecide strictly based on the user\u2019s clear, explicit statements in the chat.",
+      "combined_score": 0.9112077924365456,
+      "cancel_adj_b_acc": 0.9152542372881356,
+      "partial_adj_b_acc": 0.9071969696969697,
+      "word_count": 75,
+      "step": 11
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (may have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly requests cancellation for specific (not all) passengers; otherwise, False.\n2. partial_or_full: PARTIAL if the user specifically asks to cancel only certain legs (e.g., just one direction, particular airports/routes); otherwise, FULL.\n\nBase both answers strictly on direct, explicit user statements in the chat.",
+      "combined_score": 0.8845147105015182,
+      "cancel_adj_b_acc": 0.8461538461538463,
+      "partial_adj_b_acc": 0.926518973459092,
+      "word_count": 72,
+      "step": 8
+    },
+    {
+      "prompt": "You are Ava from Navan. Given a flight booking (may have multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly says to cancel for less than all passengers; else, False.\n2. partial_or_full: PARTIAL if the user clearly requests cancelling specific legs (e.g., departure, return, certain routes/airports); else, FULL.\n\nDecide strictly based on explicit user statements in the chat.",
+      "combined_score": 0.8488179669030732,
+      "cancel_adj_b_acc": 0.7678571428571428,
+      "partial_adj_b_acc": 0.9488636363636362,
+      "word_count": 64,
+      "step": 27
+    },
+    {
+      "prompt": "You are Ava, the Navan flight kiosk assistant. Given a flight booking (can have multiple legs) and chat history about cancellation, classify:\n\n1. cancel_not_for_all_passengers: True only if the user clearly asks to cancel for some, not all, passengers; else False.\n2. partial_or_full: PARTIAL if the user explicitly requests cancelling only certain legs (e.g., just one direction or specific airports/routes); otherwise, FULL.\n\nDecide only from clear, explicit user statements in the chat.",
+      "combined_score": 0.8300061560109049,
+      "cancel_adj_b_acc": 0.7647058823529411,
+      "partial_adj_b_acc": 0.9075,
+      "word_count": 71,
+      "step": 7
+    },
+    {
+      "prompt": "You are Ava from Navan. Given a flight booking (may have multiple legs) and a chat about cancellation:\n\n1. cancel_not_for_all_passengers: True only if the user explicitly says to cancel for less than all passengers; else, False.\n2. partial_or_full: PARTIAL if the user clearly requests cancelling only certain legs (e.g., departure, return, or particular routes/airports); else, FULL.\n\nUse only explicit user statements in the chat to decide.",
+      "combined_score": 0.7562103254687558,
+      "cancel_adj_b_acc": 0.6379310344827587,
+      "partial_adj_b_acc": 0.9283333333333332,
+      "word_count": 66,
+      "step": 27
+    }
+  ],
+  "step_statistics": [
+    {
+      "step": 0,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "df06b7f2d833dbebe0fdd160d593dfa7",
+        "d1673ee125d11072d09412200102537a",
+        "1b7a7760adb690e1bc757cd7c866cfa1"
+      ],
+      "combined_scores_mean": 0.952610609660034,
+      "combined_scores_std": 0.006544127878316173,
+      "combined_scores_values": [
+        0.9474961106029104,
+        0.9484880508771513,
+        0.9618476675000404
+      ],
+      "word_counts_mean": 104.0,
+      "word_counts_std": 2.8284271247461903,
+      "word_counts_values": [
+        106,
+        106,
+        100
+      ],
+      "cancel_precision_mean": 0.9662698412698413,
+      "cancel_precision_std": 0.013125266197254943,
+      "cancel_precision_values": [
+        0.95,
+        0.9666666666666667,
+        0.9821428571428571
+      ],
+      "cancel_recall_mean": 0.9770984665052462,
+      "cancel_recall_std": 0.007784722245302847,
+      "cancel_recall_values": [
+        0.9661016949152542,
+        0.9830508474576272,
+        0.9821428571428571
+      ],
+      "cancel_f1_mean": 0.9716386554621849,
+      "cancel_f1_std": 0.01011171504075182,
+      "cancel_f1_values": [
+        0.957983193277311,
+        0.9747899159663865,
+        0.9821428571428571
+      ],
+      "cancel_accuracy_mean": 0.9838334800853542,
+      "cancel_accuracy_std": 0.0059576609426920234,
+      "cancel_accuracy_values": [
+        0.9758454106280193,
+        0.9855072463768116,
+        0.9901477832512315
+      ],
+      "cancel_balanced_accuracy_mean": 0.9817848157739197,
+      "cancel_balanced_accuracy_std": 0.006382281673759509,
+      "cancel_balanced_accuracy_values": [
+        0.972915712322492,
+        0.9847686669720568,
+        0.9876700680272108
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9635696315478398,
+      "cancel_adj_balanced_accuracy_std": 0.012764563347519018,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9458314246449839,
+        0.9695373339441136,
+        0.9753401360544216
+      ],
+      "partial_precision_mean": 0.9391836734693878,
+      "partial_precision_std": 0.0005772300254583608,
+      "partial_precision_values": [
+        0.94,
+        0.9387755102040817,
+        0.9387755102040817
+      ],
+      "partial_recall_mean": 0.9720744680851063,
+      "partial_recall_std": 0.009718134546338825,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9583333333333334,
+        0.9787234042553191
+      ],
+      "partial_f1_mean": 0.9553235383500479,
+      "partial_f1_std": 0.00487016250912731,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9484536082474226,
+        0.9583333333333334
+      ],
+      "partial_accuracy_mean": 0.9706594349451493,
+      "partial_accuracy_std": 0.003142726563988929,
+      "partial_accuracy_values": [
+        0.972972972972973,
+        0.9662162162162162,
+        0.9727891156462585
+      ],
+      "partial_balanced_accuracy_mean": 0.9710372340425533,
+      "partial_balanced_accuracy_std": 0.004859067273169464,
+      "partial_balanced_accuracy_values": [
+        0.9745833333333334,
+        0.9641666666666666,
+        0.9743617021276596
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9420744680851064,
+      "partial_adj_balanced_accuracy_std": 0.009718134546338929,
+      "partial_adj_balanced_accuracy_values": [
+        0.9491666666666667,
+        0.9283333333333332,
+        0.9487234042553192
+      ]
+    },
+    {
+      "step": 1,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "05a6e2d97f136c383ed795ffb34fae72",
+        "ec5d546c786901a4beaf53f4ad8b8dd0",
+        "f5894d1b209cc1f127f995fb07a91ae7"
+      ],
+      "combined_scores_mean": 0.9480877829701818,
+      "combined_scores_std": 0.009276881461575334,
+      "combined_scores_values": [
+        0.9508165378793915,
+        0.935610070419294,
+        0.9578367406118603
+      ],
+      "word_counts_mean": 87.0,
+      "word_counts_std": 7.118052168020874,
+      "word_counts_values": [
+        93,
+        91,
+        77
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9652734238941135,
+      "cancel_recall_std": 0.001249071478721091,
+      "cancel_recall_values": [
+        0.9636363636363636,
+        0.9655172413793104,
+        0.9666666666666667
+      ],
+      "cancel_f1_mean": 0.9823294897633286,
+      "cancel_f1_std": 0.0006469197117961866,
+      "cancel_f1_values": [
+        0.9814814814814815,
+        0.9824561403508771,
+        0.9830508474576272
+      ],
+      "cancel_accuracy_mean": 0.9902745535905897,
+      "cancel_accuracy_std": 9.74054976755688e-05,
+      "cancel_accuracy_values": [
+        0.9901477832512315,
+        0.9902912621359223,
+        0.9903846153846154
+      ],
+      "cancel_balanced_accuracy_mean": 0.9826367119470568,
+      "cancel_balanced_accuracy_std": 0.0006245357393605698,
+      "cancel_balanced_accuracy_values": [
+        0.9818181818181818,
+        0.9827586206896552,
+        0.9833333333333334
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9652734238941137,
+      "cancel_adj_balanced_accuracy_std": 0.0012490714787211396,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9636363636363636,
+        0.9655172413793105,
+        0.9666666666666668
+      ],
+      "partial_precision_mean": 0.9452777777777778,
+      "partial_precision_std": 0.00928791860961141,
+      "partial_precision_values": [
+        0.9583333333333334,
+        0.9375,
+        0.94
+      ],
+      "partial_recall_mean": 0.9583333333333334,
+      "partial_recall_std": 0.01701034543599428,
+      "partial_recall_values": [
+        0.9583333333333334,
+        0.9375,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.951672335600907,
+      "partial_f1_std": 0.010027365618655738,
+      "partial_f1_values": [
+        0.9583333333333334,
+        0.9375,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9684684684684685,
+      "partial_accuracy_std": 0.006370331362041008,
+      "partial_accuracy_values": [
+        0.972972972972973,
+        0.9594594594594594,
+        0.972972972972973
+      ],
+      "partial_balanced_accuracy_mean": 0.9658333333333333,
+      "partial_balanced_accuracy_std": 0.00882573048073183,
+      "partial_balanced_accuracy_values": [
+        0.9691666666666667,
+        0.95375,
+        0.9745833333333334
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9316666666666666,
+      "partial_adj_balanced_accuracy_std": 0.01765146096146366,
+      "partial_adj_balanced_accuracy_values": [
+        0.9383333333333335,
+        0.9075,
+        0.9491666666666667
+      ]
+    },
+    {
+      "step": 2,
+      "num_instructions": 1,
+      "md5_hashes": [
+        "fe8b14e8a2d933e4b2f2aaea98916d68"
+      ],
+      "combined_scores_mean": 0.9377542907917503,
+      "combined_scores_std": 0.0,
+      "combined_scores_values": [
+        0.9377542907917503
+      ],
+      "word_counts_mean": 71.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        71
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0
+      ],
+      "cancel_recall_mean": 0.9473684210526315,
+      "cancel_recall_std": 0.0,
+      "cancel_recall_values": [
+        0.9473684210526315
+      ],
+      "cancel_f1_mean": 0.972972972972973,
+      "cancel_f1_std": 0.0,
+      "cancel_f1_values": [
+        0.972972972972973
+      ],
+      "cancel_accuracy_mean": 0.9853658536585366,
+      "cancel_accuracy_std": 0.0,
+      "cancel_accuracy_values": [
+        0.9853658536585366
+      ],
+      "cancel_balanced_accuracy_mean": 0.9736842105263157,
+      "cancel_balanced_accuracy_std": 0.0,
+      "cancel_balanced_accuracy_values": [
+        0.9736842105263157
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9473684210526314,
+      "cancel_adj_balanced_accuracy_std": 0.0,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9473684210526314
+      ],
+      "partial_precision_mean": 0.9387755102040817,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.9387755102040817
+      ],
+      "partial_recall_mean": 0.9583333333333334,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9583333333333334
+      ],
+      "partial_f1_mean": 0.9484536082474226,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9484536082474226
+      ],
+      "partial_accuracy_mean": 0.9662162162162162,
+      "partial_accuracy_std": 0.0,
+      "partial_accuracy_values": [
+        0.9662162162162162
+      ],
+      "partial_balanced_accuracy_mean": 0.9641666666666666,
+      "partial_balanced_accuracy_std": 0.0,
+      "partial_balanced_accuracy_values": [
+        0.9641666666666666
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9283333333333332,
+      "partial_adj_balanced_accuracy_std": 0.0,
+      "partial_adj_balanced_accuracy_values": [
+        0.9283333333333332
+      ]
+    },
+    {
+      "step": 3,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "cf2cf3ef56ce3bfbfb028560ec8a3322",
+        "815b4b13b9b1d732a4d69a15b294d52f",
+        "5c7b2e533c99a46d1a1b462618a58ff4"
+      ],
+      "combined_scores_mean": 0.9427823558172882,
+      "combined_scores_std": 0.008862623213102681,
+      "combined_scores_values": [
+        0.930264336577441,
+        0.9495831505046073,
+        0.9484995803698161
+      ],
+      "word_counts_mean": 76.0,
+      "word_counts_std": 0.816496580927726,
+      "word_counts_values": [
+        77,
+        75,
+        76
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9434930839664913,
+      "cancel_recall_std": 0.008013990190674574,
+      "cancel_recall_values": [
+        0.9322033898305084,
+        0.95,
+        0.9482758620689655
+      ],
+      "cancel_f1_mean": 0.970907527498119,
+      "cancel_f1_std": 0.004255443090698677,
+      "cancel_f1_values": [
+        0.9649122807017544,
+        0.9743589743589743,
+        0.9734513274336283
+      ],
+      "cancel_accuracy_mean": 0.9838730350792918,
+      "cancel_accuracy_std": 0.002262054711809212,
+      "cancel_accuracy_values": [
+        0.9806763285024155,
+        0.9855769230769231,
+        0.9853658536585366
+      ],
+      "cancel_balanced_accuracy_mean": 0.9717465419832457,
+      "cancel_balanced_accuracy_std": 0.004006995095337287,
+      "cancel_balanced_accuracy_values": [
+        0.9661016949152542,
+        0.975,
+        0.9741379310344828
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9434930839664913,
+      "cancel_adj_balanced_accuracy_std": 0.008013990190674574,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9322033898305084,
+        0.95,
+        0.9482758620689655
+      ],
+      "partial_precision_mean": 0.9391836734693878,
+      "partial_precision_std": 0.0005772300254583608,
+      "partial_precision_values": [
+        0.9387755102040817,
+        0.94,
+        0.9387755102040817
+      ],
+      "partial_recall_mean": 0.9720744680851063,
+      "partial_recall_std": 0.009718134546338825,
+      "partial_recall_values": [
+        0.9583333333333334,
+        0.9791666666666666,
+        0.9787234042553191
+      ],
+      "partial_f1_mean": 0.9553235383500479,
+      "partial_f1_std": 0.00487016250912731,
+      "partial_f1_values": [
+        0.9484536082474226,
+        0.9591836734693877,
+        0.9583333333333334
+      ],
+      "partial_accuracy_mean": 0.9706594349451493,
+      "partial_accuracy_std": 0.003142726563988929,
+      "partial_accuracy_values": [
+        0.9662162162162162,
+        0.972972972972973,
+        0.9727891156462585
+      ],
+      "partial_balanced_accuracy_mean": 0.9710372340425533,
+      "partial_balanced_accuracy_std": 0.004859067273169464,
+      "partial_balanced_accuracy_values": [
+        0.9641666666666666,
+        0.9745833333333334,
+        0.9743617021276596
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9420744680851064,
+      "partial_adj_balanced_accuracy_std": 0.009718134546338929,
+      "partial_adj_balanced_accuracy_values": [
+        0.9283333333333332,
+        0.9491666666666667,
+        0.9487234042553192
+      ]
+    },
+    {
+      "step": 4,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "b8376c9e6eb91efe8f6fca2d203de012",
+        "745075a422630bb29cfa7e4bce6c6861"
+      ],
+      "combined_scores_mean": 0.9510827535075737,
+      "combined_scores_std": 0.004587782081854397,
+      "combined_scores_values": [
+        0.955670535589428,
+        0.9464949714257193
+      ],
+      "word_counts_mean": 78.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        78,
+        78
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9533542976939203,
+      "cancel_recall_std": 0.008909853249475908,
+      "cancel_recall_values": [
+        0.9622641509433962,
+        0.9444444444444444
+      ],
+      "cancel_f1_mean": 0.9760989010989011,
+      "cancel_f1_std": 0.004670329670329654,
+      "cancel_f1_values": [
+        0.9807692307692307,
+        0.9714285714285714
+      ],
+      "cancel_accuracy_mean": 0.9875248756218906,
+      "cancel_accuracy_std": 0.0025248756218905766,
+      "cancel_accuracy_values": [
+        0.9900497512437811,
+        0.985
+      ],
+      "cancel_balanced_accuracy_mean": 0.9766771488469601,
+      "cancel_balanced_accuracy_std": 0.004454926624737954,
+      "cancel_balanced_accuracy_values": [
+        0.9811320754716981,
+        0.9722222222222222
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9533542976939203,
+      "cancel_adj_balanced_accuracy_std": 0.008909853249475908,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9622641509433962,
+        0.9444444444444444
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94,
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9727878563495003,
+      "partial_accuracy_std": 0.0001851166234728141,
+      "partial_accuracy_values": [
+        0.972972972972973,
+        0.9726027397260274
+      ],
+      "partial_balanced_accuracy_mean": 0.9744302721088436,
+      "partial_balanced_accuracy_std": 0.0001530612244898255,
+      "partial_balanced_accuracy_values": [
+        0.9745833333333334,
+        0.9742772108843537
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9488605442176871,
+      "partial_adj_balanced_accuracy_std": 0.000306122448979651,
+      "partial_adj_balanced_accuracy_values": [
+        0.9491666666666667,
+        0.9485544217687074
+      ]
+    },
+    {
+      "step": 5,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "ac995b9998b0c4321bc6c438bb779e14",
+        "d9f1597e1db19cb448177a5e1f7b6054"
+      ],
+      "combined_scores_mean": 0.9450599029954756,
+      "combined_scores_std": 0.004523247509131634,
+      "combined_scores_values": [
+        0.9495831505046073,
+        0.940536655486344
+      ],
+      "word_counts_mean": 74.5,
+      "word_counts_std": 1.5,
+      "word_counts_values": [
+        73,
+        76
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9571428571428571,
+      "cancel_recall_std": 0.007142857142857173,
+      "cancel_recall_values": [
+        0.95,
+        0.9642857142857143
+      ],
+      "cancel_f1_mean": 0.9780885780885781,
+      "cancel_f1_std": 0.0037296037296037365,
+      "cancel_f1_values": [
+        0.9743589743589743,
+        0.9818181818181818
+      ],
+      "cancel_accuracy_mean": 0.9878623531640773,
+      "cancel_accuracy_std": 0.0022854300871542055,
+      "cancel_accuracy_values": [
+        0.9855769230769231,
+        0.9901477832512315
+      ],
+      "cancel_balanced_accuracy_mean": 0.9785714285714286,
+      "cancel_balanced_accuracy_std": 0.0035714285714286143,
+      "cancel_balanced_accuracy_values": [
+        0.975,
+        0.9821428571428572
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9571428571428572,
+      "cancel_adj_balanced_accuracy_std": 0.0071428571428572285,
+      "cancel_adj_balanced_accuracy_values": [
+        0.95,
+        0.9642857142857144
+      ],
+      "partial_precision_mean": 0.9299999999999999,
+      "partial_precision_std": 0.009999999999999953,
+      "partial_precision_values": [
+        0.94,
+        0.92
+      ],
+      "partial_recall_mean": 0.96875,
+      "partial_recall_std": 0.01041666666666663,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9583333333333334
+      ],
+      "partial_f1_mean": 0.9489795918367347,
+      "partial_f1_std": 0.010204081632653017,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9387755102040817
+      ],
+      "partial_accuracy_mean": 0.9660783232211804,
+      "partial_accuracy_std": 0.006894649751792659,
+      "partial_accuracy_values": [
+        0.972972972972973,
+        0.9591836734693877
+      ],
+      "partial_balanced_accuracy_mean": 0.9667739898989899,
+      "partial_balanced_accuracy_std": 0.007809343434343474,
+      "partial_balanced_accuracy_values": [
+        0.9745833333333334,
+        0.9589646464646464
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9335479797979798,
+      "partial_adj_balanced_accuracy_std": 0.015618686868686948,
+      "partial_adj_balanced_accuracy_values": [
+        0.9491666666666667,
+        0.9179292929292928
+      ]
+    },
+    {
+      "step": 6,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "20fb43269d208f119c57e254846e2a6b",
+        "b7d7c230b9c167a3cf530ea0608afc8e"
+      ],
+      "combined_scores_mean": 0.9343649386145444,
+      "combined_scores_std": 0.017195509193323466,
+      "combined_scores_values": [
+        0.9515604478078679,
+        0.9171694294212209
+      ],
+      "word_counts_mean": 73.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        73,
+        73
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9358465608465609,
+      "cancel_recall_std": 0.02843915343915343,
+      "cancel_recall_values": [
+        0.9642857142857143,
+        0.9074074074074074
+      ],
+      "cancel_f1_mean": 0.9666372462488968,
+      "cancel_f1_std": 0.01518093556928507,
+      "cancel_f1_values": [
+        0.9818181818181818,
+        0.9514563106796117
+      ],
+      "cancel_accuracy_mean": 0.9825980392156863,
+      "cancel_accuracy_std": 0.007598039215686303,
+      "cancel_accuracy_values": [
+        0.9901960784313726,
+        0.975
+      ],
+      "cancel_balanced_accuracy_mean": 0.9679232804232805,
+      "cancel_balanced_accuracy_std": 0.014219576719576743,
+      "cancel_balanced_accuracy_values": [
+        0.9821428571428572,
+        0.9537037037037037
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9358465608465609,
+      "cancel_adj_balanced_accuracy_std": 0.028439153439153486,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9642857142857144,
+        0.9074074074074074
+      ],
+      "partial_precision_mean": 0.9295343137254901,
+      "partial_precision_std": 0.007965686274509831,
+      "partial_precision_values": [
+        0.9215686274509803,
+        0.9375
+      ],
+      "partial_recall_mean": 0.9683067375886525,
+      "partial_recall_std": 0.010859929078014141,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9574468085106383
+      ],
+      "partial_f1_mean": 0.9484316852737905,
+      "partial_f1_std": 0.0010632642211589882,
+      "partial_f1_values": [
+        0.9494949494949495,
+        0.9473684210526315
+      ],
+      "partial_accuracy_mean": 0.9659848204368753,
+      "partial_accuracy_std": 0.00023139577934100375,
+      "partial_accuracy_values": [
+        0.9662162162162162,
+        0.9657534246575342
+      ],
+      "partial_balanced_accuracy_mean": 0.9665776112185687,
+      "partial_balanced_accuracy_std": 0.003005722114764575,
+      "partial_balanced_accuracy_values": [
+        0.9695833333333332,
+        0.9635718891038041
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9331552224371373,
+      "partial_adj_balanced_accuracy_std": 0.00601144422952915,
+      "partial_adj_balanced_accuracy_values": [
+        0.9391666666666665,
+        0.9271437782076082
+      ]
+    },
+    {
+      "step": 7,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "7e37e2aa4f9d6c5a5001af11bb7e8efa",
+        "2b8d9683100094ff7486aed23baf4629",
+        "056478ecf9cdaa23348e8159008daadd"
+      ],
+      "combined_scores_mean": 0.8990474877969047,
+      "combined_scores_std": 0.05032384926064684,
+      "combined_scores_values": [
+        0.8300061560109049,
+        0.9485249443056775,
+        0.918611363074132
+      ],
+      "word_counts_mean": 71.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        71,
+        71,
+        71
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.8848553407376937,
+      "cancel_recall_std": 0.08985679240609201,
+      "cancel_recall_values": [
+        0.7647058823529411,
+        0.9807692307692307,
+        0.9090909090909091
+      ],
+      "cancel_f1_mean": 0.9364462937278472,
+      "cancel_f1_std": 0.05171199191050055,
+      "cancel_f1_values": [
+        0.8666666666666667,
+        0.9902912621359223,
+        0.9523809523809523
+      ],
+      "cancel_accuracy_mean": 0.9700226501967967,
+      "cancel_accuracy_std": 0.022891125649849107,
+      "cancel_accuracy_values": [
+        0.9396984924623115,
+        0.995,
+        0.9753694581280788
+      ],
+      "cancel_balanced_accuracy_mean": 0.9424276703688469,
+      "cancel_balanced_accuracy_std": 0.04492839620304603,
+      "cancel_balanced_accuracy_values": [
+        0.8823529411764706,
+        0.9903846153846154,
+        0.9545454545454546
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.8848553407376937,
+      "cancel_adj_balanced_accuracy_std": 0.08985679240609205,
+      "cancel_adj_balanced_accuracy_values": [
+        0.7647058823529411,
+        0.9807692307692308,
+        0.9090909090909092
+      ],
+      "partial_precision_mean": 0.9320918367346939,
+      "partial_precision_std": 0.008566061649869524,
+      "partial_precision_values": [
+        0.9375,
+        0.92,
+        0.9387755102040817
+      ],
+      "partial_recall_mean": 0.951388888888889,
+      "partial_recall_std": 0.009820927516479845,
+      "partial_recall_values": [
+        0.9375,
+        0.9583333333333334,
+        0.9583333333333334
+      ],
+      "partial_f1_mean": 0.9415763728171681,
+      "partial_f1_std": 0.004890740021887645,
+      "partial_f1_values": [
+        0.9375,
+        0.9387755102040817,
+        0.9484536082474226
+      ],
+      "partial_accuracy_mean": 0.9617117117117117,
+      "partial_accuracy_std": 0.003185165681020504,
+      "partial_accuracy_values": [
+        0.9594594594594594,
+        0.9594594594594594,
+        0.9662162162162162
+      ],
+      "partial_balanced_accuracy_mean": 0.9590277777777777,
+      "partial_balanced_accuracy_std": 0.004253720230864863,
+      "partial_balanced_accuracy_values": [
+        0.95375,
+        0.9591666666666667,
+        0.9641666666666666
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9180555555555555,
+      "partial_adj_balanced_accuracy_std": 0.008507440461729725,
+      "partial_adj_balanced_accuracy_values": [
+        0.9075,
+        0.9183333333333334,
+        0.9283333333333332
+      ]
+    },
+    {
+      "step": 8,
+      "num_instructions": 4,
+      "md5_hashes": [
+        "e45535cbd722d3fe1c042ff4594e8c68",
+        "56532433fb49cbea47c5f93a53aea45a",
+        "19542bc0620d33567d60d57cc6cf3ffe",
+        "36066e597227a87680306a461765cade"
+      ],
+      "combined_scores_mean": 0.9236091474624986,
+      "combined_scores_std": 0.025995332706784034,
+      "combined_scores_values": [
+        0.8845147105015182,
+        0.9162361686167981,
+        0.9423326942869598,
+        0.9513530164447184
+      ],
+      "word_counts_mean": 71.5,
+      "word_counts_std": 4.153311931459037,
+      "word_counts_values": [
+        72,
+        78,
+        69,
+        67
+      ],
+      "cancel_precision_mean": 0.9905525846702318,
+      "cancel_precision_std": 0.009460858830456767,
+      "cancel_precision_values": [
+        1.0,
+        0.9818181818181818,
+        0.9803921568627451,
+        1.0
+      ],
+      "cancel_recall_mean": 0.921217567403319,
+      "cancel_recall_std": 0.04493799135018136,
+      "cancel_recall_values": [
+        0.8461538461538461,
+        0.9310344827586207,
+        0.9433962264150944,
+        0.9642857142857143
+      ],
+      "cancel_f1_mean": 0.9539438806031727,
+      "cancel_f1_std": 0.023598278912479845,
+      "cancel_f1_values": [
+        0.9166666666666666,
+        0.9557522123893806,
+        0.9615384615384616,
+        0.9818181818181818
+      ],
+      "cancel_accuracy_mean": 0.9762143979646012,
+      "cancel_accuracy_std": 0.011149700590422154,
+      "cancel_accuracy_values": [
+        0.9591836734693877,
+        0.9757281553398058,
+        0.9797979797979798,
+        0.9901477832512315
+      ],
+      "cancel_balanced_accuracy_mean": 0.9589021201415476,
+      "cancel_balanced_accuracy_std": 0.02191707623261857,
+      "cancel_balanced_accuracy_values": [
+        0.9230769230769231,
+        0.962138863000932,
+        0.9682498373454782,
+        0.9821428571428572
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9178042402830953,
+      "cancel_adj_balanced_accuracy_std": 0.04383415246523714,
+      "cancel_adj_balanced_accuracy_values": [
+        0.8461538461538463,
+        0.924277726001864,
+        0.9364996746909564,
+        0.9642857142857144
+      ],
+      "partial_precision_mean": 0.9252573529411764,
+      "partial_precision_std": 0.01519510492612269,
+      "partial_precision_values": [
+        0.9375,
+        0.9019607843137255,
+        0.94,
+        0.9215686274509803
+      ],
+      "partial_recall_mean": 0.9685283687943262,
+      "partial_recall_std": 0.010642914187538053,
+      "partial_recall_values": [
+        0.9574468085106383,
+        0.9583333333333334,
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9463349933274745,
+      "partial_f1_std": 0.01080015999638687,
+      "partial_f1_values": [
+        0.9473684210526315,
+        0.9292929292929293,
+        0.9591836734693877,
+        0.9494949494949495
+      ],
+      "partial_accuracy_mean": 0.9640951670354378,
+      "partial_accuracy_std": 0.007140782396582123,
+      "partial_accuracy_values": [
+        0.9652777777777778,
+        0.9527027027027027,
+        0.9724137931034482,
+        0.9659863945578231
+      ],
+      "partial_balanced_accuracy_mean": 0.9652317205837715,
+      "partial_balanced_accuracy_std": 0.007458809711773049,
+      "partial_balanced_accuracy_values": [
+        0.963259486729546,
+        0.9541666666666666,
+        0.9741194158075601,
+        0.9693813131313131
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.930463441167543,
+      "partial_adj_balanced_accuracy_std": 0.014917619423546098,
+      "partial_adj_balanced_accuracy_values": [
+        0.926518973459092,
+        0.9083333333333332,
+        0.9482388316151202,
+        0.9387626262626263
+      ]
+    },
+    {
+      "step": 9,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "0c0aba39a49e0620100de5de818fd029",
+        "da6e1f1bbfc039886b00cc22e1ecddcf",
+        "94077dceb6ca9e6d7546f5a76e1bba99"
+      ],
+      "combined_scores_mean": 0.925360334408072,
+      "combined_scores_std": 0.005639364752146182,
+      "combined_scores_values": [
+        0.9323379682394953,
+        0.9185266525029242,
+        0.9252163824817964
+      ],
+      "word_counts_mean": 69.33333333333333,
+      "word_counts_std": 1.247219128924647,
+      "word_counts_values": [
+        68,
+        69,
+        71
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9262315393002281,
+      "cancel_recall_std": 0.006832754327183295,
+      "cancel_recall_values": [
+        0.9166666666666666,
+        0.9298245614035088,
+        0.9322033898305084
+      ],
+      "cancel_f1_mean": 0.9616901278228509,
+      "cancel_f1_std": 0.0036915373804021928,
+      "cancel_f1_values": [
+        0.9565217391304348,
+        0.9636363636363636,
+        0.9649122807017544
+      ],
+      "cancel_accuracy_mean": 0.9789640962400901,
+      "cancel_accuracy_std": 0.002289449776960269,
+      "cancel_accuracy_values": [
+        0.9757281553398058,
+        0.9804878048780488,
+        0.9806763285024155
+      ],
+      "cancel_balanced_accuracy_mean": 0.963115769650114,
+      "cancel_balanced_accuracy_std": 0.003416377163591673,
+      "cancel_balanced_accuracy_values": [
+        0.9583333333333333,
+        0.9649122807017544,
+        0.9661016949152542
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.926231539300228,
+      "cancel_adj_balanced_accuracy_std": 0.006832754327183346,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9166666666666665,
+        0.9298245614035088,
+        0.9322033898305084
+      ],
+      "partial_precision_mean": 0.9325,
+      "partial_precision_std": 0.008897565210026059,
+      "partial_precision_values": [
+        0.94,
+        0.9375,
+        0.92
+      ],
+      "partial_recall_mean": 0.9583333333333334,
+      "partial_recall_std": 0.01701034543599428,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9375,
+        0.9583333333333334
+      ],
+      "partial_f1_mean": 0.9451530612244898,
+      "partial_f1_std": 0.009934797147574734,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9375,
+        0.9387755102040817
+      ],
+      "partial_accuracy_mean": 0.9638405528816488,
+      "partial_accuracy_std": 0.006195801735683697,
+      "partial_accuracy_values": [
+        0.9726027397260274,
+        0.9594594594594594,
+        0.9594594594594594
+      ],
+      "partial_balanced_accuracy_mean": 0.9623979591836734,
+      "partial_balanced_accuracy_std": 0.008686101356785653,
+      "partial_balanced_accuracy_values": [
+        0.9742772108843537,
+        0.95375,
+        0.9591666666666667
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.924795918367347,
+      "partial_adj_balanced_accuracy_std": 0.017372202713571303,
+      "partial_adj_balanced_accuracy_values": [
+        0.9485544217687074,
+        0.9075,
+        0.9183333333333334
+      ]
+    },
+    {
+      "step": 10,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "0e458cfa716d7a90c9b2592fd54fc39a",
+        "a5a77cc8a463383ae5e03add27116cff"
+      ],
+      "combined_scores_mean": 0.9435552128189403,
+      "combined_scores_std": 0.0030954780111791536,
+      "combined_scores_values": [
+        0.9466506908301194,
+        0.9404597348077611
+      ],
+      "word_counts_mean": 70.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        70,
+        70
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9494350282485875,
+      "cancel_recall_std": 0.01723163841807912,
+      "cancel_recall_values": [
+        0.9666666666666667,
+        0.9322033898305084
+      ],
+      "cancel_f1_mean": 0.9739815640796907,
+      "cancel_f1_std": 0.009069283377936388,
+      "cancel_f1_values": [
+        0.9830508474576272,
+        0.9649122807017544
+      ],
+      "cancel_accuracy_mean": 0.9854603442615262,
+      "cancel_accuracy_std": 0.004877819989681509,
+      "cancel_accuracy_values": [
+        0.9903381642512077,
+        0.9805825242718447
+      ],
+      "cancel_balanced_accuracy_mean": 0.9747175141242939,
+      "cancel_balanced_accuracy_std": 0.008615819209039588,
+      "cancel_balanced_accuracy_values": [
+        0.9833333333333334,
+        0.9661016949152542
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9494350282485876,
+      "cancel_adj_balanced_accuracy_std": 0.017231638418079176,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9666666666666668,
+        0.9322033898305084
+      ],
+      "partial_precision_mean": 0.93875,
+      "partial_precision_std": 0.0012499999999999734,
+      "partial_precision_values": [
+        0.9375,
+        0.94
+      ],
+      "partial_recall_mean": 0.9683067375886525,
+      "partial_recall_std": 0.010859929078014141,
+      "partial_recall_values": [
+        0.9574468085106383,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9532760472610096,
+      "partial_f1_std": 0.005907626208378092,
+      "partial_f1_values": [
+        0.9473684210526315,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9693877551020408,
+      "partial_accuracy_std": 0.003401360544217691,
+      "partial_accuracy_values": [
+        0.9659863945578231,
+        0.9727891156462585
+      ],
+      "partial_balanced_accuracy_mean": 0.9690776112185686,
+      "partial_balanced_accuracy_std": 0.005354206963249508,
+      "partial_balanced_accuracy_values": [
+        0.9637234042553191,
+        0.9744318181818181
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9381552224371372,
+      "partial_adj_balanced_accuracy_std": 0.010708413926499016,
+      "partial_adj_balanced_accuracy_values": [
+        0.9274468085106382,
+        0.9488636363636362
+      ]
+    },
+    {
+      "step": 11,
+      "num_instructions": 4,
+      "md5_hashes": [
+        "2ebc926f373a56e6128227157b5cf408",
+        "c2ae1af6634d487a4df45abb7110383f",
+        "af083980ebb83a5d3cec83d074ef0a99",
+        "9ed16dd8bfcb267a3e224bb6ff798dcd"
+      ],
+      "combined_scores_mean": 0.9275108053666439,
+      "combined_scores_std": 0.009641672670041098,
+      "combined_scores_values": [
+        0.9112077924365456,
+        0.9316966100317048,
+        0.9363193956939213,
+        0.9308194233044038
+      ],
+      "word_counts_mean": 74.75,
+      "word_counts_std": 0.4330127018922193,
+      "word_counts_values": [
+        75,
+        75,
+        74,
+        75
+      ],
+      "cancel_precision_mean": 0.9951923076923077,
+      "cancel_precision_std": 0.00832716734408116,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        0.9807692307692307,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9421068697851557,
+      "cancel_recall_std": 0.01695430417686927,
+      "cancel_recall_values": [
+        0.9152542372881356,
+        0.9454545454545454,
+        0.9622641509433962,
+        0.9454545454545454
+      ],
+      "cancel_f1_mean": 0.967776504365703,
+      "cancel_f1_std": 0.006945650911978455,
+      "cancel_f1_values": [
+        0.9557522123893806,
+        0.9719626168224299,
+        0.9714285714285714,
+        0.9719626168224299
+      ],
+      "cancel_accuracy_mean": 0.9827374575541632,
+      "cancel_accuracy_std": 0.004047834293697837,
+      "cancel_accuracy_values": [
+        0.9757281553398058,
+        0.9852216748768473,
+        0.985,
+        0.985
+      ],
+      "cancel_balanced_accuracy_mean": 0.9702030947565234,
+      "cancel_balanced_accuracy_std": 0.007542598847136256,
+      "cancel_balanced_accuracy_values": [
+        0.9576271186440678,
+        0.9727272727272727,
+        0.9777307149274804,
+        0.9727272727272727
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9404061895130468,
+      "cancel_adj_balanced_accuracy_std": 0.015085197694272514,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9152542372881356,
+        0.9454545454545453,
+        0.9554614298549609,
+        0.9454545454545453
+      ],
+      "partial_precision_mean": 0.9239668367346938,
+      "partial_precision_std": 0.007841753332314428,
+      "partial_precision_values": [
+        0.9375,
+        0.92,
+        0.92,
+        0.9183673469387755
+      ],
+      "partial_recall_mean": 0.9529033687943264,
+      "partial_recall_std": 0.008900500610352424,
+      "partial_recall_values": [
+        0.9375,
+        0.9583333333333334,
+        0.9583333333333334,
+        0.9574468085106383
+      ],
+      "partial_f1_mean": 0.9381377551020409,
+      "partial_f1_std": 0.0006377551020408379,
+      "partial_f1_values": [
+        0.9375,
+        0.9387755102040817,
+        0.9387755102040817,
+        0.9375
+      ],
+      "partial_accuracy_mean": 0.9591118740133519,
+      "partial_accuracy_std": 0.0003051180262783619,
+      "partial_accuracy_values": [
+        0.9591836734693877,
+        0.9594594594594594,
+        0.9591836734693877,
+        0.9586206896551724
+      ],
+      "partial_balanced_accuracy_mean": 0.9575112597424528,
+      "partial_balanced_accuracy_std": 0.0022808385665297796,
+      "partial_balanced_accuracy_values": [
+        0.9535984848484849,
+        0.9591666666666667,
+        0.9589646464646464,
+        0.9583152409900131
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9150225194849055,
+      "partial_adj_balanced_accuracy_std": 0.004561677133059559,
+      "partial_adj_balanced_accuracy_values": [
+        0.9071969696969697,
+        0.9183333333333334,
+        0.9179292929292928,
+        0.9166304819800262
+      ]
+    },
+    {
+      "step": 12,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "5183b0bce631902a1449a1f686ff5b7c",
+        "9e89edda1bf52fb61657cbc779214734"
+      ],
+      "combined_scores_mean": 0.9369085153439474,
+      "combined_scores_std": 0.004274899146240074,
+      "combined_scores_values": [
+        0.9411834144901874,
+        0.9326336161977072
+      ],
+      "word_counts_mean": 72.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        72,
+        72
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.925,
+      "cancel_recall_std": 0.00833333333333336,
+      "cancel_recall_values": [
+        0.9333333333333333,
+        0.9166666666666666
+      ],
+      "cancel_f1_mean": 0.9610194902548725,
+      "cancel_f1_std": 0.004497751124437788,
+      "cancel_f1_values": [
+        0.9655172413793104,
+        0.9565217391304348
+      ],
+      "cancel_accuracy_mean": 0.9783653846153846,
+      "cancel_accuracy_std": 0.0024038461538461453,
+      "cancel_accuracy_values": [
+        0.9807692307692307,
+        0.9759615384615384
+      ],
+      "cancel_balanced_accuracy_mean": 0.9624999999999999,
+      "cancel_balanced_accuracy_std": 0.004166666666666707,
+      "cancel_balanced_accuracy_values": [
+        0.9666666666666667,
+        0.9583333333333333
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9249999999999999,
+      "cancel_adj_balanced_accuracy_std": 0.008333333333333415,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9333333333333333,
+        0.9166666666666665
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94,
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.972972972972973,
+      "partial_accuracy_std": 0.0,
+      "partial_accuracy_values": [
+        0.972972972972973,
+        0.972972972972973
+      ],
+      "partial_balanced_accuracy_mean": 0.9745833333333334,
+      "partial_balanced_accuracy_std": 0.0,
+      "partial_balanced_accuracy_values": [
+        0.9745833333333334,
+        0.9745833333333334
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9491666666666667,
+      "partial_adj_balanced_accuracy_std": 0.0,
+      "partial_adj_balanced_accuracy_values": [
+        0.9491666666666667,
+        0.9491666666666667
+      ]
+    },
+    {
+      "step": 13,
+      "num_instructions": 4,
+      "md5_hashes": [
+        "4615056cd1377d558768fdb94ea82d89",
+        "74220238d2a8f45eb1706a28da2e1553",
+        "1fede4bf0d8bbcfdfba98771240c1098",
+        "5a455fd293866e2af9932d294e47c60d"
+      ],
+      "combined_scores_mean": 0.9453482543412367,
+      "combined_scores_std": 0.00424991284012474,
+      "combined_scores_values": [
+        0.9416181623658976,
+        0.9495831505046073,
+        0.9495831505046073,
+        0.940608553989835
+      ],
+      "word_counts_mean": 74.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        74,
+        74,
+        74,
+        74
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9417464996315401,
+      "cancel_recall_std": 0.008303722934711604,
+      "cancel_recall_values": [
+        0.9347826086956522,
+        0.95,
+        0.95,
+        0.9322033898305084
+      ],
+      "cancel_f1_mean": 0.9699805910627909,
+      "cancel_f1_std": 0.00440547840372714,
+      "cancel_f1_values": [
+        0.9662921348314607,
+        0.9743589743589743,
+        0.9743589743589743,
+        0.9649122807017544
+      ],
+      "cancel_accuracy_mean": 0.9840512936640654,
+      "cancel_accuracy_std": 0.0020093696676463046,
+      "cancel_accuracy_values": [
+        0.984375,
+        0.9855769230769231,
+        0.9855769230769231,
+        0.9806763285024155
+      ],
+      "cancel_balanced_accuracy_mean": 0.9708732498157702,
+      "cancel_balanced_accuracy_std": 0.004151861467355791,
+      "cancel_balanced_accuracy_values": [
+        0.9673913043478262,
+        0.975,
+        0.975,
+        0.9661016949152542
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9417464996315401,
+      "cancel_adj_balanced_accuracy_std": 0.008303722934711582,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9347826086956523,
+        0.95,
+        0.95,
+        0.9322033898305084
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94,
+        0.94,
+        0.94,
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9791666666666666,
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9591836734693877,
+        0.9591836734693877,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9728804146612366,
+      "partial_accuracy_std": 0.00016031569859025575,
+      "partial_accuracy_values": [
+        0.9726027397260274,
+        0.972972972972973,
+        0.972972972972973,
+        0.972972972972973
+      ],
+      "partial_balanced_accuracy_mean": 0.9745068027210885,
+      "partial_balanced_accuracy_std": 0.00013255490874254175,
+      "partial_balanced_accuracy_values": [
+        0.9742772108843537,
+        0.9745833333333334,
+        0.9745833333333334,
+        0.9745833333333334
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9490136054421769,
+      "partial_adj_balanced_accuracy_std": 0.0002651098174850835,
+      "partial_adj_balanced_accuracy_values": [
+        0.9485544217687074,
+        0.9491666666666667,
+        0.9491666666666667,
+        0.9491666666666667
+      ]
+    },
+    {
+      "step": 14,
+      "num_instructions": 1,
+      "md5_hashes": [
+        "c2d39dff6f5a8dd571fdc0f5c5c5402e"
+      ],
+      "combined_scores_mean": 0.9326336161977072,
+      "combined_scores_std": 0.0,
+      "combined_scores_values": [
+        0.9326336161977072
+      ],
+      "word_counts_mean": 68.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        68
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0
+      ],
+      "cancel_recall_mean": 0.9166666666666666,
+      "cancel_recall_std": 0.0,
+      "cancel_recall_values": [
+        0.9166666666666666
+      ],
+      "cancel_f1_mean": 0.9565217391304348,
+      "cancel_f1_std": 0.0,
+      "cancel_f1_values": [
+        0.9565217391304348
+      ],
+      "cancel_accuracy_mean": 0.9759615384615384,
+      "cancel_accuracy_std": 0.0,
+      "cancel_accuracy_values": [
+        0.9759615384615384
+      ],
+      "cancel_balanced_accuracy_mean": 0.9583333333333333,
+      "cancel_balanced_accuracy_std": 0.0,
+      "cancel_balanced_accuracy_values": [
+        0.9583333333333333
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9166666666666665,
+      "cancel_adj_balanced_accuracy_std": 0.0,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9166666666666665
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.972972972972973,
+      "partial_accuracy_std": 0.0,
+      "partial_accuracy_values": [
+        0.972972972972973
+      ],
+      "partial_balanced_accuracy_mean": 0.9745833333333334,
+      "partial_balanced_accuracy_std": 0.0,
+      "partial_balanced_accuracy_values": [
+        0.9745833333333334
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9491666666666667,
+      "partial_adj_balanced_accuracy_std": 0.0,
+      "partial_adj_balanced_accuracy_values": [
+        0.9491666666666667
+      ]
+    },
+    {
+      "step": 15,
+      "num_instructions": 4,
+      "md5_hashes": [
+        "11b065bf2105a861638cb981658e73d3",
+        "e5999a7ab7111d23431e1a498a05e683",
+        "c0fe5fdfabdaba65e19ef8c920f1f271",
+        "3e521aed6f08cea1212e76a35548040a"
+      ],
+      "combined_scores_mean": 0.9359121499286976,
+      "combined_scores_std": 0.01488409107219053,
+      "combined_scores_values": [
+        0.948348112505348,
+        0.9495831505046073,
+        0.9127639052620298,
+        0.9329534314428055
+      ],
+      "word_counts_mean": 74.0,
+      "word_counts_std": 2.23606797749979,
+      "word_counts_values": [
+        71,
+        75,
+        73,
+        77
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9316846873173583,
+      "cancel_recall_std": 0.030244484909558368,
+      "cancel_recall_values": [
+        0.9482758620689655,
+        0.95,
+        0.8793103448275862,
+        0.9491525423728814
+      ],
+      "cancel_f1_mean": 0.9643757904461563,
+      "cancel_f1_std": 0.01651301193898853,
+      "cancel_f1_values": [
+        0.9734513274336283,
+        0.9743589743589743,
+        0.9357798165137615,
+        0.9739130434782609
+      ],
+      "cancel_accuracy_mean": 0.9805403981161127,
+      "cancel_accuracy_std": 0.008479982557192923,
+      "cancel_accuracy_values": [
+        0.9852941176470589,
+        0.9855769230769231,
+        0.9658536585365853,
+        0.9854368932038835
+      ],
+      "cancel_balanced_accuracy_mean": 0.9658423436586792,
+      "cancel_balanced_accuracy_std": 0.015122242454779167,
+      "cancel_balanced_accuracy_values": [
+        0.9741379310344828,
+        0.975,
+        0.9396551724137931,
+        0.9745762711864407
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9316846873173583,
+      "cancel_adj_balanced_accuracy_std": 0.030244484909558333,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9482758620689655,
+        0.95,
+        0.8793103448275863,
+        0.9491525423728815
+      ],
+      "partial_precision_mean": 0.94405557967868,
+      "partial_precision_std": 0.007747573754839362,
+      "partial_precision_values": [
+        0.9387755102040817,
+        0.94,
+        0.94,
+        0.9574468085106383
+      ],
+      "partial_recall_mean": 0.9686391843971631,
+      "partial_recall_std": 0.017979127210028693,
+      "partial_recall_values": [
+        0.9787234042553191,
+        0.9791666666666666,
+        0.9791666666666666,
+        0.9375
+      ],
+      "partial_f1_mean": 0.9560172753311851,
+      "partial_f1_std": 0.005005470990331364,
+      "partial_f1_values": [
+        0.9583333333333334,
+        0.9591836734693877,
+        0.9591836734693877,
+        0.9473684210526315
+      ],
+      "partial_accuracy_mean": 0.9710878057257706,
+      "partial_accuracy_std": 0.0029482084358584985,
+      "partial_accuracy_values": [
+        0.9726027397260274,
+        0.972972972972973,
+        0.9727891156462585,
+        0.9659863945578231
+      ],
+      "partial_balanced_accuracy_mean": 0.9704685820975714,
+      "partial_balanced_accuracy_std": 0.006825334878227791,
+      "partial_balanced_accuracy_values": [
+        0.9742101869761444,
+        0.9745833333333334,
+        0.9744318181818181,
+        0.9586489898989898
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9409371641951428,
+      "partial_adj_balanced_accuracy_std": 0.013650669756455581,
+      "partial_adj_balanced_accuracy_values": [
+        0.9484203739522887,
+        0.9491666666666667,
+        0.9488636363636362,
+        0.9172979797979797
+      ]
+    },
+    {
+      "step": 16,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "7ae5136bebeb51de310ab099618a8e44",
+        "ba3a154d50b8765b8ffa562ebdeaa8db",
+        "1d796e9dcc1de88e3d7752880a640a1f"
+      ],
+      "combined_scores_mean": 0.941675690423034,
+      "combined_scores_std": 0.005752268082438264,
+      "combined_scores_values": [
+        0.9356720732416052,
+        0.9399235198707044,
+        0.9494314781567923
+      ],
+      "word_counts_mean": 73.33333333333333,
+      "word_counts_std": 2.6246692913372702,
+      "word_counts_values": [
+        72,
+        77,
+        71
+      ],
+      "cancel_precision_mean": 0.9940476190476191,
+      "cancel_precision_std": 0.008417937871268445,
+      "cancel_precision_values": [
+        1.0,
+        0.9821428571428571,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9434930839664913,
+      "cancel_recall_std": 0.008013990190674574,
+      "cancel_recall_values": [
+        0.9322033898305084,
+        0.9482758620689655,
+        0.95
+      ],
+      "cancel_f1_mean": 0.9680611785874943,
+      "cancel_f1_std": 0.00445321409654145,
+      "cancel_f1_values": [
+        0.9649122807017544,
+        0.9649122807017544,
+        0.9743589743589743
+      ],
+      "cancel_accuracy_mean": 0.9822553663836905,
+      "cancel_accuracy_std": 0.002299745264975222,
+      "cancel_accuracy_values": [
+        0.9806763285024155,
+        0.9805825242718447,
+        0.9855072463768116
+      ],
+      "cancel_balanced_accuracy_mean": 0.9706204158571196,
+      "cancel_balanced_accuracy_std": 0.0036340498649969823,
+      "cancel_balanced_accuracy_values": [
+        0.9661016949152542,
+        0.9707595526561044,
+        0.975
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.941240831714239,
+      "cancel_adj_balanced_accuracy_std": 0.0072680997299939655,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9322033898305084,
+        0.9415191053122087,
+        0.95
+      ],
+      "partial_precision_mean": 0.9399673202614379,
+      "partial_precision_std": 0.015009146114463348,
+      "partial_precision_values": [
+        0.9215686274509803,
+        0.9583333333333334,
+        0.94
+      ],
+      "partial_recall_mean": 0.9722222222222222,
+      "partial_recall_std": 0.009820927516479793,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9583333333333334,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9556706520992235,
+      "partial_f1_std": 0.004380657985514197,
+      "partial_f1_values": [
+        0.9494949494949495,
+        0.9583333333333334,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9706594349451493,
+      "partial_accuracy_std": 0.003142726563988929,
+      "partial_accuracy_values": [
+        0.9662162162162162,
+        0.972972972972973,
+        0.9727891156462585
+      ],
+      "partial_balanced_accuracy_mean": 0.9710606060606061,
+      "partial_balanced_accuracy_std": 0.0023898683579412533,
+      "partial_balanced_accuracy_values": [
+        0.9695833333333332,
+        0.9691666666666667,
+        0.9744318181818181
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.942121212121212,
+      "partial_adj_balanced_accuracy_std": 0.004779736715882507,
+      "partial_adj_balanced_accuracy_values": [
+        0.9391666666666665,
+        0.9383333333333335,
+        0.9488636363636362
+      ]
+    },
+    {
+      "step": 17,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "4e6e40c9b133972f4edac73142d2e203",
+        "c1ac9181ac939895f73bbb064e709c5d"
+      ],
+      "combined_scores_mean": 0.9424844252212213,
+      "combined_scores_std": 0.012076901710249555,
+      "combined_scores_values": [
+        0.9304075235109718,
+        0.9545613269314709
+      ],
+      "word_counts_mean": 71.5,
+      "word_counts_std": 0.5,
+      "word_counts_values": [
+        71,
+        72
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9416666666666667,
+      "cancel_recall_std": 0.008333333333333304,
+      "cancel_recall_values": [
+        0.9333333333333333,
+        0.95
+      ],
+      "cancel_f1_mean": 0.9699381078691424,
+      "cancel_f1_std": 0.004420866489831976,
+      "cancel_f1_values": [
+        0.9655172413793104,
+        0.9743589743589743
+      ],
+      "cancel_accuracy_mean": 0.9831730769230769,
+      "cancel_accuracy_std": 0.002403846153846201,
+      "cancel_accuracy_values": [
+        0.9807692307692307,
+        0.9855769230769231
+      ],
+      "cancel_balanced_accuracy_mean": 0.9708333333333333,
+      "cancel_balanced_accuracy_std": 0.004166666666666652,
+      "cancel_balanced_accuracy_values": [
+        0.9666666666666667,
+        0.975
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9416666666666667,
+      "cancel_adj_balanced_accuracy_std": 0.008333333333333304,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9333333333333333,
+        0.95
+      ],
+      "partial_precision_mean": 0.9687222715173025,
+      "partial_precision_std": 0.009538598047914848,
+      "partial_precision_values": [
+        0.9782608695652174,
+        0.9591836734693877
+      ],
+      "partial_recall_mean": 0.9583333333333333,
+      "partial_recall_std": 0.020833333333333315,
+      "partial_recall_values": [
+        0.9375,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.963259486729546,
+      "partial_f1_std": 0.00581267821890763,
+      "partial_f1_values": [
+        0.9574468085106383,
+        0.9690721649484536
+      ],
+      "partial_accuracy_mean": 0.9763513513513513,
+      "partial_accuracy_std": 0.003378378378378344,
+      "partial_accuracy_values": [
+        0.972972972972973,
+        0.9797297297297297
+      ],
+      "partial_balanced_accuracy_mean": 0.9716666666666667,
+      "partial_balanced_accuracy_std": 0.007916666666666627,
+      "partial_balanced_accuracy_values": [
+        0.96375,
+        0.9795833333333333
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9433333333333332,
+      "partial_adj_balanced_accuracy_std": 0.015833333333333255,
+      "partial_adj_balanced_accuracy_values": [
+        0.9275,
+        0.9591666666666665
+      ]
+    },
+    {
+      "step": 18,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "1840592220ee6ce8f87262740c873021",
+        "be27198da5069511e3e3785c1fc82cbc"
+      ],
+      "combined_scores_mean": 0.9495086442832531,
+      "combined_scores_std": 0.00791368022767891,
+      "combined_scores_values": [
+        0.9415949640555742,
+        0.957422324510932
+      ],
+      "word_counts_mean": 73.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        73,
+        73
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.944949494949495,
+      "cancel_recall_std": 0.0005050505050505083,
+      "cancel_recall_values": [
+        0.9444444444444444,
+        0.9454545454545454
+      ],
+      "cancel_f1_mean": 0.9716955941255007,
+      "cancel_f1_std": 0.0002670226969292422,
+      "cancel_f1_values": [
+        0.9714285714285714,
+        0.9719626168224299
+      ],
+      "cancel_accuracy_mean": 0.9850746268656716,
+      "cancel_accuracy_std": 0.0,
+      "cancel_accuracy_values": [
+        0.9850746268656716,
+        0.9850746268656716
+      ],
+      "cancel_balanced_accuracy_mean": 0.9724747474747475,
+      "cancel_balanced_accuracy_std": 0.0002525252525252264,
+      "cancel_balanced_accuracy_values": [
+        0.9722222222222222,
+        0.9727272727272727
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9449494949494949,
+      "cancel_adj_balanced_accuracy_std": 0.0005050505050504528,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9444444444444444,
+        0.9454545454545453
+      ],
+      "partial_precision_mean": 0.9307843137254901,
+      "partial_precision_std": 0.009215686274509804,
+      "partial_precision_values": [
+        0.9215686274509803,
+        0.94
+      ],
+      "partial_recall_mean": 0.9895833333333333,
+      "partial_recall_std": 0.010416666666666685,
+      "partial_recall_values": [
+        0.9791666666666666,
+        1.0
+      ],
+      "partial_f1_mean": 0.9592835572217016,
+      "partial_f1_std": 0.009788607726752052,
+      "partial_f1_values": [
+        0.9494949494949495,
+        0.9690721649484536
+      ],
+      "partial_accuracy_mean": 0.9727192246761718,
+      "partial_accuracy_std": 0.006732830118348743,
+      "partial_accuracy_values": [
+        0.9659863945578231,
+        0.9794520547945206
+      ],
+      "partial_balanced_accuracy_mean": 0.977114898989899,
+      "partial_balanced_accuracy_std": 0.007733585858585856,
+      "partial_balanced_accuracy_values": [
+        0.9693813131313131,
+        0.9848484848484849
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.954229797979798,
+      "partial_adj_balanced_accuracy_std": 0.015467171717171713,
+      "partial_adj_balanced_accuracy_values": [
+        0.9387626262626263,
+        0.9696969696969697
+      ]
+    },
+    {
+      "step": 19,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "647088c53d3e4a2b2bdd71c6c190e966",
+        "2e758d72277631ea227217c5dadc0c11"
+      ],
+      "combined_scores_mean": 0.943399212577736,
+      "combined_scores_std": 0.0035106024859264395,
+      "combined_scores_values": [
+        0.9398886100918095,
+        0.9469098150636623
+      ],
+      "word_counts_mean": 73.5,
+      "word_counts_std": 1.5,
+      "word_counts_values": [
+        75,
+        72
+      ],
+      "cancel_precision_mean": 0.9811051693404634,
+      "cancel_precision_std": 0.0007130124777183777,
+      "cancel_precision_values": [
+        0.9818181818181818,
+        0.9803921568627451
+      ],
+      "cancel_recall_mean": 0.9544534412955465,
+      "cancel_recall_std": 0.007085020242915019,
+      "cancel_recall_values": [
+        0.9473684210526315,
+        0.9615384615384616
+      ],
+      "cancel_f1_mean": 0.9675797503467407,
+      "cancel_f1_std": 0.003294036061026351,
+      "cancel_f1_values": [
+        0.9642857142857143,
+        0.970873786407767
+      ],
+      "cancel_accuracy_mean": 0.9827439024390243,
+      "cancel_accuracy_std": 0.0022560975609756118,
+      "cancel_accuracy_values": [
+        0.9804878048780488,
+        0.985
+      ],
+      "cancel_balanced_accuracy_mean": 0.9738483422693949,
+      "cancel_balanced_accuracy_std": 0.003542510121457454,
+      "cancel_balanced_accuracy_values": [
+        0.9703058321479374,
+        0.9773908523908523
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9476966845387897,
+      "cancel_adj_balanced_accuracy_std": 0.007085020242914908,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9406116642958748,
+        0.9547817047817047
+      ],
+      "partial_precision_mean": 0.9215686274509803,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.9215686274509803,
+        0.9215686274509803
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9494949494949495,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9494949494949495,
+        0.9494949494949495
+      ],
+      "partial_accuracy_mean": 0.9662162162162162,
+      "partial_accuracy_std": 0.0,
+      "partial_accuracy_values": [
+        0.9662162162162162,
+        0.9662162162162162
+      ],
+      "partial_balanced_accuracy_mean": 0.9695833333333332,
+      "partial_balanced_accuracy_std": 0.0,
+      "partial_balanced_accuracy_values": [
+        0.9695833333333332,
+        0.9695833333333332
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9391666666666665,
+      "partial_adj_balanced_accuracy_std": 0.0,
+      "partial_adj_balanced_accuracy_values": [
+        0.9391666666666665,
+        0.9391666666666665
+      ]
+    },
+    {
+      "step": 20,
+      "num_instructions": 1,
+      "md5_hashes": [
+        "9de55b9d5eaa5eb11e2fb186e43bb834"
+      ],
+      "combined_scores_mean": 0.9439424921854591,
+      "combined_scores_std": 0.0,
+      "combined_scores_values": [
+        0.9439424921854591
+      ],
+      "word_counts_mean": 73.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        73
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0
+      ],
+      "cancel_recall_mean": 0.9387755102040817,
+      "cancel_recall_std": 0.0,
+      "cancel_recall_values": [
+        0.9387755102040817
+      ],
+      "cancel_f1_mean": 0.968421052631579,
+      "cancel_f1_std": 0.0,
+      "cancel_f1_values": [
+        0.968421052631579
+      ],
+      "cancel_accuracy_mean": 0.9847715736040609,
+      "cancel_accuracy_std": 0.0,
+      "cancel_accuracy_values": [
+        0.9847715736040609
+      ],
+      "cancel_balanced_accuracy_mean": 0.9693877551020409,
+      "cancel_balanced_accuracy_std": 0.0,
+      "cancel_balanced_accuracy_values": [
+        0.9693877551020409
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9387755102040818,
+      "cancel_adj_balanced_accuracy_std": 0.0,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9387755102040818
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.972972972972973,
+      "partial_accuracy_std": 0.0,
+      "partial_accuracy_values": [
+        0.972972972972973
+      ],
+      "partial_balanced_accuracy_mean": 0.9745833333333334,
+      "partial_balanced_accuracy_std": 0.0,
+      "partial_balanced_accuracy_values": [
+        0.9745833333333334
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9491666666666667,
+      "partial_adj_balanced_accuracy_std": 0.0,
+      "partial_adj_balanced_accuracy_values": [
+        0.9491666666666667
+      ]
+    },
+    {
+      "step": 21,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "ea7e165c47b2907d7290c08d024ece1f",
+        "af204455fd997f1d5f91a3d226f1f4d9",
+        "fb88eb8069f3f70182925aa909e72f94"
+      ],
+      "combined_scores_mean": 0.9503555158116773,
+      "combined_scores_std": 0.00489515308371477,
+      "combined_scores_values": [
+        0.9541333293859032,
+        0.9534905396588685,
+        0.9434426783902603
+      ],
+      "word_counts_mean": 74.0,
+      "word_counts_std": 2.449489742783178,
+      "word_counts_values": [
+        74,
+        77,
+        71
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9524761348139489,
+      "cancel_recall_std": 0.005332201083493963,
+      "cancel_recall_values": [
+        0.9491525423728814,
+        0.9482758620689655,
+        0.96
+      ],
+      "cancel_f1_mean": 0.9756520692155277,
+      "cancel_f1_std": 0.002792205998283483,
+      "cancel_f1_values": [
+        0.9739130434782609,
+        0.9734513274336283,
+        0.9795918367346939
+      ],
+      "cancel_accuracy_mean": 0.9867849873709508,
+      "cancel_accuracy_std": 0.002175554105730548,
+      "cancel_accuracy_values": [
+        0.9855072463768116,
+        0.985,
+        0.9898477157360406
+      ],
+      "cancel_balanced_accuracy_mean": 0.9762380674069745,
+      "cancel_balanced_accuracy_std": 0.0026661005417469696,
+      "cancel_balanced_accuracy_values": [
+        0.9745762711864407,
+        0.9741379310344828,
+        0.98
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9524761348139489,
+      "cancel_adj_balanced_accuracy_std": 0.005332201083493939,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9491525423728815,
+        0.9482758620689655,
+        0.96
+      ],
+      "partial_precision_mean": 0.9383503401360543,
+      "partial_precision_std": 0.01667404043463227,
+      "partial_precision_values": [
+        0.9591836734693877,
+        0.9183673469387755,
+        0.9375
+      ],
+      "partial_recall_mean": 0.978871158392435,
+      "partial_recall_std": 0.01737352430831992,
+      "partial_recall_values": [
+        0.9791666666666666,
+        1.0,
+        0.9574468085106383
+      ],
+      "partial_f1_mean": 0.9579624648372412,
+      "partial_f1_std": 0.008868015593853102,
+      "partial_f1_values": [
+        0.9690721649484536,
+        0.9574468085106383,
+        0.9473684210526315
+      ],
+      "partial_accuracy_mean": 0.9725157034010152,
+      "partial_accuracy_std": 0.005631544722251399,
+      "partial_accuracy_values": [
+        0.9797297297297297,
+        0.971830985915493,
+        0.9659863945578231
+      ],
+      "partial_balanced_accuracy_mean": 0.9742293936292071,
+      "partial_balanced_accuracy_std": 0.007429313536690567,
+      "partial_balanced_accuracy_values": [
+        0.9795833333333333,
+        0.9793814432989691,
+        0.9637234042553191
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9484587872584144,
+      "partial_adj_balanced_accuracy_std": 0.014858627073381134,
+      "partial_adj_balanced_accuracy_values": [
+        0.9591666666666665,
+        0.9587628865979383,
+        0.9274468085106382
+      ]
+    },
+    {
+      "step": 22,
+      "num_instructions": 1,
+      "md5_hashes": [
+        "39e30b5c6a720fc6ec6ef723bf00a559"
+      ],
+      "combined_scores_mean": 0.9563553805607595,
+      "combined_scores_std": 0.0,
+      "combined_scores_values": [
+        0.9563553805607595
+      ],
+      "word_counts_mean": 73.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        73
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0
+      ],
+      "cancel_recall_mean": 0.9642857142857143,
+      "cancel_recall_std": 0.0,
+      "cancel_recall_values": [
+        0.9642857142857143
+      ],
+      "cancel_f1_mean": 0.9818181818181818,
+      "cancel_f1_std": 0.0,
+      "cancel_f1_values": [
+        0.9818181818181818
+      ],
+      "cancel_accuracy_mean": 0.9900990099009901,
+      "cancel_accuracy_std": 0.0,
+      "cancel_accuracy_values": [
+        0.9900990099009901
+      ],
+      "cancel_balanced_accuracy_mean": 0.9821428571428572,
+      "cancel_balanced_accuracy_std": 0.0,
+      "cancel_balanced_accuracy_values": [
+        0.9821428571428572
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9642857142857144,
+      "cancel_adj_balanced_accuracy_std": 0.0,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9642857142857144
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9726027397260274,
+      "partial_accuracy_std": 0.0,
+      "partial_accuracy_values": [
+        0.9726027397260274
+      ],
+      "partial_balanced_accuracy_mean": 0.9742772108843537,
+      "partial_balanced_accuracy_std": 0.0,
+      "partial_balanced_accuracy_values": [
+        0.9742772108843537
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9485544217687074,
+      "partial_adj_balanced_accuracy_std": 0.0,
+      "partial_adj_balanced_accuracy_values": [
+        0.9485544217687074
+      ]
+    },
+    {
+      "step": 23,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "6aa5aee7891327ca8cb62e80ab406128",
+        "07b2959ae6e02a208c581e75363385dc",
+        "5b1924a25ed0d31a6cc6685e324247aa"
+      ],
+      "combined_scores_mean": 0.9429102421366161,
+      "combined_scores_std": 0.007392810982594476,
+      "combined_scores_values": [
+        0.9434952643540255,
+        0.933577609729477,
+        0.9516578523263458
+      ],
+      "word_counts_mean": 71.66666666666667,
+      "word_counts_std": 0.4714045207910317,
+      "word_counts_values": [
+        72,
+        71,
+        72
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9582422014363937,
+      "cancel_recall_std": 0.007180603699165961,
+      "cancel_recall_values": [
+        0.9482758620689655,
+        0.9615384615384616,
+        0.9649122807017544
+      ],
+      "cancel_f1_mean": 0.9786621138130768,
+      "cancel_f1_std": 0.003753261593767999,
+      "cancel_f1_values": [
+        0.9734513274336283,
+        0.9803921568627451,
+        0.9821428571428571
+      ],
+      "cancel_accuracy_mean": 0.9885038936112093,
+      "cancel_accuracy_std": 0.0022212069747747985,
+      "cancel_accuracy_values": [
+        0.9853658536585366,
+        0.9899497487437185,
+        0.9901960784313726
+      ],
+      "cancel_balanced_accuracy_mean": 0.9791211007181969,
+      "cancel_balanced_accuracy_std": 0.003590301849582972,
+      "cancel_balanced_accuracy_values": [
+        0.9741379310344828,
+        0.9807692307692308,
+        0.9824561403508771
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9582422014363937,
+      "cancel_adj_balanced_accuracy_std": 0.007180603699165944,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9482758620689655,
+        0.9615384615384617,
+        0.9649122807017543
+      ],
+      "partial_precision_mean": 0.9268790849673202,
+      "partial_precision_std": 0.007510121042014011,
+      "partial_precision_values": [
+        0.9215686274509803,
+        0.9375,
+        0.9215686274509803
+      ],
+      "partial_recall_mean": 0.9652777777777777,
+      "partial_recall_std": 0.019641855032959635,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9375,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9454966329966329,
+      "partial_f1_std": 0.005654473418579297,
+      "partial_f1_values": [
+        0.9494949494949495,
+        0.9375,
+        0.9494949494949495
+      ],
+      "partial_accuracy_mean": 0.9637188208616779,
+      "partial_accuracy_std": 0.003206833474768927,
+      "partial_accuracy_values": [
+        0.9659863945578231,
+        0.9591836734693877,
+        0.9659863945578231
+      ],
+      "partial_balanced_accuracy_mean": 0.9641203703703703,
+      "partial_balanced_accuracy_std": 0.007440096603393811,
+      "partial_balanced_accuracy_values": [
+        0.9693813131313131,
+        0.9535984848484849,
+        0.9693813131313131
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9282407407407408,
+      "partial_adj_balanced_accuracy_std": 0.01488019320678762,
+      "partial_adj_balanced_accuracy_values": [
+        0.9387626262626263,
+        0.9071969696969697,
+        0.9387626262626263
+      ]
+    },
+    {
+      "step": 24,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "6cde0785048ef5d240e6e6777612bf91",
+        "847a63a840efb17fb78572a822b02b6f"
+      ],
+      "combined_scores_mean": 0.9319504371643239,
+      "combined_scores_std": 0.012444939046601433,
+      "combined_scores_values": [
+        0.9443953762109254,
+        0.9195054981177225
+      ],
+      "word_counts_mean": 74.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        74,
+        74
+      ],
+      "cancel_precision_mean": 0.9807407407407407,
+      "cancel_precision_std": 0.000740740740740764,
+      "cancel_precision_values": [
+        0.9814814814814815,
+        0.98
+      ],
+      "cancel_recall_mean": 0.9269179894179894,
+      "cancel_recall_std": 0.01951058201058198,
+      "cancel_recall_values": [
+        0.9464285714285714,
+        0.9074074074074074
+      ],
+      "cancel_f1_mean": 0.952972027972028,
+      "cancel_f1_std": 0.010664335664335667,
+      "cancel_f1_values": [
+        0.9636363636363636,
+        0.9423076923076923
+      ],
+      "cancel_accuracy_mean": 0.9753445932828577,
+      "cancel_accuracy_std": 0.005047563579887393,
+      "cancel_accuracy_values": [
+        0.9803921568627451,
+        0.9702970297029703
+      ],
+      "cancel_balanced_accuracy_mean": 0.9600806163306164,
+      "cancel_balanced_accuracy_std": 0.00975529100529099,
+      "cancel_balanced_accuracy_values": [
+        0.9698359073359073,
+        0.9503253253253253
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9201612326612326,
+      "cancel_adj_balanced_accuracy_std": 0.01951058201058198,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9396718146718146,
+        0.9006506506506506
+      ],
+      "partial_precision_mean": 0.9307843137254901,
+      "partial_precision_std": 0.009215686274509804,
+      "partial_precision_values": [
+        0.94,
+        0.9215686274509803
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9543393114821686,
+      "partial_f1_std": 0.0048443619872191035,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9494949494949495
+      ],
+      "partial_accuracy_mean": 0.9695945945945946,
+      "partial_accuracy_std": 0.0033783783783783994,
+      "partial_accuracy_values": [
+        0.972972972972973,
+        0.9662162162162162
+      ],
+      "partial_balanced_accuracy_mean": 0.9720833333333333,
+      "partial_balanced_accuracy_std": 0.0025000000000000577,
+      "partial_balanced_accuracy_values": [
+        0.9745833333333334,
+        0.9695833333333332
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9441666666666666,
+      "partial_adj_balanced_accuracy_std": 0.0050000000000001155,
+      "partial_adj_balanced_accuracy_values": [
+        0.9491666666666667,
+        0.9391666666666665
+      ]
+    },
+    {
+      "step": 25,
+      "num_instructions": 1,
+      "md5_hashes": [
+        "b54003d8e223495e2f59655da9950d0b"
+      ],
+      "combined_scores_mean": 0.9466488829609869,
+      "combined_scores_std": 0.0,
+      "combined_scores_values": [
+        0.9466488829609869
+      ],
+      "word_counts_mean": 72.0,
+      "word_counts_std": 0.0,
+      "word_counts_values": [
+        72
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0
+      ],
+      "cancel_recall_mean": 0.9444444444444444,
+      "cancel_recall_std": 0.0,
+      "cancel_recall_values": [
+        0.9444444444444444
+      ],
+      "cancel_f1_mean": 0.9714285714285714,
+      "cancel_f1_std": 0.0,
+      "cancel_f1_values": [
+        0.9714285714285714
+      ],
+      "cancel_accuracy_mean": 0.9850746268656716,
+      "cancel_accuracy_std": 0.0,
+      "cancel_accuracy_values": [
+        0.9850746268656716
+      ],
+      "cancel_balanced_accuracy_mean": 0.9722222222222222,
+      "cancel_balanced_accuracy_std": 0.0,
+      "cancel_balanced_accuracy_values": [
+        0.9722222222222222
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9444444444444444,
+      "cancel_adj_balanced_accuracy_std": 0.0,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9444444444444444
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9727891156462585,
+      "partial_accuracy_std": 0.0,
+      "partial_accuracy_values": [
+        0.9727891156462585
+      ],
+      "partial_balanced_accuracy_mean": 0.9744318181818181,
+      "partial_balanced_accuracy_std": 0.0,
+      "partial_balanced_accuracy_values": [
+        0.9744318181818181
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9488636363636362,
+      "partial_adj_balanced_accuracy_std": 0.0,
+      "partial_adj_balanced_accuracy_values": [
+        0.9488636363636362
+      ]
+    },
+    {
+      "step": 26,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "9975ba180acdadcbee5ba5a7ef875790",
+        "790929d2e1f03e9f65fa1b2324439925"
+      ],
+      "combined_scores_mean": 0.9520783817279765,
+      "combined_scores_std": 0.004588077551560654,
+      "combined_scores_values": [
+        0.9474903041764159,
+        0.9566664592795372
+      ],
+      "word_counts_mean": 71.5,
+      "word_counts_std": 1.5,
+      "word_counts_values": [
+        73,
+        70
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9553571428571428,
+      "cancel_recall_std": 0.008928571428571452,
+      "cancel_recall_values": [
+        0.9464285714285714,
+        0.9642857142857143
+      ],
+      "cancel_f1_mean": 0.9771476230191827,
+      "cancel_f1_std": 0.004670558798999136,
+      "cancel_f1_values": [
+        0.9724770642201835,
+        0.9818181818181818
+      ],
+      "cancel_accuracy_mean": 0.9876722966414289,
+      "cancel_accuracy_std": 0.0025237817899437243,
+      "cancel_accuracy_values": [
+        0.9851485148514851,
+        0.9901960784313726
+      ],
+      "cancel_balanced_accuracy_mean": 0.9776785714285714,
+      "cancel_balanced_accuracy_std": 0.004464285714285754,
+      "cancel_balanced_accuracy_values": [
+        0.9732142857142857,
+        0.9821428571428572
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9553571428571429,
+      "cancel_adj_balanced_accuracy_std": 0.008928571428571508,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9464285714285714,
+        0.9642857142857144
+      ],
+      "partial_precision_mean": 0.94,
+      "partial_precision_std": 0.0,
+      "partial_precision_values": [
+        0.94,
+        0.94
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9591836734693877,
+      "partial_f1_std": 0.0,
+      "partial_f1_values": [
+        0.9591836734693877,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9727878563495003,
+      "partial_accuracy_std": 0.0001851166234728141,
+      "partial_accuracy_values": [
+        0.9726027397260274,
+        0.972972972972973
+      ],
+      "partial_balanced_accuracy_mean": 0.9744302721088436,
+      "partial_balanced_accuracy_std": 0.0001530612244898255,
+      "partial_balanced_accuracy_values": [
+        0.9742772108843537,
+        0.9745833333333334
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9488605442176871,
+      "partial_adj_balanced_accuracy_std": 0.000306122448979651,
+      "partial_adj_balanced_accuracy_values": [
+        0.9485544217687074,
+        0.9491666666666667
+      ]
+    },
+    {
+      "step": 27,
+      "num_instructions": 2,
+      "md5_hashes": [
+        "1d721433e3b3f7ad825d2e5cf5b37d6f",
+        "3a34a0a15a049133d2357ea0746874b5"
+      ],
+      "combined_scores_mean": 0.8025141461859144,
+      "combined_scores_std": 0.04630382071715872,
+      "combined_scores_values": [
+        0.7562103254687558,
+        0.8488179669030732
+      ],
+      "word_counts_mean": 65.0,
+      "word_counts_std": 1.0,
+      "word_counts_values": [
+        66,
+        64
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.7028940886699508,
+      "cancel_recall_std": 0.06496305418719212,
+      "cancel_recall_values": [
+        0.6379310344827587,
+        0.7678571428571429
+      ],
+      "cancel_f1_mean": 0.8238171185539607,
+      "cancel_f1_std": 0.04486975013290806,
+      "cancel_f1_values": [
+        0.7789473684210526,
+        0.8686868686868687
+      ],
+      "cancel_accuracy_mean": 0.9170094217800947,
+      "cancel_accuracy_std": 0.01895116935291019,
+      "cancel_accuracy_values": [
+        0.8980582524271845,
+        0.9359605911330049
+      ],
+      "cancel_balanced_accuracy_mean": 0.8514470443349753,
+      "cancel_balanced_accuracy_std": 0.03248152709359603,
+      "cancel_balanced_accuracy_values": [
+        0.8189655172413793,
+        0.8839285714285714
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.7028940886699507,
+      "cancel_adj_balanced_accuracy_std": 0.06496305418719206,
+      "cancel_adj_balanced_accuracy_values": [
+        0.6379310344827587,
+        0.7678571428571428
+      ],
+      "partial_precision_mean": 0.9393877551020409,
+      "partial_precision_std": 0.0006122448979591355,
+      "partial_precision_values": [
+        0.9387755102040817,
+        0.94
+      ],
+      "partial_recall_mean": 0.96875,
+      "partial_recall_std": 0.01041666666666663,
+      "partial_recall_values": [
+        0.9583333333333334,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9538186408584052,
+      "partial_f1_std": 0.005365032610982534,
+      "partial_f1_values": [
+        0.9484536082474226,
+        0.9591836734693877
+      ],
+      "partial_accuracy_mean": 0.9695026659312374,
+      "partial_accuracy_std": 0.0032864497150211225,
+      "partial_accuracy_values": [
+        0.9662162162162162,
+        0.9727891156462585
+      ],
+      "partial_balanced_accuracy_mean": 0.9692992424242424,
+      "partial_balanced_accuracy_std": 0.0051325757575757525,
+      "partial_balanced_accuracy_values": [
+        0.9641666666666666,
+        0.9744318181818181
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9385984848484847,
+      "partial_adj_balanced_accuracy_std": 0.010265151515151505,
+      "partial_adj_balanced_accuracy_values": [
+        0.9283333333333332,
+        0.9488636363636362
+      ]
+    },
+    {
+      "step": 28,
+      "num_instructions": 4,
+      "md5_hashes": [
+        "0267904decaab57579760c228e9378ff",
+        "015fee86a72ff3ec3ab94f56ea254e6b",
+        "d918e68b4958df95894aa18c9f46f26e",
+        "39bd189d0734408d4c172e7f059dcfc9"
+      ],
+      "combined_scores_mean": 0.9509972319138916,
+      "combined_scores_std": 0.003515353179875642,
+      "combined_scores_values": [
+        0.953968854066157,
+        0.9513530164447184,
+        0.9451539416638405,
+        0.9535131154808507
+      ],
+      "word_counts_mean": 68.0,
+      "word_counts_std": 1.224744871391589,
+      "word_counts_values": [
+        68,
+        67,
+        67,
+        70
+      ],
+      "cancel_precision_mean": 0.9781325665859565,
+      "cancel_precision_std": 0.014411317308369328,
+      "cancel_precision_values": [
+        0.9661016949152542,
+        1.0,
+        0.9821428571428571,
+        0.9642857142857143
+      ],
+      "cancel_recall_mean": 0.9692845947156292,
+      "cancel_recall_std": 0.014186224256101209,
+      "cancel_recall_values": [
+        0.9827586206896551,
+        0.9642857142857143,
+        0.9482758620689655,
+        0.9818181818181818
+      ],
+      "cancel_f1_mean": 0.973515602462971,
+      "cancel_f1_std": 0.0059990768497115415,
+      "cancel_f1_values": [
+        0.9743589743589743,
+        0.9818181818181818,
+        0.9649122807017544,
+        0.972972972972973
+      ],
+      "cancel_accuracy_mean": 0.9853235390525028,
+      "cancel_accuracy_std": 0.0034161704644553297,
+      "cancel_accuracy_values": [
+        0.9854368932038835,
+        0.9901477832512315,
+        0.9804878048780488,
+        0.9852216748768473
+      ],
+      "cancel_balanced_accuracy_mean": 0.9804135788433819,
+      "cancel_balanced_accuracy_std": 0.005664111884597995,
+      "cancel_balanced_accuracy_values": [
+        0.9846225535880708,
+        0.9821428571428572,
+        0.9707365704902651,
+        0.9841523341523342
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9608271576867636,
+      "cancel_adj_balanced_accuracy_std": 0.011328223769195992,
+      "cancel_adj_balanced_accuracy_values": [
+        0.9692451071761417,
+        0.9642857142857144,
+        0.9414731409805301,
+        0.9683046683046683
+      ],
+      "partial_precision_mean": 0.9261764705882353,
+      "partial_precision_std": 0.007981018427033063,
+      "partial_precision_values": [
+        0.9215686274509803,
+        0.9215686274509803,
+        0.94,
+        0.9215686274509803
+      ],
+      "partial_recall_mean": 0.9791666666666666,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9791666666666666,
+        0.9791666666666666,
+        0.9791666666666666,
+        0.9791666666666666
+      ],
+      "partial_f1_mean": 0.9519171304885591,
+      "partial_f1_std": 0.00419534054605941,
+      "partial_f1_values": [
+        0.9494949494949495,
+        0.9494949494949495,
+        0.9591836734693877,
+        0.9494949494949495
+      ],
+      "partial_accuracy_mean": 0.9678019856591286,
+      "partial_accuracy_std": 0.002880849093922614,
+      "partial_accuracy_values": [
+        0.9662162162162162,
+        0.9659863945578231,
+        0.9727891156462585,
+        0.9662162162162162
+      ],
+      "partial_balanced_accuracy_mean": 0.9707449494949494,
+      "partial_balanced_accuracy_std": 0.0021302117887841516,
+      "partial_balanced_accuracy_values": [
+        0.9695833333333332,
+        0.9693813131313131,
+        0.9744318181818181,
+        0.9695833333333332
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9414898989898989,
+      "partial_adj_balanced_accuracy_std": 0.004260423577568303,
+      "partial_adj_balanced_accuracy_values": [
+        0.9391666666666665,
+        0.9387626262626263,
+        0.9488636363636362,
+        0.9391666666666665
+      ]
+    },
+    {
+      "step": 29,
+      "num_instructions": 3,
+      "md5_hashes": [
+        "e95b37b177ccb91f69f1f359a784507d",
+        "cd4b2282e27c586a5906aad31383e4d3",
+        "4b0e89c27179561402a5984b8e83337d"
+      ],
+      "combined_scores_mean": 0.9342633828987252,
+      "combined_scores_std": 0.0034239953639974303,
+      "combined_scores_values": [
+        0.9338983050847458,
+        0.930264336577441,
+        0.9386275070339889
+      ],
+      "word_counts_mean": 72.33333333333333,
+      "word_counts_std": 0.4714045207910317,
+      "word_counts_values": [
+        72,
+        72,
+        73
+      ],
+      "cancel_precision_mean": 1.0,
+      "cancel_precision_std": 0.0,
+      "cancel_precision_values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cancel_recall_mean": 0.9437853107344633,
+      "cancel_recall_std": 0.008196959394659283,
+      "cancel_recall_values": [
+        0.95,
+        0.9322033898305084,
+        0.9491525423728814
+      ],
+      "cancel_f1_mean": 0.97106143284633,
+      "cancel_f1_std": 0.004351916639860839,
+      "cancel_f1_values": [
+        0.9743589743589743,
+        0.9649122807017544,
+        0.9739130434782609
+      ],
+      "cancel_accuracy_mean": 0.9839201659853835,
+      "cancel_accuracy_std": 0.0022939158546853764,
+      "cancel_accuracy_values": [
+        0.9855769230769231,
+        0.9806763285024155,
+        0.9855072463768116
+      ],
+      "cancel_balanced_accuracy_mean": 0.9718926553672317,
+      "cancel_balanced_accuracy_std": 0.0040984796973296544,
+      "cancel_balanced_accuracy_values": [
+        0.975,
+        0.9661016949152542,
+        0.9745762711864407
+      ],
+      "cancel_adj_balanced_accuracy_mean": 0.9437853107344633,
+      "cancel_adj_balanced_accuracy_std": 0.008196959394659307,
+      "cancel_adj_balanced_accuracy_values": [
+        0.95,
+        0.9322033898305084,
+        0.9491525423728815
+      ],
+      "partial_precision_mean": 0.9325170068027212,
+      "partial_precision_std": 0.008850860390362229,
+      "partial_precision_values": [
+        0.92,
+        0.9387755102040817,
+        0.9387755102040817
+      ],
+      "partial_recall_mean": 0.9583333333333334,
+      "partial_recall_std": 0.0,
+      "partial_recall_values": [
+        0.9583333333333334,
+        0.9583333333333334,
+        0.9583333333333334
+      ],
+      "partial_f1_mean": 0.945227575566309,
+      "partial_f1_std": 0.00456229917028977,
+      "partial_f1_values": [
+        0.9387755102040817,
+        0.9484536082474226,
+        0.9484536082474226
+      ],
+      "partial_accuracy_mean": 0.963963963963964,
+      "partial_accuracy_std": 0.003185165681020504,
+      "partial_accuracy_values": [
+        0.9594594594594594,
+        0.9662162162162162,
+        0.9662162162162162
+      ],
+      "partial_balanced_accuracy_mean": 0.9625,
+      "partial_balanced_accuracy_std": 0.002357022603955108,
+      "partial_balanced_accuracy_values": [
+        0.9591666666666667,
+        0.9641666666666666,
+        0.9641666666666666
+      ],
+      "partial_adj_balanced_accuracy_mean": 0.9249999999999999,
+      "partial_adj_balanced_accuracy_std": 0.004714045207910216,
+      "partial_adj_balanced_accuracy_values": [
+        0.9183333333333334,
+        0.9283333333333332,
+        0.9283333333333332
+      ]
+    }
+  ],
+  "config": {
+    "train_data_path": "data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance_train.json",
+    "initial_prompt_file": "prompts/original/identify_partial.yaml",
+    "initial_prompt_key": "initial_prompt_simple",
+    "save_folder": "results/gpt-5-verified/meta_prompt_v1/exp_mode_random/threshold_0.5/max_num_instructions_10/initial_prompt_simple/scorer_gpt-4.1/optimizer_gpt-4.1/train_ratio_1.0/num_search_steps_30/num_gen_inst_4_num_exp_2_opt_temperature_1.0"
+  }
+}

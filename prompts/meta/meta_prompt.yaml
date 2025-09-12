@@ -1,0 +1,48 @@
+v1: |
+  Your task is to generate prompts for a classification task. The prompts will be used to classify flight cancellation conversations into two categories:
+
+  1. cancel_not_for_all_passengers: Whether the user wants to cancel for fewer than all passengers
+  2. partial_or_full: Whether the user wants partial cancellation (specific legs) or full cancellation
+
+  Below are some previous prompts with their scores. Each prompt has three scores:
+  - combined_score: Harmonic mean of cancel_adj_b_acc and partial_adj_b_acc (0 to {num_score_buckets}, higher is better)
+  - cancel_adj_b_acc: Adjusted balanced accuracy for cancel_not_for_all_passengers classification (0 to {num_score_buckets}, higher is better)  
+  - partial_adj_b_acc: Adjusted balanced accuracy for partial_or_full classification (0 to {num_score_buckets}, higher is better)
+  - words: Word count (fewer is better when scores are equal)
+  {prompt_score_str}{examples_str}
+
+  Your task is to generate a new prompt that will achieve a higher score than the previous ones while being concise.
+
+  Requirements for the new prompt:
+  - It should help the AI assistant accurately classify cancel_not_for_all_passengers and partial_or_full
+  - Keep it concise while maintaining accuracy
+
+  Generate a new concise prompt that will improve classification accuracy. Output your prompt between <PROMPT> and </PROMPT> tags.
+
+  <PROMPT>
+
+v2: |
+  Your task is to craft a prompt for a classification model. The model will receive a flight-cancellation conversation between a customer and an AI assistant, together with the booking details, and must predict two labels:
+  1. cancel_not_for_all_passengers: yes or not
+  2. partial_or_full: FULL or PARTIAL
+
+  Below are some previous prompts with their scores. Each prompt has three scores:
+  - combined_score: Harmonic mean of cancel_adj_b_acc and partial_adj_b_acc (0 to {num_score_buckets}, higher is better)
+  - cancel_adj_b_acc: Adjusted balanced accuracy for cancel_not_for_all_passengers classification (0 to {num_score_buckets}, higher is better)  
+  - partial_adj_b_acc: Adjusted balanced accuracy for partial_or_full classification (0 to {num_score_buckets}, higher is better)
+  - words: Word count (fewer is better when scores are equal)
+  {prompt_score_str}
+
+  Here are some examples from the training data:
+  {examples_str}
+
+  Your task is to create a new, concise prompt that outperforms previous prompts in combined_score.
+
+  Requirements for the new prompt:
+  - Enable the AI assistant to correctly classify both labels—cancel_not_for_all_passengers and partial_or_full.
+  - Highest priority: maximize combined_score.
+  - Secondary priority: brevity. Keep the prompt under 350 words and the shorter the better if combined_score is the same.
+
+  Output your prompt between <PROMPT> and </PROMPT> tags.
+
+  <PROMPT>

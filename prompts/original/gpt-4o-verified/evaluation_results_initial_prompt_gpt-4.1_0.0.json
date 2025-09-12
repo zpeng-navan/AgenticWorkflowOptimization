@@ -1,0 +1,1717 @@
+{
+  "total_cases": 130,
+  "successful_predictions": 130,
+  "prediction_errors": 0,
+  "cancel_not_for_all_metrics": {
+    "precision": 0.9767441860465116,
+    "recall": 0.875,
+    "f1": 0.9230769230769231,
+    "accuracy": 0.9461538461538461
+  },
+  "partial_or_full_metrics": {
+    "precision": 1.0,
+    "recall": 0.96,
+    "f1": 0.9795918367346939,
+    "accuracy": 0.9878048780487805
+  },
+  "detailed_results": [
+    {
+      "element_id": "7890469f-7477-49ea-850c-3b65b7ebf66a",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel the 'SIN > MAN' leg, which matches one of the booking legs, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the 'SIN > MAN' leg, which matches one of the booking legs, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "7b01ca24-47b5-4894-86cb-8618f27bc74e",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling Matthew Pendel's round trip flight, which means the entire booking for that passenger. Since the user did not specify canceling only a part of the trip (e.g., just departure or return), the cancellation is for the full booking. However, the user mentioned only one passenger, so the cancellation is not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling Matthew Pendel's round trip flight, which means the entire booking for that passenger. Since the user did not specify canceling only a part of the trip (e.g., just departure or return), the cancellation is for the full booking. However, the user mentioned only one passenger, so the cancellation is not for all passengers."
+      }
+    },
+    {
+      "element_id": "f9a2bdf6-4ddd-472f-a468-38a779ff6aa4",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is for a general cancellation, so it applies to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is for a general cancellation, so it applies to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "8260535b-8ae3-4ae1-9d6a-b2f3db074b73",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "d88ad149-e587-4661-bf96-1bfa96d964a1",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel only the 'JFK to TPA' leg (the return flight) and mentioned that Parker will still take the other leg. There is no indication that the cancellation is for fewer than all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel only the 'JFK to TPA' leg (the return flight) and mentioned that Parker will still take the other leg. There is no indication that the cancellation is for fewer than all passengers."
+      }
+    },
+    {
+      "element_id": "59eb6fc7-a8b2-4b7c-910d-295040a3210f",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User specified canceling 'jessica's flight on the 30th', indicating cancellation is for a specific passenger and likely a specific leg (since only one leg would be on a specific date).\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specified canceling 'jessica's flight on the 30th', indicating cancellation is for a specific passenger and likely a specific leg (since only one leg would be on a specific date)."
+      }
+    },
+    {
+      "element_id": "651f07e8-051c-4e74-9779-91b0afd47847",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "fd811184-e806-44ce-ad46-fb2a70af4e76",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel both the flight and hotel without specifying any particular leg or passenger, so the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel both the flight and hotel without specifying any particular leg or passenger, so the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "803d8ea1-45ea-4322-ab0b-4f2827b59926",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or airport, nor did they mention canceling for only some passengers. The request is to cancel the entire trip for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or airport, nor did they mention canceling for only some passengers. The request is to cancel the entire trip for all passengers."
+      }
+    },
+    {
+      "element_id": "dc625ddb-4c26-4e64-b30f-e2a7722dd119",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User specified canceling only one of Angelo's two PER-ADL flights, indicating a partial cancellation. The user also specified the cancellation is for Angelo only, not all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specified canceling only one of Angelo's two PER-ADL flights, indicating a partial cancellation. The user also specified the cancellation is for Angelo only, not all passengers."
+      }
+    },
+    {
+      "element_id": "e8250b6b-a5da-40b2-9ee9-598bf275b0da",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is for the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is for the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "353f1d8e-1b1d-4f64-9e6d-83ad8a922b0b",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user simply requested to 'Cancel flight' without specifying a particular leg or mentioning any specific passengers, so the request applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user simply requested to 'Cancel flight' without specifying a particular leg or mentioning any specific passengers, so the request applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "af36c46d-0a88-4956-b2c9-076c60725d44",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "34a52010-77fa-4c47-9bf9-7328376d24eb",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel their upcoming flight without specifying any particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel their upcoming flight without specifying any particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "ad117190-43b9-4ea2-b575-fcfaf9f7e84d",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel the EWR -> SFO leg, which matches a specific part of the booking, indicating a partial cancellation. There is no mention of canceling for fewer than all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the EWR -> SFO leg, which matches a specific part of the booking, indicating a partial cancellation. There is no mention of canceling for fewer than all passengers."
+      }
+    },
+    {
+      "element_id": "baef2c7d-a68c-4138-8cbc-cf93c3ca6d38",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific airports, nor did they mention canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific airports, nor did they mention canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "49339970-16b0-4f3a-a8fc-c4b698abb73b",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user explicitly mentioned wanting to cancel their return flight, which matches one leg of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user explicitly mentioned wanting to cancel their return flight, which matches one leg of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "ee71cabe-cf4d-42c0-8c04-483187001747",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"User specifically mentioned the DTW to SFO leg, indicating a request to change (and potentially cancel) only that part of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "User specifically mentioned the DTW to SFO leg, indicating a request to change (and potentially cancel) only that part of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "d5945672-c2e0-4bc6-b048-144336616f11",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user did not specify canceling only a specific leg or part of the trip, so the cancellation is for the entire booking (FULL). However, the user explicitly stated they want to cancel for only one of the two passengers, so cancel_not_for_all_passengers is true.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user did not specify canceling only a specific leg or part of the trip, so the cancellation is for the entire booking (FULL). However, the user explicitly stated they want to cancel for only one of the two passengers, so cancel_not_for_all_passengers is true."
+      }
+    },
+    {
+      "element_id": "3b978f79-5bfa-4973-8a64-597a896ef0d4",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel the 'SEA to SAN' leg, which matches the return flight in the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the 'SEA to SAN' leg, which matches the return flight in the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "93f9ec10-478b-4da1-a128-8163f7a08451",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user requested to cancel the flight for a specific guest, not all passengers, and did not mention any specific leg or part of the booking, so the cancellation is for the full booking but not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user requested to cancel the flight for a specific guest, not all passengers, and did not mention any specific leg or part of the booking, so the cancellation is for the full booking but not for all passengers."
+      }
+    },
+    {
+      "element_id": "1ad5d9d2-6996-4e2f-9066-31439f9c5395",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user requested to cancel only one leg (the one today) and to keep the return, indicating a partial cancellation. The user also specified the cancellation is for Ana Soro only, not all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user requested to cancel only one leg (the one today) and to keep the return, indicating a partial cancellation. The user also specified the cancellation is for Ana Soro only, not all passengers."
+      }
+    },
+    {
+      "element_id": "9b786eaa-b7d3-475b-83de-e9a6b0e4eb23",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user explicitly requested to cancel only the return flight, which matches the ORD -> EWR leg, indicating a partial cancellation. There is no mention of cancelling for fewer than all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user explicitly requested to cancel only the return flight, which matches the ORD -> EWR leg, indicating a partial cancellation. There is no mention of cancelling for fewer than all passengers."
+      }
+    },
+    {
+      "element_id": "b23347fe-2956-4bfd-9ca1-513d12cbc48e",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user wants to cancel the booking for a specific employee, not all passengers, and did not mention canceling only a part of the flight, so this is a full cancellation for one passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user wants to cancel the booking for a specific employee, not all passengers, and did not mention canceling only a part of the flight, so this is a full cancellation for one passenger."
+      }
+    },
+    {
+      "element_id": "7f17bc69-fec4-4883-9e67-19c2fb1cd41c",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel only the second leg (BOS to AUS) of their trip, which matches a specific leg in the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel only the second leg (BOS to AUS) of their trip, which matches a specific leg in the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "fb56dc7d-1847-4b8c-b3a2-aeabf421548b",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers, so the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers, so the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "5f6d49a9-28a4-4648-a791-08936d49a4ce",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user said 'I need to cancel my flights' without specifying any particular leg or passenger, so this is a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user said 'I need to cancel my flights' without specifying any particular leg or passenger, so this is a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "dff2c2fb-7bf1-4038-807d-b853b42204c8",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling for only one passenger (Maxime Chevalier-Boisvert), not all passengers. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking for that passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling for only one passenger (Maxime Chevalier-Boisvert), not all passengers. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking for that passenger."
+      }
+    },
+    {
+      "element_id": "14de3ccb-321f-4237-a405-ee0695e6b168",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel the 'SLC to JFK' flight, which matches only one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the 'SLC to JFK' flight, which matches only one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "0b65df88-05a9-44e0-ba1e-f1d628a91c4d",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel the 'SGN to HKG' leg, which matches one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so it applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the 'SGN to HKG' leg, which matches one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so it applies to all passengers."
+      }
+    },
+    {
+      "element_id": "e4a84b70-262e-450f-adab-841d34f276df",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n\"partial_or_full\": \"PARTIAL\",\n\"cancel_not_for_all_passengers\": false,\n\"thought\": \"The user specifically requested to cancel the flight from Grand Rapids to Chicago, which matches only the second leg (GRR -> ORD) of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the flight from Grand Rapids to Chicago, which matches only the second leg (GRR -> ORD) of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "53b31c70-d57c-410f-b3f6-49f0498c70e2",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user requested to cancel the flight for a specific passenger, Tiana Fair, not for all passengers. There is no mention of canceling only a part of the flight (e.g., just one leg), so the cancellation is for the full booking for that passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user requested to cancel the flight for a specific passenger, Tiana Fair, not for all passengers. There is no mention of canceling only a part of the flight (e.g., just one leg), so the cancellation is for the full booking for that passenger."
+      }
+    },
+    {
+      "element_id": "dc220ed9-ca6b-4cbc-aea4-fcb94dd1a9ce",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"User specifically discussed changing the LNK -> MSP leg and agreed to cancel after being told they cannot change airlines, indicating intent to cancel only that leg. There is no mention of canceling for only some passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "User specifically discussed changing the LNK -> MSP leg and agreed to cancel after being told they cannot change airlines, indicating intent to cancel only that leg. There is no mention of canceling for only some passengers."
+      }
+    },
+    {
+      "element_id": "5d835292-e0d9-4e3c-8592-59ce9d05ec7f",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user did not specify a particular leg or airport, so the cancellation is for the entire booking. However, the user explicitly mentioned canceling for Cory Howell, indicating the cancellation is not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user did not specify a particular leg or airport, so the cancellation is for the entire booking. However, the user explicitly mentioned canceling for Cory Howell, indicating the cancellation is not for all passengers."
+      }
+    },
+    {
+      "element_id": "11155353-1d6d-4620-a7e4-dceb73a9e483",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or airport, nor did they mention canceling for specific passengers. The request is to cancel the entire trip for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or airport, nor did they mention canceling for specific passengers. The request is to cancel the entire trip for all passengers."
+      }
+    },
+    {
+      "element_id": "3a4f86e4-89ad-4466-994a-be19cec021f2",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel their upcoming trip, which indicates a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel their upcoming trip, which indicates a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "29eaff06-dd8d-4d21-a1a4-93b5094d4b96",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n\"partial_or_full\": \"PARTIAL\",\n\"cancel_not_for_all_passengers\": false,\n\"thought\": \"The user specifically requested to cancel the flight from Dubai to Turin, which matches only one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the flight from Dubai to Turin, which matches only one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "4a166438-b74b-47da-b7f7-fdffba1c4e06",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling the flight for a specific employee (Gabriel Cerroni), indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling the flight for a specific employee (Gabriel Cerroni), indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "6ac07b21-bfbc-4c84-a099-b0ceec4901cf",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling flights for 'Armaan', indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling flights for 'Armaan', indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "542020be-b8a7-4237-a177-0b4c1e21123a",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling 'one of the tickets' from NYC to CLE, which matches the LGA -> CLE leg and indicates a partial cancellation for only some passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling 'one of the tickets' from NYC to CLE, which matches the LGA -> CLE leg and indicates a partial cancellation for only some passengers."
+      }
+    },
+    {
+      "element_id": "073f616e-62ca-41bc-ae7e-21a4d421d731",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. Their request to 'cancel Navan Booking ID AQMSAU' indicates a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. Their request to 'cancel Navan Booking ID AQMSAU' indicates a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "9d537a95-bc55-4317-9032-d960649fa1ae",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not mention canceling only a specific leg or for specific passengers, so the cancellation request applies to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not mention canceling only a specific leg or for specific passengers, so the cancellation request applies to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "ba8ad4e9-3f33-43bc-b276-70f0378c5a95",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user did not specify canceling only a part of the flight (no mention of departure/return or specific legs), so the cancellation is for the entire booking. However, the user explicitly stated they want to cancel for only 1 traveler, so it is not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user did not specify canceling only a part of the flight (no mention of departure/return or specific legs), so the cancellation is for the entire booking. However, the user explicitly stated they want to cancel for only 1 traveler, so it is not for all passengers."
+      }
+    },
+    {
+      "element_id": "d4c69cd8-9f1a-4c29-8b4d-2ab807a26b06",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling the trip for a specific passenger (Anna Storrs), not all passengers, but did not mention canceling only a part of the trip, so the cancellation is for the full booking for that passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling the trip for a specific passenger (Anna Storrs), not all passengers, but did not mention canceling only a part of the trip, so the cancellation is for the full booking for that passenger."
+      }
+    },
+    {
+      "element_id": "64fab329-c00b-4524-b51a-0e0e19557a14",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically mentioned wanting to cancel the flight 'to Laredo TX out of Houston', which matches the IAH -> LRD leg, indicating a partial cancellation. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically mentioned wanting to cancel the flight 'to Laredo TX out of Houston', which matches the IAH -> LRD leg, indicating a partial cancellation. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "eafbd9c5-a61f-4b87-957c-ecb1e0a54e04",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n\"partial_or_full\": \"PARTIAL\",\n\"cancel_not_for_all_passengers\": false,\n\"thought\": \"The user explicitly requested to cancel their return flight, which matches the second leg (PVD -> ATW), indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user explicitly requested to cancel their return flight, which matches the second leg (PVD -> ATW), indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "576dcd2a-6655-4824-bcc5-3931cd20f989",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User specifically requested to cancel only the BOS-LGA leg, which is a partial cancellation. The user also mentioned canceling for 'his' travel (Jamie), indicating the cancellation is not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specifically requested to cancel only the BOS-LGA leg, which is a partial cancellation. The user also mentioned canceling for 'his' travel (Jamie), indicating the cancellation is not for all passengers."
+      }
+    },
+    {
+      "element_id": "06d39fe7-0732-4fe7-92ee-dbc9610656ec",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. The cancellation request is for Alfrez James Quiambao, and there is no indication that there are multiple passengers or that the cancellation is for fewer than all passengers. Therefore, the cancellation is for the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. The cancellation request is for Alfrez James Quiambao, and there is no indication that there are multiple passengers or that the cancellation is for fewer than all passengers. Therefore, the cancellation is for the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "f6f07da4-8dcc-43ca-85e8-816f27c9af04",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers, so the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers, so the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "74388367-c4ee-4b26-af9e-dc70705a224b",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. They simply stated they do not need the entire round trip booking. There is no mention of canceling for only some passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. They simply stated they do not need the entire round trip booking. There is no mention of canceling for only some passengers."
+      }
+    },
+    {
+      "element_id": "38151ecf-85e8-4e9b-bdda-ce3d8d107fdf",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel the airfare booking without specifying any particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel the airfare booking without specifying any particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "6667fa9c-ac16-4f5e-beb6-68fac8a7a05b",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel their trip without specifying any particular leg or passenger, so the cancellation applies to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel their trip without specifying any particular leg or passenger, so the cancellation applies to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "1dd27e25-698e-4deb-bc0e-9517b3958b8e",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers, so the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers, so the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "aac5058c-ea04-4b21-bfb3-c3494be456d4",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel 'all travel for this week', which indicates the entire booking, and did not mention canceling for specific passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel 'all travel for this week', which indicates the entire booking, and did not mention canceling for specific passengers."
+      }
+    },
+    {
+      "element_id": "eb2bf1a2-d73d-4266-a5ec-1b09b7436d3c",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. They also did not mention canceling for only some passengers. The request is to cancel the entire booking for Aaron Smith.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. They also did not mention canceling for only some passengers. The request is to cancel the entire booking for Aaron Smith."
+      }
+    },
+    {
+      "element_id": "b7d00892-1eeb-4f0a-bc01-ea9911e69743",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling the reservation for Amber Edgerton only, indicating not all passengers are being canceled. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling the reservation for Amber Edgerton only, indicating not all passengers are being canceled. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "dd1438d8-7c99-4095-85a1-872f9c305b4f",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user requested to cancel the flight for a specific passenger (Susan Lewis), indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the flight, so the cancellation applies to the entire booking for that passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user requested to cancel the flight for a specific passenger (Susan Lewis), indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the flight, so the cancellation applies to the entire booking for that passenger."
+      }
+    },
+    {
+      "element_id": "4dca0336-9fe0-4cbf-8a47-b4651babca1d",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports from the legs. They requested to cancel the current booking to make a new one, implying the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports from the legs. They requested to cancel the current booking to make a new one, implying the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "4a605796-63be-429a-ba1a-3445679aea7d",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is for a general cancellation, so it applies to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is for a general cancellation, so it applies to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "6a03f38d-d6f1-4aaa-b645-10161a299728",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user explicitly requested to cancel only the return flight (LCY -> SUF) and specified to maintain the two other passengers, indicating a partial cancellation for fewer than all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user explicitly requested to cancel only the return flight (LCY -> SUF) and specified to maintain the two other passengers, indicating a partial cancellation for fewer than all passengers."
+      }
+    },
+    {
+      "element_id": "f9df2025-da28-4e52-9bce-cf27a6ec900b",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not mention canceling only a specific leg or for specific passengers; all references were to changing both legs, so any cancellation request would apply to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not mention canceling only a specific leg or for specific passengers; all references were to changing both legs, so any cancellation request would apply to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "6b00f5ab-778a-4eb6-abaf-83c73f915591",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel the hold, which implies the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel the hold, which implies the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "6d60746a-3a14-4dfe-a2bb-c2f5d66b6834",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return flight, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return flight, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "17b09a4e-db1c-4c53-bd8f-2f30d7bd7802",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user mentioned wanting to cancel 'one' ticket, which suggests they want to cancel for only one passenger, not the entire booking. There is no mention of canceling only a specific leg, so the cancellation is for the full booking for that passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user mentioned wanting to cancel 'one' ticket, which suggests they want to cancel for only one passenger, not the entire booking. There is no mention of canceling only a specific leg, so the cancellation is for the full booking for that passenger."
+      }
+    },
+    {
+      "element_id": "a296f820-ea7d-4dfb-b75d-646209e4d4db",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not mention canceling only the departure or return flight, nor did they reference specific legs or airports. There is also no mention of canceling for only some passengers. Therefore, the request is to cancel the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not mention canceling only the departure or return flight, nor did they reference specific legs or airports. There is also no mention of canceling for only some passengers. Therefore, the request is to cancel the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "6f41c5ea-681a-48f6-872f-c1ed1b9bd425",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only a part of the booking or mention specific legs or airports. There is also no indication that the cancellation is for fewer than all passengers. Therefore, the cancellation request is for the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only a part of the booking or mention specific legs or airports. There is also no indication that the cancellation is for fewer than all passengers. Therefore, the cancellation request is for the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "321813ab-1c00-4557-95b3-14794894f901",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user simply requested to 'Cancel flight' without specifying any particular leg or passenger, so the request applies to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user simply requested to 'Cancel flight' without specifying any particular leg or passenger, so the request applies to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "20df7453-e4e1-48a2-acc5-53b0258dc698",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically mentioned wanting to cancel the 'MUC to ORD to PIT' flight, which matches the MUC -> PIT leg in the booking, indicating a partial cancellation. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically mentioned wanting to cancel the 'MUC to ORD to PIT' flight, which matches the MUC -> PIT leg in the booking, indicating a partial cancellation. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "81c854dd-f363-4d06-a056-7310b1da4dd0",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user requested to cancel Peter Harper’s NZ trip without specifying a particular leg, so this is a full cancellation. However, the user specified Peter Harper, indicating the cancellation is not for all passengers, but only for Peter.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user requested to cancel Peter Harper’s NZ trip without specifying a particular leg, so this is a full cancellation. However, the user specified Peter Harper, indicating the cancellation is not for all passengers, but only for Peter."
+      }
+    },
+    {
+      "element_id": "e5038ccd-56f1-459f-bf43-6d74cddc7d2c",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User explicitly requested to cancel only the return flight (YUL -> YYZ) and specified the cancellation is for Filipe Da Silva, not all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User explicitly requested to cancel only the return flight (YUL -> YYZ) and specified the cancellation is for Filipe Da Silva, not all passengers."
+      }
+    },
+    {
+      "element_id": "3bada753-b9c2-450b-ab6c-42c353971bf6",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user only requested to cancel the flight without specifying a particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user only requested to cancel the flight without specifying a particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "4ddf19e7-d017-4f0f-b9c3-6c530e47f743",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user simply stated they want to cancel their trip without specifying a particular leg or mentioning any specific passengers, so this is a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user simply stated they want to cancel their trip without specifying a particular leg or mentioning any specific passengers, so this is a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "15aa5121-9446-4f0e-88a5-f162f166784e",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific airports, nor did they mention canceling for only some passengers. The request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific airports, nor did they mention canceling for only some passengers. The request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "f5fb703e-d6d2-4e3e-a93a-746694484a11",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling the flight for Madison Carter only, indicating not all passengers are being canceled. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling the flight for Madison Carter only, indicating not all passengers are being canceled. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "15a97d7a-0a00-48f3-a55e-000d6f9d7336",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel the flight without specifying a particular leg or mentioning specific airports, and did not indicate that the cancellation is for fewer than all passengers. Therefore, the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel the flight without specifying a particular leg or mentioning specific airports, and did not indicate that the cancellation is for fewer than all passengers. Therefore, the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "7c34b42d-b45b-4299-9687-0fcd9bc12e51",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify a particular leg or mention any specific airports, nor did they mention canceling for only some passengers. The request is to cancel the entire flight booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify a particular leg or mention any specific airports, nor did they mention canceling for only some passengers. The request is to cancel the entire flight booking for all passengers."
+      }
+    },
+    {
+      "element_id": "6333f434-c9ea-471a-b48a-b36b979fd2dc",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling 'his 7:57pm flight tonight', which refers to only one leg of the booking and only for Kevin, not all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling 'his 7:57pm flight tonight', which refers to only one leg of the booking and only for Kevin, not all passengers."
+      }
+    },
+    {
+      "element_id": "3c9c121e-3a0c-48ad-bb80-f99722cd1e90",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user explicitly stated they want to cancel the 'return home portion' of their roundtrip ticket, which matches the MFE -> ATL leg. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user explicitly stated they want to cancel the 'return home portion' of their roundtrip ticket, which matches the MFE -> ATL leg. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "1288e1df-8df5-447b-b548-eca93740b6e5",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel their 'Friday flight on 5/2', which suggests only one leg (likely the departure or return) is to be canceled, not the entire booking. There is no mention of canceling for only some passengers, so it applies to all.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel their 'Friday flight on 5/2', which suggests only one leg (likely the departure or return) is to be canceled, not the entire booking. There is no mention of canceling for only some passengers, so it applies to all."
+      }
+    },
+    {
+      "element_id": "8830c462-1bc7-4736-9ab0-9130708317cf",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User explicitly said they want to cancel 'part' of Ian Wheal's Lincoln flight, indicating a partial cancellation. The user also specified Ian Wheal, suggesting the cancellation is not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User explicitly said they want to cancel 'part' of Ian Wheal's Lincoln flight, indicating a partial cancellation. The user also specified Ian Wheal, suggesting the cancellation is not for all passengers."
+      }
+    },
+    {
+      "element_id": "ed5ffbcd-b68e-499a-a5de-d650fc7963ba",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user requested to cancel the flight for a specific passenger (Issa Okamoto), indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation applies to the entire booking for that passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user requested to cancel the flight for a specific passenger (Issa Okamoto), indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation applies to the entire booking for that passenger."
+      }
+    },
+    {
+      "element_id": "2b42dea6-d39f-4817-a60f-a5894dc1c09d",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User specified canceling the flight for Naeem only, indicating not all passengers are to be canceled. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specified canceling the flight for Naeem only, indicating not all passengers are to be canceled. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "f7c7cdd5-1e36-415d-ae59-301403b2e938",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire flight booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire flight booking for all passengers."
+      }
+    },
+    {
+      "element_id": "b389b9ea-4a09-4f72-a819-dd65b9fcc621",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user asked how to remove 1 flight ticket, which suggests they want to cancel for only one passenger, not all. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user asked how to remove 1 flight ticket, which suggests they want to cancel for only one passenger, not all. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "7c1d7bc1-b6b7-4e75-959a-a5a4717c5f1e",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or airport, nor did they mention canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or airport, nor did they mention canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "21f33260-ff79-4a77-ae45-3b69e5430834",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel the entire trip without specifying any particular leg or passenger, so the cancellation applies to the full booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel the entire trip without specifying any particular leg or passenger, so the cancellation applies to the full booking and all passengers."
+      }
+    },
+    {
+      "element_id": "bd762d4c-58bf-4e20-b991-d3a6a17cd189",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user did not specify canceling only a part of the flight (no mention of departure/return or specific legs), so the cancellation is for the entire booking. However, the user explicitly stated they want to cancel only for Grace White, not all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user did not specify canceling only a part of the flight (no mention of departure/return or specific legs), so the cancellation is for the entire booking. However, the user explicitly stated they want to cancel only for Grace White, not all passengers."
+      }
+    },
+    {
+      "element_id": "8c4bc506-5928-4a01-bd9c-9aa5a93ff7fd",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not mention canceling only the departure or return flight, nor did they reference specific legs or airports matching the booking (IAH <-> MCO). They mentioned ORD, which does not match any leg, so the intent is to cancel the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not mention canceling only the departure or return flight, nor did they reference specific legs or airports matching the booking (IAH <-> MCO). They mentioned ORD, which does not match any leg, so the intent is to cancel the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "ef46f484-6686-43ab-9104-f306d96b17a8",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specifically mentions canceling 'Joel Scully's trip', indicating the cancellation is for only one passenger, not all. The user also refers to the 'trip to Sydney', which matches the MEL -> SYD leg, suggesting a partial cancellation.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specifically mentions canceling 'Joel Scully's trip', indicating the cancellation is for only one passenger, not all. The user also refers to the 'trip to Sydney', which matches the MEL -> SYD leg, suggesting a partial cancellation."
+      }
+    },
+    {
+      "element_id": "17869c0c-4735-447d-a042-28d2cba92dcc",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User specifically requested to cancel only the DEN to AUS leg and mentioned keeping their husband's round trip flight, indicating a partial cancellation and not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specifically requested to cancel only the DEN to AUS leg and mentioned keeping their husband's round trip flight, indicating a partial cancellation and not for all passengers."
+      }
+    },
+    {
+      "element_id": "c0bdabc0-81b5-47ef-973c-39dc17b9c96f",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling Kristy Gursky’s flight, indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking for Kristy.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling Kristy Gursky’s flight, indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking for Kristy."
+      }
+    },
+    {
+      "element_id": "80a2db5e-a3a2-4fff-9e11-79b85c4117b3",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n\"partial_or_full\": \"PARTIAL\",\n\"cancel_not_for_all_passengers\": true,\n\"thought\": \"User specifically requested to cancel the return flight (TUL -> MTY) and referred to 'his flight', indicating the cancellation is for only one passenger, not all.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specifically requested to cancel the return flight (TUL -> MTY) and referred to 'his flight', indicating the cancellation is for only one passenger, not all."
+      }
+    },
+    {
+      "element_id": "b5bb4d0c-6c7b-4cbc-9416-689353da9838",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify a particular leg or mention specific airports, nor did they mention canceling for only some passengers. The request refers to 'Friday's flight,' but with a round trip, this is ambiguous and does not clearly indicate a partial cancellation. Therefore, the cancellation is assumed to be for the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify a particular leg or mention specific airports, nor did they mention canceling for only some passengers. The request refers to 'Friday's flight,' but with a round trip, this is ambiguous and does not clearly indicate a partial cancellation. Therefore, the cancellation is assumed to be for the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "06bbe351-1e43-4ab6-9543-19311fed7c9a",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel the ticket without specifying any particular leg or passenger, so the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel the ticket without specifying any particular leg or passenger, so the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "001e0603-6c3f-48fd-886a-31c1e7ec28e0",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers; they simply said they want to cancel the booking, so this is a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers; they simply said they want to cancel the booking, so this is a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "dceefd3d-cabf-47cf-91b7-2681126035b6",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel 'this travel' without specifying a particular leg or mentioning any specific airports, and did not mention cancelling for only some passengers. Therefore, the cancellation is for the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel 'this travel' without specifying a particular leg or mentioning any specific airports, and did not mention cancelling for only some passengers. Therefore, the cancellation is for the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "f94ee9cf-bbb9-4364-9125-f92dce48872d",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically mentioned the ABQ to DFW leg, indicating a request to change (and potentially cancel) only that part of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically mentioned the ABQ to DFW leg, indicating a request to change (and potentially cancel) only that part of the booking. There is no mention of canceling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "4b3647f2-46f9-493f-8818-9310f0b765bc",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel the SYD to MEL leg, which matches only one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the SYD to MEL leg, which matches only one leg of the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "7029cb74-51c4-4a41-8298-77cb03c97e9e",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers; they just requested to cancel the trip, so the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers; they just requested to cancel the trip, so the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "7197f887-aebe-4c27-b6a4-8b4679523307",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return flight, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the cancellation request applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return flight, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the cancellation request applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "d03803af-5d62-4a8b-992f-6bb5bf2d2338",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically requested to cancel the outbound flight out of DC, which matches the IAD -> AUS leg, indicating a partial cancellation. There is no mention of cancelling for fewer than all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically requested to cancel the outbound flight out of DC, which matches the IAD -> AUS leg, indicating a partial cancellation. There is no mention of cancelling for fewer than all passengers."
+      }
+    },
+    {
+      "element_id": "35a85b97-309f-4223-be70-fd622e85df19",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"User specified canceling two flights but explicitly said not to cancel the first flight, indicating a partial cancellation. There is no mention of canceling for fewer than all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "User specified canceling two flights but explicitly said not to cancel the first flight, indicating a partial cancellation. There is no mention of canceling for fewer than all passengers."
+      }
+    },
+    {
+      "element_id": "219ba9d6-1794-45f6-b033-44e9362c28fe",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user specifically mentioned wanting to cancel the BOS to LGA leg, which matches the return flight in the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user specifically mentioned wanting to cancel the BOS to LGA leg, which matches the return flight in the booking, indicating a partial cancellation. There is no mention of cancelling for only some passengers, so the cancellation applies to all passengers."
+      }
+    },
+    {
+      "element_id": "98c3d369-c61d-4111-bd0f-7481255abec1",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "78120dca-0023-4c7a-bae2-ab29d9411ac6",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or passengers. The request is to cancel the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "a72a9bb9-10ff-4814-a53c-fc8c264858f7",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return flight, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return flight, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "ff0a0ce5-2ab5-441e-93b9-03e8b90b639f",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel flights for both Joseph DeRosa and Pina Tararo without specifying any particular leg or airport, indicating a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel flights for both Joseph DeRosa and Pina Tararo without specifying any particular leg or airport, indicating a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "a440c69a-7579-4a62-a13d-714365b66ba6",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or airport, nor did they mention canceling for specific passengers. The request is for a general cancellation, so it applies to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or airport, nor did they mention canceling for specific passengers. The request is for a general cancellation, so it applies to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "0b245acb-9a4b-4744-9107-871ff3a9e9f1",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user said 'I need to cancel this trip' without specifying any particular leg or passenger, so the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user said 'I need to cancel this trip' without specifying any particular leg or passenger, so the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "9b18a9fc-2aff-421c-853e-dc55fa548569",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return flight, nor did they mention specific legs or airports. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return flight, nor did they mention specific legs or airports. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "0e5d45c9-b8b9-4abe-b27f-09eb7263c5ce",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user wants to cancel all future flights for a specific employee (Eric Yang), not for all passengers in the reservation. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user wants to cancel all future flights for a specific employee (Eric Yang), not for all passengers in the reservation. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "b51109dd-e990-41e5-a5b3-73d9551ae873",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user explicitly requested to cancel only one leg of the flight for a specific guest (Richard Robert Hunt), not the entire booking or for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user explicitly requested to cancel only one leg of the flight for a specific guest (Richard Robert Hunt), not the entire booking or for all passengers."
+      }
+    },
+    {
+      "element_id": "8866e75a-279c-4ab8-9db2-16144bb9f4f9",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user requested to cancel their trip without specifying a particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user requested to cancel their trip without specifying a particular leg or mentioning any specific passengers, so the cancellation applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "118e7bb2-fb22-480b-bb28-6c013d871661",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel, which implies the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel, which implies the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "7cd46e61-3bd8-49e5-af52-5e675d1120d8",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "PARTIAL",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"User's request and chat history indicate they want to cancel only the return leg (AUS -> EWR) to rebook on a different airline, which matches a specific leg in the booking. There is no mention of canceling for only some passengers, so cancellation is for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "User's request and chat history indicate they want to cancel only the return leg (AUS -> EWR) to rebook on a different airline, which matches a specific leg in the booking. There is no mention of canceling for only some passengers, so cancellation is for all passengers."
+      }
+    },
+    {
+      "element_id": "9f094907-77ce-4744-8197-ea347c94b161",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User specified to cancel the flight for Jake Englen only, indicating not all passengers are being cancelled. There is no mention of cancelling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specified to cancel the flight for Jake Englen only, indicating not all passengers are being cancelled. There is no mention of cancelling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "a3313cf6-e816-41aa-8b3e-b16a59ccc0f0",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified they want to cancel the trip for only one passenger (Pas Wijesekera), not all passengers. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking for that passenger.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified they want to cancel the trip for only one passenger (Pas Wijesekera), not all passengers. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking for that passenger."
+      }
+    },
+    {
+      "element_id": "80d0594e-1513-4058-b942-4eafa16c0718",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "9c569ddd-74bf-4f46-94a4-9fe8fd98df36",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or airport, nor did they mention canceling for only some passengers. They simply requested to cancel their multi-leg flights, which implies the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or airport, nor did they mention canceling for only some passengers. They simply requested to cancel their multi-leg flights, which implies the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "6e8eaf47-15db-414e-bb92-653bef064677",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. There is also no mention of canceling for fewer than all passengers. Therefore, the cancellation request applies to the entire booking and all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return leg, nor did they mention specific airports or legs. There is also no mention of canceling for fewer than all passengers. Therefore, the cancellation request applies to the entire booking and all passengers."
+      }
+    },
+    {
+      "element_id": "a831587b-3ffe-46dd-98be-2781f0336595",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"User specified cancelling the flight for Abbey Friesen, indicating the cancellation is not for all passengers. There is no mention of cancelling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "User specified cancelling the flight for Abbey Friesen, indicating the cancellation is not for all passengers. There is no mention of cancelling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "d0f453a2-dc23-4147-8bc1-59edc782fb26",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel their flight ticket. Therefore, the cancellation request applies to the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers; they simply requested to cancel their flight ticket. Therefore, the cancellation request applies to the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "e463c959-40b6-479d-92f4-31b5ee41ee80",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or airport, nor did they mention canceling for specific passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or airport, nor did they mention canceling for specific passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "452ea997-d369-4d18-843e-02071b5b9807",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify canceling only the departure or return flight, nor did they mention specific legs or airports. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify canceling only the departure or return flight, nor did they mention specific legs or airports. There is also no mention of canceling for only some passengers. Therefore, the request is for a full cancellation for all passengers."
+      }
+    },
+    {
+      "element_id": "f23b4d38-ce79-4740-a278-e4a8dfd4ba21",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user requested to cancel the air booking for a specific employee, Christina Sutherland, not for all passengers. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user requested to cancel the air booking for a specific employee, Christina Sutherland, not for all passengers. There is no mention of canceling only a specific leg, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "712d6033-f2cd-4d88-adf7-4fd4910d3e9a",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling the flight for Chad Richard, indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling the flight for Chad Richard, indicating the cancellation is not for all passengers. There is no mention of canceling only a specific leg or part of the booking, so the cancellation is for the entire booking."
+      }
+    },
+    {
+      "element_id": "889f2f87-525d-47d0-af99-17b8726fefd8",
+      "gt_cancel_not_for_all": false,
+      "pred_cancel_not_for_all": false,
+      "gt_partial_or_full": "FULL",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": false,\n  \"thought\": \"The user did not specify any particular leg or mention any specific passengers; they simply asked to cancel, which implies the entire booking for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": false,
+        "thought": "The user did not specify any particular leg or mention any specific passengers; they simply asked to cancel, which implies the entire booking for all passengers."
+      }
+    },
+    {
+      "element_id": "d93637e8-d38a-4bec-989a-549ba0404fa2",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "FULL",
+      "raw_response": "{\n  \"partial_or_full\": \"FULL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified canceling flights for Jordan Capone only, indicating not all passengers are being canceled. The user listed both legs (DSM-BWI and BWI-SMF), so the entire booking for this traveler is being canceled, not just a part.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "FULL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified canceling flights for Jordan Capone only, indicating not all passengers are being canceled. The user listed both legs (DSM-BWI and BWI-SMF), so the entire booking for this traveler is being canceled, not just a part."
+      }
+    },
+    {
+      "element_id": "5cb5b13d-e0ad-4633-97e7-596d47316594",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user explicitly stated they want to cancel 'one leg' of a roundtrip flight, indicating a partial cancellation. They also specified the cancellation is for 'daniel ralls', which suggests it is not for all passengers.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user explicitly stated they want to cancel 'one leg' of a roundtrip flight, indicating a partial cancellation. They also specified the cancellation is for 'daniel ralls', which suggests it is not for all passengers."
+      }
+    },
+    {
+      "element_id": "3b86916e-a6f8-4528-8029-8011fd73d3ad",
+      "gt_cancel_not_for_all": true,
+      "pred_cancel_not_for_all": true,
+      "gt_partial_or_full": "null",
+      "pred_partial_or_full": "PARTIAL",
+      "raw_response": "{\n  \"partial_or_full\": \"PARTIAL\",\n  \"cancel_not_for_all_passengers\": true,\n  \"thought\": \"The user specified cancelling 'Tim's flights' and provided a specific passenger name, indicating the cancellation is not for all passengers. The user also mentioned 'flights tomorrow to Kuala Lumpur', which matches the SIN -> KUL leg, suggesting a partial cancellation.\"\n}",
+      "parsed_response": {
+        "partial_or_full": "PARTIAL",
+        "cancel_not_for_all_passengers": true,
+        "thought": "The user specified cancelling 'Tim's flights' and provided a specific passenger name, indicating the cancellation is not for all passengers. The user also mentioned 'flights tomorrow to Kuala Lumpur', which matches the SIN -> KUL leg, suggesting a partial cancellation."
+      }
+    }
+  ],
+  "errors": [],
+  "config": {
+    "prompt_file_path": "prompts/original/identify_partial.yaml",
+    "prompt_name": "initial_prompt",
+    "test_data_path": "data/processed/logs/04222025-08182025/ground_truth/verified_ground_truth_balance_test.json",
+    "model": "gpt-4.1",
+    "temperature": 0.0
+  }
+}
