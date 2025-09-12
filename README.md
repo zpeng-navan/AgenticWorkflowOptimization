@@ -14,6 +14,14 @@ source .venv/bin/activate
 
 # 3. install the requirements
 pip install -r requirements.txt
+
+# 4. create .env file with keys
+OPENAI_API_KEY=
+OPENAI_ORG_ID=
+OPENAI_PROJECT_ID=
+
+NEW_RELIC_API_KEY=
+NEW_RELIC_ACCOUNT_ID=
 ```
 
 ## Data Collection
