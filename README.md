@@ -3,6 +3,14 @@
 ## Description
 Ava’s workflow contains numerous LLM-based nodes whose prompts are written by human experts, so their performance, cost, and latency are not necessarily optimal. Automated prompt-optimization techniques can refine these prompts. Among them, [OPRO](https://arxiv.org/abs/2309.03409) is both simple to implement and highly effective. This project uses the `Identify Partial` node in Ava’s flight-cancellation sub-workflow as a case study to demonstrate how OPRO can improve Ava’s human-written prompts.
 
+## Results
+![Final Results](imgs/results.png)
+Ava's current approach is gpt-4.1 with reasoning. The performance are:
+
+adjusted balanced accuracy: 94.14
+
+averaged cost per 1M LLM call 1174.37$
+
 ## Environment Setup
 ```sh
 # the env is based on python=3.13.5
