@@ -48,7 +48,7 @@ python -m src.ava_opro_optimizer_parallel --train_data_path data/processed/logs/
 python -m src.utils.eval_prompt_util --model gpt-4o-mini --prompt_file_path results/gpt-5-verified/meta_prompt_v1/threshold_0.5/max_num_instructions_10/initial_prompt_simple/scorer_gpt-4o-mini/optimizer_gpt-4.1/train_ratio_1.0/num_search_steps_100/num_gen_inst_4_num_exp_2_opt_temperature_1.0/optimized_prompt.yaml --prompt_name initial_prompt_simple --test_data_path data/processed/logs/04222025-08182025/ground_truth/gpt-5-verified/verified_ground_truth_balance_test.json --data_source gpt-5-verified --verbose --run_num 5
 ```
 
-# OPtimized Prompt
+# Optimized Prompt
 
 ## Without Reasoning
 
